@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>OomuBook 輕約美業平台｜尋找最適合妳的美學職人</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,6 @@
             --border-soft: #E6DDD3;
             --danger-red: #D9534F;
             --success-green: #4E9A51;
-            --warning-amber: #D9822B;
             --font-main: 'jf-openhuninn', 'Noto Sans TC', sans-serif;
         }
 
@@ -35,6 +34,7 @@
             margin: 0;
             padding: 0;
             font-family: var(--font-main);
+            max-width: 100%;
         }
 
         body {
@@ -44,21 +44,22 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* 頂部導覽列 */
         header {
             background-color: var(--bg-card);
             border-bottom: 1px solid var(--border-soft);
-            padding: 0.9rem 1.5rem;
+            padding: 0.9rem 1.2rem;
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 10px rgba(92, 69, 51, 0.04);
+            width: 100%;
         }
 
         .nav-container {
-            max-width: 1060px;
+            max-width: 900px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -152,18 +153,19 @@
             border-radius: 8px;
         }
 
-        /* 主內容區 */
         main {
             flex: 1;
-            max-width: 1060px;
+            max-width: 900px;
             width: 100%;
             margin: 0 auto;
-            padding: 1.8rem 1.2rem;
+            padding: 1.5rem 1rem;
+            overflow-x: hidden;
         }
 
         .view-section {
             display: none;
             animation: fadeIn 0.25s ease;
+            width: 100%;
         }
 
         .view-section.active {
@@ -175,8 +177,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 表單元件 */
-        select, input[type="text"], input[type="tel"], input[type="date"], input[type="time"], input[type="number"], input[type="month"], textarea {
+        select, input[type="text"], input[type="tel"], input[type="date"], input[type="time"], input[type="number"], input[type="month"], input[type="password"], textarea {
             padding: 0.65rem 0.9rem;
             border: 1.5px solid var(--border-soft);
             border-radius: 12px;
@@ -185,6 +186,7 @@
             font-size: 0.92rem;
             outline: none;
             transition: border-color 0.2s;
+            width: 100%;
         }
 
         select:focus, input:focus, textarea:focus {
@@ -192,27 +194,26 @@
             background-color: #FFF;
         }
 
-        /* 消費者首頁 Hero & 搜尋區 */
         .hero-box {
             background-color: var(--bg-card);
             border: 1px solid var(--border-soft);
             border-radius: 20px;
-            padding: 2rem 1.5rem;
+            padding: 1.8rem 1.2rem;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             box-shadow: 0 4px 15px rgba(92, 69, 51, 0.03);
         }
 
         .hero-box h1 {
             color: var(--primary-dark);
-            font-size: 1.65rem;
+            font-size: 1.55rem;
             margin-bottom: 0.4rem;
         }
 
         .hero-box p {
             color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1.4rem;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
         }
 
         .search-bar {
@@ -220,18 +221,38 @@
             flex-wrap: wrap;
             gap: 0.75rem;
             justify-content: center;
-            max-width: 820px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
         .search-bar select {
             flex: 1;
-            min-width: 150px;
+            min-width: 140px;
         }
 
-        /* 店家卡片網格 */
+        .home-service-filter-box {
+            margin-top: 1.2rem;
+            padding-top: 1.1rem;
+            border-top: 1px dashed var(--border-soft);
+            text-align: center;
+        }
+
+        .home-filter-label {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .home-pills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
         .section-heading {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--primary-dark);
             margin-bottom: 1rem;
             display: flex;
@@ -241,15 +262,15 @@
 
         .shop-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(305px, 1fr));
-            gap: 1.3rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
         }
 
         .shop-card {
             background: var(--bg-card);
             border: 1px solid var(--border-soft);
             border-radius: 18px;
-            padding: 1.4rem;
+            padding: 1.3rem;
             transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
             display: flex;
@@ -274,30 +295,30 @@
         }
 
         .shop-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--primary-dark);
             margin-bottom: 0.3rem;
-            padding-right: 68px;
+            padding-right: 65px;
         }
 
         .shop-meta {
             font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.6rem;
         }
 
         .tag-list {
             display: flex;
             flex-wrap: wrap;
             gap: 0.4rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.9rem;
         }
 
         .tag {
             background: var(--bg-sand);
             color: var(--primary-dark);
             font-size: 0.78rem;
-            padding: 3px 9px;
+            padding: 3px 8px;
             border-radius: 8px;
         }
 
@@ -307,18 +328,18 @@
             font-weight: 500;
         }
 
-        /* 卡片區塊與表單 */
         .card-panel {
             background: var(--bg-card);
             border: 1px solid var(--border-soft);
             border-radius: 18px;
-            padding: 1.5rem;
-            margin-bottom: 1.4rem;
+            padding: 1.4rem;
+            margin-bottom: 1.3rem;
+            width: 100%;
         }
 
         .panel-title {
             color: var(--primary-dark);
-            font-size: 1.12rem;
+            font-size: 1.1rem;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
@@ -329,7 +350,7 @@
 
         .form-grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1rem;
         }
 
@@ -357,28 +378,22 @@
             display: none;
         }
 
-        .input-error {
-            border-color: var(--danger-red) !important;
-            background-color: #FFF8F8 !important;
-        }
-
-        /* 複選服務項目膠囊按鈕 */
         .checkbox-pills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.55rem;
+            gap: 0.5rem;
         }
 
         .pill-check {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            padding: 0.45rem 0.9rem;
+            gap: 0.35rem;
+            padding: 0.42rem 0.85rem;
             border: 1.5px solid var(--border-soft);
             border-radius: 20px;
             background: var(--bg-cream);
             cursor: pointer;
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             user-select: none;
             transition: all 0.15s;
         }
@@ -389,7 +404,6 @@
             border-color: var(--primary-coffee);
         }
 
-        /* 銀行代碼搜尋下拉元件 */
         .bank-search-wrapper {
             position: relative;
         }
@@ -399,7 +413,7 @@
             top: 100%;
             left: 0;
             right: 0;
-            max-height: 210px;
+            max-height: 200px;
             overflow-y: auto;
             background: #FFF;
             border: 1.5px solid var(--primary-coffee);
@@ -421,93 +435,73 @@
             background: var(--bg-sand);
         }
 
-        /* 大分類與價目階層卡片 */
-        .category-block {
+        .calendar-box {
+            background: var(--bg-card);
             border: 1.5px solid var(--border-soft);
-            border-radius: 14px;
-            padding: 1.1rem;
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .cal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 1rem;
-            background: #FCF9F5;
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 1.05rem;
         }
 
-        .category-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 0.7rem;
-            margin-bottom: 0.8rem;
-            border-bottom: 1px dashed var(--accent-latte);
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            text-align: center;
         }
 
-        .service-row-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #FFF;
-            padding: 0.65rem 0.9rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-soft);
-            margin-bottom: 0.5rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        /* 店家小後台分頁導覽列 */
-        .merchant-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.3rem;
-            overflow-x: auto;
+        .cal-week-name {
+            font-size: 0.82rem;
+            color: var(--text-muted);
             padding-bottom: 4px;
         }
 
-        .m-tab-btn {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-soft);
-            color: var(--text-muted);
-            padding: 0.65rem 1.15rem;
-            border-radius: 12px;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        .m-tab-btn.active {
-            background: var(--primary-coffee);
-            color: white;
-            border-color: var(--primary-coffee);
-        }
-
-        .m-tab-content {
-            display: none;
-        }
-
-        .m-tab-content.active {
-            display: block;
-        }
-
-        /* 預約頁面選項 */
-        .option-item {
-            border: 1.5px solid var(--border-soft);
-            border-radius: 12px;
-            padding: 0.85rem 1rem;
-            margin-bottom: 0.6rem;
+        .cal-day {
+            aspect-ratio: 1;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: var(--bg-cream);
+            border: 1px solid var(--border-soft);
+            font-size: 0.9rem;
             cursor: pointer;
+            user-select: none;
             transition: all 0.15s;
-            background: #FFF;
         }
 
-        .option-item.selected {
-            border-color: var(--primary-coffee);
-            background-color: var(--bg-sand);
+        .cal-day:hover {
+            background: var(--bg-sand);
+        }
+
+        .cal-day.selected {
+            background: var(--primary-dark) !important;
+            color: white !important;
+            border-color: var(--primary-dark) !important;
+            font-weight: bold;
+        }
+
+        .cal-day.empty {
+            background: transparent;
+            border: none;
+            cursor: default;
         }
 
         .time-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
             gap: 0.6rem;
+            margin-top: 0.8rem;
         }
 
         .time-slot {
@@ -526,12 +520,88 @@
             border-color: var(--primary-coffee);
         }
 
-        .time-slot.disabled {
-            background: #EFEFEF;
-            color: #AAA;
-            border-color: #E0E0E0;
-            cursor: not-allowed;
-            text-decoration: line-through;
+        .merchant-tabs {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            width: 100%;
+        }
+
+        .m-tab-btn {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-soft);
+            color: var(--text-muted);
+            padding: 0.55rem 0.95rem;
+            border-radius: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            font-size: 0.88rem;
+        }
+
+        .m-tab-btn.active {
+            background: var(--primary-coffee);
+            color: white;
+            border-color: var(--primary-coffee);
+        }
+
+        .m-tab-content {
+            display: none;
+        }
+
+        .m-tab-content.active {
+            display: block;
+        }
+
+        .category-block {
+            border: 1.5px solid var(--border-soft);
+            border-radius: 14px;
+            padding: 1.1rem;
+            margin-bottom: 1rem;
+            background: #FCF9F5;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px dashed var(--accent-latte);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .service-row-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #FFF;
+            padding: 0.65rem 0.9rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-soft);
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .option-item {
+            border: 1.5px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.15s;
+            background: #FFF;
+        }
+
+        .option-item.selected {
+            border-color: var(--primary-coffee);
+            background-color: var(--bg-sand);
         }
 
         .summary-box {
@@ -557,46 +627,55 @@
             color: var(--primary-dark);
         }
 
-        /* 數據統計卡片與表格 */
+        .bank-copy-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.35rem;
+        }
+
         .stat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 1rem;
-            margin-bottom: 1.4rem;
+            margin-bottom: 1.3rem;
         }
 
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-soft);
             border-radius: 16px;
-            padding: 1.1rem;
+            padding: 1rem;
             text-align: center;
         }
 
         .stat-label {
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             color: var(--text-muted);
             margin-bottom: 0.3rem;
         }
 
         .stat-val {
-            font-size: 1.55rem;
+            font-size: 1.45rem;
             font-weight: 700;
             color: var(--primary-dark);
         }
 
         .table-wrap {
             overflow-x: auto;
+            width: 100%;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.88rem;
+            font-size: 0.86rem;
         }
 
         th, td {
-            padding: 0.75rem;
+            padding: 0.7rem;
             text-align: left;
             border-bottom: 1px solid var(--border-soft);
             vertical-align: middle;
@@ -609,9 +688,9 @@
         }
 
         .status-pill {
-            padding: 3px 9px;
+            padding: 3px 8px;
             border-radius: 12px;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             display: inline-block;
             white-space: nowrap;
         }
@@ -621,7 +700,6 @@
         .status-done { background: #E3F5E3; color: #2E7D32; }
         .status-expired { background: #F8D7DA; color: #721C24; }
 
-        /* 彈窗 Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -641,7 +719,7 @@
             background: var(--bg-card);
             border-radius: 20px;
             padding: 1.8rem;
-            max-width: 440px;
+            max-width: 420px;
             width: 100%;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             text-align: center;
@@ -654,6 +732,7 @@
             font-size: 0.82rem;
             border-top: 1px solid var(--border-soft);
             margin-top: 3rem;
+            width: 100%;
         }
 
         .secret-trigger {
@@ -665,7 +744,7 @@
 </head>
 <body>
 
-    <!-- 頂部導覽 -->
+    <!-- 頂部導覽列：統一 Logo 與兩個選項（店家登入 / 顧客進入） -->
     <header>
         <div class="nav-container">
             <div class="brand-logo" onclick="switchView('home-view')">
@@ -676,18 +755,19 @@
                 <span class="brand-sub">輕約美業平台</span>
             </div>
             <div class="nav-actions">
-                <button class="btn-soft" onclick="switchView('home-view')">探索工作室</button>
-                <button class="btn-outline" onclick="switchView('merchant-view')">店家管理後台</button>
+                <button class="btn-outline" onclick="openMerchantLoginModal()">店家登入</button>
+                <button class="btn-primary" onclick="switchView('home-view')">顧客進入</button>
             </div>
         </div>
     </header>
 
     <main>
-        <!-- ================= 1. 消費者首頁 (地區二段連動 + 服務篩選) ================= -->
+        <!-- ================= 1. 消費者首頁 ================= -->
         <section id="home-view" class="view-section active">
             <div class="hero-box">
                 <h1>預約屬於妳的日常微光 ✨</h1>
                 <p>嚴選個人美學工作室｜透明價目・即時防撞時段・安心線上預約</p>
+                
                 <div class="search-bar">
                     <select id="filter-city" onchange="onHomeCityChange()">
                         <option value="">所有縣市</option>
@@ -695,10 +775,12 @@
                     <select id="filter-district" onchange="renderShopList()">
                         <option value="">所有區域</option>
                     </select>
-                    <select id="filter-category" onchange="renderShopList()">
-                        <option value="">所有服務項目</option>
-                    </select>
                     <button class="btn-primary" onclick="renderShopList()">立即搜尋</button>
+                </div>
+
+                <div class="home-service-filter-box">
+                    <span class="home-filter-label">選擇想預約的服務項目（可複選）：</span>
+                    <div id="home-service-pills" class="home-pills-wrap"></div>
                 </div>
             </div>
 
@@ -716,21 +798,47 @@
             <div class="card-panel" id="booking-shop-header"></div>
 
             <div class="card-panel">
-                <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">步驟 1：選擇主要服務項目（依大分類瀏覽） <span class="req-mark">*</span></h3>
+                <h3 style="color: var(--primary-dark); margin-bottom: 0.8rem;">步驟 1：選擇服務項目 <span class="req-mark">*</span></h3>
                 <div id="booking-services-list"></div>
                 <div id="err-service" class="error-text">請至少選擇一項主要服務</div>
 
-                <h3 style="color: var(--primary-dark); margin: 1.5rem 0 0.8rem;">步驟 2：加購項目（可複選）</h3>
+                <h3 style="color: var(--primary-dark); margin: 1.3rem 0 0.8rem;">加購項目（可複選）</h3>
                 <div id="booking-addons-list"></div>
+            </div>
 
-                <h3 style="color: var(--primary-dark); margin: 1.5rem 0 0.8rem;">步驟 3：選擇預約日期與時段 <span class="req-mark">*</span></h3>
-                <div class="form-group">
-                    <input type="date" id="booking-date" onchange="renderTimeSlots()" style="width: 100%; max-width: 260px;">
-                    <div id="closed-day-notice" style="color: var(--danger-red); font-size: 0.88rem; margin-top: 0.4rem; display: none;">⚠️ 此日期為工作室公休日，請選擇其他日期</div>
+            <div class="card-panel">
+                <h3 style="color: var(--primary-dark); margin-bottom: 0.8rem;">步驟 2：填寫聯絡資料 <span class="req-mark">*</span></h3>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label class="form-label">姓名 <span class="req-mark">*</span></label>
+                        <input type="text" id="cust-name" style="width: 100%;">
+                        <div id="err-name" class="error-text">請填寫您的姓名</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">手機號碼（10碼） <span class="req-mark">*</span></label>
+                        <input type="tel" id="cust-phone" maxlength="10" placeholder="0912345678" style="width: 100%;" onblur="checkBlacklistAndPhone()">
+                        <div id="err-phone" class="error-text">請輸入正確的 10 碼手機號碼（09開頭）</div>
+                    </div>
                 </div>
-                <div id="time-slots-container" class="time-grid"></div>
-                <div id="err-time" class="error-text">請選擇預約時段（已灰底劃線代表已被預約或工時衝突）</div>
+            </div>
 
+            <div class="card-panel">
+                <h3 style="color: var(--primary-dark); margin-bottom: 0.8rem;">步驟 3：選擇預約日期與時段 <span class="req-mark">*</span></h3>
+                <div class="calendar-box">
+                    <div class="cal-header">
+                        <button class="btn-soft btn-sm" onclick="changeBookingMonth(-1)">〈</button>
+                        <span id="booking-cal-title">2026 年 11 月</span>
+                        <button class="btn-soft btn-sm" onclick="changeBookingMonth(1)">〉</button>
+                    </div>
+                    <div class="cal-grid" id="booking-cal-days"></div>
+                </div>
+                <div style="font-size: 0.9rem; color: var(--primary-dark); margin-bottom: 0.5rem; font-weight: 500;" id="booking-selected-date-label">請點選上方月曆日期</div>
+                <div id="time-slots-container" class="time-grid"></div>
+                <div id="err-time" class="error-text">請選擇可預約時段</div>
+            </div>
+
+            <div class="card-panel">
+                <h3 style="color: var(--primary-dark); margin-bottom: 0.8rem;">步驟 4：定金匯款與確認</h3>
                 <div class="summary-box">
                     <div class="summary-row">
                         <span>已選項目總時長：</span>
@@ -744,38 +852,26 @@
                         <span>此項目需預付訂金：</span>
                         <span id="sum-deposit">$0</span>
                     </div>
-                    <div id="bank-info-display" style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--primary-dark); background: #FFF; padding: 0.75rem; border-radius: 8px;"></div>
+                    
+                    <div style="margin-top: 1rem; border-top: 1px dashed var(--accent-latte); padding-top: 0.8rem;">
+                        <strong style="color: var(--primary-dark); font-size: 0.92rem;">📋 店家定金匯款規則：</strong>
+                        <div id="deposit-rule-display" style="font-size: 0.88rem; color: var(--text-main); margin-top: 0.3rem; white-space: pre-line; background: #FFF; padding: 0.7rem; border-radius: 8px;"></div>
+                    </div>
+
+                    <div id="bank-info-display" style="margin-top: 0.8rem; font-size: 0.88rem; color: var(--primary-dark); background: #FFF; padding: 0.85rem; border-radius: 10px;"></div>
                 </div>
 
-                <h3 style="color: var(--primary-dark); margin: 1.5rem 0 0.8rem;">步驟 4：填寫聯絡與訂金核對資料</h3>
-                <div class="form-grid-2">
-                    <div class="form-group">
-                        <label class="form-label">您的稱呼 / 姓名 <span class="req-mark">*</span></label>
-                        <input type="text" id="cust-name" placeholder="例如：林小姐" style="width: 100%;">
-                        <div id="err-name" class="error-text">請填寫您的姓名或稱呼</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">手機號碼（10碼） <span class="req-mark">*</span></label>
-                        <input type="tel" id="cust-phone" maxlength="10" placeholder="0912345678" style="width: 100%;">
-                        <div id="err-phone" class="error-text">請輸入正確的 10 碼手機號碼（09開頭）</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">LINE 名稱（方便店家聯繫） <span class="req-mark">*</span></label>
-                        <input type="text" id="cust-line" placeholder="請輸入您的 LINE 顯示名稱" style="width: 100%;">
-                        <div id="err-line" class="error-text">請填寫 LINE 名稱以利核對</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">訂金匯款帳號後五碼 <span class="req-mark">*</span></label>
-                        <input type="text" id="cust-last5" maxlength="5" placeholder="請輸入 5 碼數字（例：12345）" style="width: 100%;">
-                        <div id="err-last5" class="error-text">請輸入完整的 5 碼數字匯款後五碼</div>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">訂金匯款帳號後五碼 <span class="req-mark">*</span></label>
+                    <input type="text" id="cust-last5" maxlength="5" placeholder="請輸入 5 碼數字（例：12345）" style="width: 100%; max-width: 300px;">
+                    <div id="err-last5" class="error-text">請輸入完整的 5 碼數字匯款後五碼</div>
                 </div>
 
                 <button class="btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1.05rem; margin-top: 0.5rem;" onclick="submitBooking()">確認送出預約申請</button>
             </div>
         </section>
 
-        <!-- ================= 3. 店家專屬小後台（安你好全功能版） ================= -->
+        <!-- ================= 3. 店家專屬工作台 ================= -->
         <section id="merchant-view" class="view-section">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.6rem;">
                 <div>
@@ -783,42 +879,91 @@
                     <span id="merchant-status-badge" class="status-pill status-done">訂閱中・首頁公開上架</span>
                 </div>
                 <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                    <select id="merchant-switcher" onchange="switchMerchantAccount()"></select>
-                    <button class="btn-soft" onclick="switchView('home-view')">回到前台首頁</button>
+                    <button class="btn-outline" onclick="previewCurrentShop()">👁️ 預覽顧客頁面</button>
+                    <button class="btn-soft" onclick="switchView('home-view')">🏠 切換回首頁</button>
+                    <button class="btn-soft" style="color: var(--danger-red);" onclick="logoutMerchant()">登出</button>
                 </div>
             </div>
 
-            <!-- 強制上架防呆提示 -->
             <div id="merchant-warning-banner" style="display: none; background: #FFF3CD; border: 1px solid #FFEEBA; color: #856404; padding: 1rem; border-radius: 12px; margin-bottom: 1.2rem;">
                 ⚠️ <strong>注意：您的工作室目前未在首頁公開！</strong><br>
-                系統偵測到您的「縣市區域、詳細地址、服務項目」或「價目明細」尚未填寫完整，或訂閱尚未開通。請補齊資料並儲存即可自動上架。
+                請補齊店家基本資料、至少一個服務大分類與細項價目，即可自動上架。
             </div>
 
-            <!-- 後台功能分頁選單 -->
             <div class="merchant-tabs">
-                <button class="m-tab-btn active" onclick="switchMerchantTab('tab-orders', this)">📅 預約與已閱對帳</button>
-                <button class="m-tab-btn" onclick="switchMerchantTab('tab-services', this)">✨ 大分類與價目設定</button>
-                <button class="m-tab-btn" onclick="switchMerchantTab('tab-accounting', this)">💰 記帳與日/月報表</button>
-                <button class="m-tab-btn" onclick="switchMerchantTab('tab-schedule', this)">🕒 營業時段與公休日</button>
-                <button class="m-tab-btn" onclick="switchMerchantTab('tab-profile', this)">📍 工作室資料與銀行</button>
+                <button class="m-tab-btn active" onclick="switchMerchantTab('tab-services', this)">服務與規則項目</button>
+                <button class="m-tab-btn" onclick="switchMerchantTab('tab-schedule', this)">時段設定</button>
+                <button class="m-tab-btn" onclick="switchMerchantTab('tab-orders', this)">預約紀錄</button>
+                <button class="m-tab-btn" onclick="switchMerchantTab('tab-blacklist', this)">黑名單</button>
+                <button class="m-tab-btn" onclick="switchMerchantTab('tab-accounting', this)">記帳報表</button>
+                <button class="m-tab-btn" onclick="switchMerchantTab('tab-profile', this)">工作室設定</button>
             </div>
 
-            <!-- 分頁 1：預約訂單管理（含未閱/已閱/完工入帳） -->
-            <div id="tab-orders" class="m-tab-content active">
+            <!-- 分頁 1：服務與純文字規則分類設定 -->
+            <div id="tab-services" class="m-tab-content active">
                 <div class="card-panel">
-                    <div class="panel-title">
-                        <span>客人預約與訂金對帳管理</span>
-                        <span id="unread-order-badge" style="font-size: 0.85rem; color: var(--danger-red);"></span>
+                    <div class="panel-title"><span>✨ 項目大分類、價目或純文字公告管理</span></div>
+                    <div style="display: flex; gap: 0.6rem; margin-bottom: 1.2rem; background: var(--bg-sand); padding: 0.9rem; border-radius: 12px; flex-wrap: wrap;">
+                        <input type="text" id="new-cat-title" placeholder="輸入分類名稱（例：日系美睫系列 或 預約注意事項）" style="flex: 1; min-width: 220px; background: #FFF;">
+                        <select id="new-cat-type" style="max-width: 140px; background: #FFF;">
+                            <option value="service">價目服務分類</option>
+                            <option value="text">純文字公告/規則</option>
+                        </select>
+                        <button class="btn-primary" onclick="addServiceCategory()">+ 新增分類</button>
                     </div>
+                    <div id="m-categories-container"></div>
+                </div>
+
+                <div class="card-panel">
+                    <div class="panel-title"><span>➕ 加購項目管理</span></div>
+                    <div id="m-addons-editor" style="margin-bottom: 1rem;"></div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        <input type="text" id="new-addon-name" placeholder="加購項目名稱" style="flex: 2; min-width: 150px;">
+                        <input type="number" id="new-addon-price" placeholder="價格 ($)" style="flex: 1; min-width: 90px;">
+                        <input type="number" id="new-addon-dur" placeholder="增加工時(分)" style="flex: 1; min-width: 100px;">
+                        <button class="btn-outline" onclick="addMerchantAddon()">+ 新增加購</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分頁 2：時段設定 -->
+            <div id="tab-schedule" class="m-tab-content">
+                <div class="card-panel">
+                    <div class="panel-title"><span>📅 設定日期與開放時段（點選月曆日期管理當日開放時段）</span></div>
+                    
+                    <div class="calendar-box">
+                        <div class="cal-header">
+                            <button class="btn-soft btn-sm" onclick="changeMerchantMonth(-1)">〈</button>
+                            <span id="merchant-cal-title">2026 年 11 月</span>
+                            <button class="btn-soft btn-sm" onclick="changeMerchantMonth(1)">〉</button>
+                        </div>
+                        <div class="cal-grid" id="merchant-cal-days"></div>
+                    </div>
+
+                    <div style="background: var(--bg-sand); padding: 1.2rem; border-radius: 14px; margin-top: 1rem;">
+                        <strong style="color: var(--primary-dark); font-size: 1rem;" id="merchant-selected-date-title">修改日期開放時段：</strong>
+                        <div style="display: flex; gap: 0.6rem; margin-top: 0.8rem; flex-wrap: wrap;">
+                            <input type="time" id="merchant-add-time" value="10:00" style="max-width: 180px; background: #FFF;">
+                            <button class="btn-primary" onclick="addMerchantSlotForDate()">+ 新增時段</button>
+                        </div>
+                        <div id="merchant-date-slots-list" class="time-grid" style="margin-top: 1rem;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分頁 3：預約紀錄 -->
+            <div id="tab-orders" class="m-tab-content">
+                <div class="card-panel">
+                    <div class="panel-title"><span>📅 客人預約訂單管理</span></div>
                     <div class="table-wrap">
                         <table>
                             <thead>
                                 <tr>
                                     <th>日期時段</th>
-                                    <th>客人資訊</th>
-                                    <th>預約服務 (總工時)</th>
-                                    <th>應收 / 訂金後五碼</th>
-                                    <th>處理狀態</th>
+                                    <th>客人姓名/電話</th>
+                                    <th>預約項目</th>
+                                    <th>訂金後五碼</th>
+                                    <th>狀態</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
@@ -828,62 +973,38 @@
                 </div>
             </div>
 
-            <!-- 分頁 2：大分類與細項價目/訂金/工時設定 -->
-            <div id="tab-services" class="m-tab-content">
+            <!-- 分頁 4：黑名單 -->
+            <div id="tab-blacklist" class="m-tab-content">
                 <div class="card-panel">
-                    <div class="panel-title">
-                        <span>✨ 服務大分類與細項價目管理（每個項目可獨立設定訂金與工時）</span>
+                    <div class="panel-title"><span>🚫 黑名單管理（以手機號碼辨識攔截）</span></div>
+                    <div style="display: flex; gap: 0.6rem; margin-bottom: 1.2rem; background: var(--bg-sand); padding: 0.9rem; border-radius: 12px; flex-wrap: wrap;">
+                        <input type="text" id="bl-name" placeholder="客人的姓名" style="flex: 1; min-width: 140px; background: #FFF;">
+                        <input type="tel" id="bl-phone" maxlength="10" placeholder="客人的手機號碼（09開頭）" style="flex: 1.5; min-width: 180px; background: #FFF;">
+                        <button class="btn-primary" onclick="addBlacklist()">+ 加入黑名單</button>
                     </div>
-                    
-                    <!-- 新增項目大分類 -->
-                    <div style="display: flex; gap: 0.6rem; margin-bottom: 1.4rem; background: var(--bg-sand); padding: 0.9rem; border-radius: 12px; flex-wrap: wrap;">
-                        <input type="text" id="new-cat-title" placeholder="輸入新項目大分類（例：日系單根美睫、半永久霧眉系列）" style="flex: 1; min-width: 240px; background: #FFF;">
-                        <button class="btn-primary" onclick="addServiceCategory()">+ 新增項目大分類</button>
-                    </div>
-
-                    <!-- 大分類與細項列表容器 -->
-                    <div id="m-categories-container"></div>
-                </div>
-
-                <!-- 加購項目管理 -->
-                <div class="card-panel">
-                    <div class="panel-title"><span>➕ 通用加購項目管理（卸睫、卸甲、深層清潔等）</span></div>
-                    <div id="m-addons-editor" style="margin-bottom: 1rem;"></div>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        <input type="text" id="new-addon-name" placeholder="加購名稱（例：本店卸睫重接）" style="flex: 2; min-width: 160px;">
-                        <input type="number" id="new-addon-price" placeholder="加購價格 ($)" style="flex: 1; min-width: 100px;">
-                        <input type="number" id="new-addon-dur" placeholder="增加工時(分)" style="flex: 1; min-width: 110px;">
-                        <button class="btn-outline" onclick="addMerchantAddon()">+ 新增加購</button>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr><th>姓名</th><th>手機號碼</th><th>操作</th></tr>
+                            </thead>
+                            <tbody id="m-blacklist-table"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <!-- 分頁 3：工作室記帳與日/月財務報表 -->
+            <!-- 分頁 5：記帳報表 -->
             <div id="tab-accounting" class="m-tab-content">
                 <div class="stat-grid">
-                    <div class="stat-card">
-                        <div class="stat-label">今日營業收入</div>
-                        <div class="stat-val" style="color: var(--success-green);" id="acc-today-inc">$0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">篩選月份總收入</div>
-                        <div class="stat-val" style="color: var(--primary-coffee);" id="acc-month-inc">$0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">篩選月份總支出</div>
-                        <div class="stat-val" style="color: var(--danger-red);" id="acc-month-exp">$0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">篩選月份淨利結餘</div>
-                        <div class="stat-val" id="acc-month-net">$0</div>
-                    </div>
+                    <div class="stat-card"><div class="stat-label">今日營業收入</div><div class="stat-val" style="color: var(--success-green);" id="acc-today-inc">$0</div></div>
+                    <div class="stat-card"><div class="stat-label">本月總收入</div><div class="stat-val" style="color: var(--primary-coffee);" id="acc-month-inc">$0</div></div>
+                    <div class="stat-card"><div class="stat-label">本月總支出</div><div class="stat-val" style="color: var(--danger-red);" id="acc-month-exp">$0</div></div>
+                    <div class="stat-card"><div class="stat-label">本月淨利</div><div class="stat-val" id="acc-month-net">$0</div></div>
                 </div>
 
                 <div class="card-panel">
-                    <div class="panel-title">
-                        <span>✍️ 新增日常收支記帳</span>
-                    </div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem;">
+                    <div class="panel-title"><span>✍️ 新增收支記帳</span></div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem;">
                         <input type="date" id="acc-date">
                         <select id="acc-type">
                             <option value="income">收入 (+)</option>
@@ -892,74 +1013,43 @@
                         <select id="acc-cat">
                             <option value="美業服務營收">美業服務營收</option>
                             <option value="材料/耗材採購">材料/耗材採購</option>
-                            <option value="店租/水電網路">店租/水電網路</option>
-                            <option value="廣告/行銷推廣">廣告/行銷推廣</option>
+                            <option value="店租/水電">店租/水電</option>
+                            <option value="行銷廣告">行銷廣告</option>
                             <option value="其他雜項">其他雜項</option>
                         </select>
-                        <input type="text" id="acc-note" placeholder="備註說明（例：補黑膠與睫毛）">
-                        <input type="number" id="acc-amount" placeholder="金額 (NT$)">
+                        <input type="text" id="acc-note" placeholder="備註說明">
+                        <input type="number" id="acc-amount" placeholder="金額 ($)">
                         <button class="btn-primary" onclick="addAccountRecord()">記一筆</button>
                     </div>
                 </div>
 
                 <div class="card-panel">
-                    <div class="panel-title">
-                        <span>📊 月份收支明細報表</span>
-                        <div>
-                            <label style="font-size: 0.85rem; color: var(--text-muted);">選擇月份：</label>
-                            <input type="month" id="acc-filter-month" onchange="renderAccounting()">
-                        </div>
-                    </div>
+                    <div class="panel-title"><span>📊 月份收支明細</span><input type="month" id="acc-filter-month" onchange="renderAccounting()"></div>
                     <div class="table-wrap">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>日期</th>
-                                    <th>收支類型</th>
-                                    <th>項目分類</th>
-                                    <th>備註說明</th>
-                                    <th>金額</th>
-                                    <th>操作</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>日期</th><th>類型</th><th>分類</th><th>備註</th><th>金額</th><th>操作</th></tr></thead>
                             <tbody id="acc-records-table"></tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-            <!-- 分頁 4：營業時間與公休日設定 -->
-            <div id="tab-schedule" class="m-tab-content">
-                <div class="card-panel">
-                    <div class="panel-title"><span>🕒 每日開放預約時段設定</span></div>
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label class="form-label">每日最早可預約時間</label>
-                            <input type="time" id="sched-open" value="10:00" style="width: 100%;">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">每日最晚結束營業時間</label>
-                            <input type="time" id="sched-close" value="21:00" style="width: 100%;">
-                        </div>
-                    </div>
-                    <button class="btn-primary" onclick="saveScheduleSettings()">儲存營業時間</button>
-                </div>
-
-                <div class="card-panel">
-                    <div class="panel-title"><span>🏖️ 特定公休日設定（設定後前台該日將自動關閉預約）</span></div>
-                    <div style="display: flex; gap: 0.6rem; margin-bottom: 1rem; flex-wrap: wrap;">
-                        <input type="date" id="new-closed-date">
-                        <button class="btn-outline" onclick="addClosedDate()">+ 新增公休日</button>
-                    </div>
-                    <div id="closed-dates-list" class="checkbox-pills"></div>
-                </div>
-            </div>
-
-            <!-- 分頁 5：工作室基本資料、縣市區域連動、服務複選、銀行搜尋 -->
+            <!-- 分頁 6：工作室設定 -->
             <div id="tab-profile" class="m-tab-content">
                 <div class="card-panel">
-                    <div class="panel-title"><span>📍 工作室資料與收款銀行設定（上架必填防呆）</span></div>
+                    <div class="panel-title"><span>📍 工作室基本資料與登入帳密設定</span></div>
                     
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label class="form-label">登入帳號 (不可與其他店家重複) <span class="req-mark">*</span></label>
+                            <input type="text" id="m-username" style="width: 100%;">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">登入密碼 <span class="req-mark">*</span></label>
+                            <input type="password" id="m-password" style="width: 100%;">
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label class="form-label">工作室名稱 <span class="req-mark">*</span></label>
                         <input type="text" id="m-name" style="width: 100%;">
@@ -971,76 +1061,70 @@
                             <select id="m-city" onchange="onMerchantCityChange()" style="width: 100%;"></select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">所在區域（鄉鎮市區） <span class="req-mark">*</span></label>
+                            <label class="form-label">所在區域 <span class="req-mark">*</span></label>
                             <select id="m-district" style="width: 100%;"></select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">服務項目（可複選，將顯示於首頁媒合標籤） <span class="req-mark">*</span></label>
+                        <label class="form-label">服務項目（可複選） <span class="req-mark">*</span></label>
                         <div id="m-categories-checkboxes" class="checkbox-pills"></div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">工作室完整地址（客人送出預約後顯示） <span class="req-mark">*</span></label>
-                        <input type="text" id="m-address" placeholder="請填寫完整街道門牌" style="width: 100%;">
+                        <label class="form-label">工作室完整地址 <span class="req-mark">*</span></label>
+                        <input type="text" id="m-address" placeholder="預約成功後顯示給客人" style="width: 100%;">
                     </div>
 
                     <div class="form-grid-2">
                         <div class="form-group bank-search-wrapper">
-                            <label class="form-label">收款銀行（可輸入代碼如 822 / 812 或名稱搜尋） <span class="req-mark">*</span></label>
-                            <input type="text" id="m-bank-search" placeholder="點擊選擇或輸入銀行代碼（例：822）" onfocus="showBankDropdown()" oninput="filterBankDropdown()" style="width: 100%;">
+                            <label class="form-label">收款銀行 <span class="req-mark">*</span></label>
+                            <input type="text" id="m-bank-search" placeholder="輸入代碼如 822 搜尋" onfocus="showBankDropdown()" oninput="filterBankDropdown()" style="width: 100%;">
                             <div id="bank-dropdown-list" class="bank-dropdown-list"></div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">收款銀行帳號 <span class="req-mark">*</span></label>
-                            <input type="text" id="m-bank-account" placeholder="請輸入匯款帳號（例：1025-4008-9912）" style="width: 100%;">
+                            <input type="text" id="m-bank-account" placeholder="匯款帳號" style="width: 100%;">
                         </div>
                     </div>
 
-                    <button class="btn-primary" onclick="saveMerchantProfile()">儲存設定並驗證上架狀態</button>
+                    <div class="form-group">
+                        <label class="form-label">定金匯款規則說明（顯示在預約頁供客人參考）</label>
+                        <textarea id="m-deposit-rule" rows="3" placeholder="請填寫匯款期限、退費規定等..." style="width: 100%;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">預約成功彈窗提示訊息（可自訂）</label>
+                        <textarea id="m-success-popup-msg" rows="3" placeholder="預約成功後跳出的提示文字..." style="width: 100%;"></textarea>
+                    </div>
+
+                    <button class="btn-primary" onclick="saveMerchantProfile()">儲存設定並同步更新</button>
                 </div>
             </div>
         </section>
 
-        <!-- ================= 4. 平台創辦人總控大後台 (隱藏入口進入) ================= -->
+        <!-- ================= 4. 平台總控大後台 ================= -->
         <section id="admin-view" class="view-section">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                 <div>
                     <h2 style="color: var(--primary-dark);">👑 OomuBook 平台總控中心</h2>
                     <p style="font-size: 0.85rem; color: var(--text-muted);">管理入駐工作室訂閱狀態、收租開通與首頁精選置頂</p>
                 </div>
-                <button class="btn-soft" onclick="switchView('home-view')">登出管理後台</button>
+                <button class="btn-soft" onclick="switchView('home-view')">登出總控大後台</button>
             </div>
 
             <div class="stat-grid">
-                <div class="stat-card">
-                    <div class="stat-label">入駐工作室總數</div>
-                    <div class="stat-val" id="admin-stat-shops">0</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">付費訂閱中 (收租中)</div>
-                    <div class="stat-val" style="color: var(--success-green);" id="admin-stat-active">0</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">全平台累計預約筆數</div>
-                    <div class="stat-val" style="color: var(--primary-coffee);" id="admin-stat-bookings">0</div>
-                </div>
+                <div class="stat-card"><div class="stat-label">入駐工作室總數</div><div class="stat-val" id="admin-stat-shops">0</div></div>
+                <div class="stat-card"><div class="stat-label">付費訂閱中</div><div class="stat-val" style="color: var(--success-green);" id="admin-stat-active">0</div></div>
+                <div class="stat-card"><div class="stat-label">平台總預約筆數</div><div class="stat-val" style="color: var(--primary-coffee);" id="admin-stat-bookings">0</div></div>
             </div>
 
             <div class="card-panel">
-                <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">工作室訂閱權限與首頁置頂控制</h3>
+                <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">工作室訂閱與置頂控制</h3>
                 <div class="table-wrap">
                     <table>
                         <thead>
-                            <tr>
-                                <th>工作室名稱</th>
-                                <th>地區 / 服務項目</th>
-                                <th>資料完整度</th>
-                                <th>訂閱收租狀態</th>
-                                <th>首頁精選置頂</th>
-                                <th>操作控制</th>
-                            </tr>
+                            <tr><th>工作室名稱</th><th>帳號</th><th>地區/項目</th><th>狀態</th><th>訂閱收租</th><th>首頁置頂</th></tr>
                         </thead>
                         <tbody id="admin-shops-table"></tbody>
                     </table>
@@ -1054,23 +1138,19 @@
         <div style="margin-top: 0.3rem; font-size: 0.75rem;">個人美學工作室專屬預約與媒合系統</div>
     </footer>
 
-    <!-- 提示與驗證彈窗 -->
+    <!-- 通用彈窗 Modal -->
     <div id="custom-modal" class="modal-overlay">
         <div class="modal-card">
             <h3 id="modal-title" style="color: var(--primary-dark); margin-bottom: 0.8rem;">提示訊息</h3>
-            <p id="modal-body" style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 1.5rem; white-space: pre-line;"></p>
-            <div id="modal-input-wrap" style="display: none; margin-bottom: 1.2rem;">
-                <input type="password" id="admin-pass-input" placeholder="請輸入管理員密碼（測試碼：8888）" style="width: 100%; text-align: center;">
-            </div>
+            <div id="modal-body" style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 1.5rem; text-align: left;"></div>
             <div style="display: flex; gap: 0.6rem; justify-content: center;">
                 <button class="btn-soft" id="modal-cancel-btn" style="display: none;" onclick="closeModal()">取消</button>
-                <button class="btn-primary" id="modal-confirm-btn" onclick="closeModal()">我知道了</button>
+                <button class="btn-primary" id="modal-confirm-btn" onclick="closeModal()">確定</button>
             </div>
         </div>
     </div>
 
     <script>
-        // ================= 全台灣縣市與行政區資料庫 =================
         const TAIWAN_REGIONS = {
             "台北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
             "新北市": ["板橋區", "三重區", "中和區", "永和區", "新莊區", "新店區", "樹林區", "鶯歌區", "三峽區", "淡水區", "汐止區", "瑞芳區", "土城區", "蘆洲區", "五股區", "泰山區", "林口區", "深坑區", "石碇區", "坪林區", "三芝區", "石門區", "八里區", "平溪區", "雙溪區", "貢寮區", "金山區", "萬里區", "烏來區"],
@@ -1080,11 +1160,7 @@
             "苗栗縣": ["苗栗市", "頭份市", "竹南鎮", "苑裡鎮", "通霄鎮", "後龍鎮", "卓蘭鎮", "大湖鄉", "公館鄉", "銅鑼鄉", "南庄鄉", "頭屋鄉", "三義鄉", "西湖鄉", "造橋鄉", "三灣鄉", "獅潭鄉", "泰安鄉"],
             "台中市": ["中區", "東區", "南區", "西區", "北區", "北屯區", "西屯區", "南屯區", "太平區", "大里區", "霧峰區", "烏日區", "豐原區", "后里區", "石岡區", "東勢區", "和平區", "新社區", "潭子區", "大雅區", "神岡區", "大肚區", "沙鹿區", "龍井區", "梧棲區", "清水區", "大甲區", "外埔區", "大安區"],
             "彰化縣": ["彰化市", "員林市", "鹿港鎮", "和美鎮", "北斗鎮", "溪湖鎮", "田中鎮", "二林鎮", "線西鄉", "伸港鄉", "福興鄉", "秀水鄉", "花壇鄉", "芬園鄉", "大村鄉", "埔鹽鄉", "埔心鄉", "永靖鄉", "社頭鄉", "二水鄉", "田尾鄉", "埤頭鄉", "芳苑鄉", "大城鄉", "竹塘鄉", "溪州鄉"],
-            "南投縣": ["南投市", "埔里鎮", "草屯鎮", "竹山鎮", "集集鎮", "名間鄉", "鹿谷鄉", "中寮鄉", "魚池鄉", "國姓鄉", "水里鄉", "信義鄉", "仁愛鄉"],
-            "雲林縣": ["斗六市", "斗南鎮", "虎尾鎮", "西螺鎮", "土庫鎮", "北港鎮", "古坑鄉", "大埤鄉", "莿桐鄉", "林內鄉", "二崙鄉", "崙背鄉", "麥寮鄉", "東勢鄉", "褒忠鄉", "臺西鄉", "元長鄉", "四湖鄉", "口湖鄉", "水林鄉"],
-            "嘉義市": ["東區", "西區"],
-            "嘉義縣": ["太保市", "朴子市", "布袋鎮", "大林鎮", "民雄鄉", "溪口鄉", "新港鄉", "六腳鄉", "東石鄉", "義竹鄉", "鹿草鄉", "水上鄉", "中埔鄉", "竹崎鄉", "梅山鄉", "番路鄉", "大埔鄉", "阿里山鄉"],
-            "台南市": ["中西區", "東區", "南區", "北區", "安平區", "安南區", "永康區", "歸仁區", "新化區", "左鎮區", "玉井區", "楠西區", "南化區", "仁德區", "關廟區", "龍崎區", "官田區", "麻豆區", "佳里區", "西港區", "七股區", "將軍區", "學甲區", "北門區", "新營區", "後壁區", "白河區", "東山區", "六甲區", "下營區", "柳營區", "鹽水區", "善化區", "大內區", "山上區", "新市區", "安定區"],
+            "台南市": ["中西區", "東區", "南區", "北區", "安平區", "安南區", "永康區", "歸仁區", "新化區", "左鎮區", "玉井區", "楠西區", "南化區", "仁德區", "關廟區", "龍崎區", "官田區", "麻豆區", "佳里區", "西港區", "七股區", "將軍區", "學甲區", "北門區", "New營區", "後壁區", "白河區", "東山區", "六甲區", "下營區", "柳營區", "鹽水區", "善化區", "大內區", "山上區", "新市區", "安定區"],
             "高雄市": ["楠梓區", "左營區", "鼓山區", "三民區", "鹽埕區", "前金區", "新興區", "苓雅區", "前鎮區", "旗津區", "小港區", "鳳山區", "大寮區", "鳥松區", "林園區", "仁武區", "大樹區", "大社區", "岡山區", "路竹區", "橋頭區", "梓官區", "彌陀區", "永安區", "燕巢區", "田寮區", "阿蓮區", "茄萣區", "湖內區", "旗山區", "美濃區", "內門區", "杉林區", "甲仙區", "六龜區", "茂林區", "桃源區", "那瑪夏區"],
             "屏東縣": ["屏東市", "潮州鎮", "東港鎮", "恆春鎮", "萬丹鄉", "長治鄉", "麟洛鄉", "九如鄉", "里港鄉", "鹽埔鄉", "高樹鄉", "萬巒鄉", "內埔鄉", "竹田鄉", "新埤鄉", "枋寮鄉", "新園鄉", "崁頂鄉", "林邊鄉", "南州鄉", "佳冬鄉", "琉球鄉", "車城鄉", "滿州鄉", "枋山鄉", "三地門鄉", "霧臺鄉", "瑪家鄉", "泰武鄉", "來義鄉", "春日鄉", "獅子鄉", "牡丹鄉"],
             "宜蘭縣": ["宜蘭市", "羅東鎮", "蘇澳鎮", "頭城鎮", "礁溪鄉", "壯圍鄉", "員山鄉", "冬山鄉", "五結鄉", "三星鄉", "大同鄉", "南澳鄉"],
@@ -1095,58 +1171,21 @@
             "連江縣": ["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"]
         };
 
-        // ================= 服務項目複選清單 =================
-        const BEAUTY_SERVICE_OPTIONS = [
-            "美甲", "美睫", "霧眉", "飄眉", "霧唇", "熱蠟除毛", "美容護膚", "美體/SPA/芳療", "彩妝造型"
-        ];
+        const BEAUTY_SERVICE_OPTIONS = ["美甲", "美睫", "霧眉", "飄眉", "霧唇", "熱蠟除毛", "美容護膚", "美體/SPA/芳療", "彩妝造型"];
 
-        // ================= 台灣銀行代碼與名稱資料庫 =================
         const TAIWAN_BANKS = [
-            { code: "004", name: "臺灣銀行" },
-            { code: "005", name: "臺灣土地銀行" },
-            { code: "006", name: "合作金庫商業銀行" },
-            { code: "007", name: "第一商業銀行" },
-            { code: "008", name: "華南商業銀行" },
-            { code: "009", name: "彰化商業銀行" },
-            { code: "011", name: "上海商業儲蓄銀行" },
-            { code: "012", name: "台北富邦商業銀行" },
-            { code: "013", name: "國泰世華商業銀行" },
-            { code: "016", name: "高雄銀行" },
-            { code: "017", name: "兆豐國際商業銀行" },
-            { code: "021", name: "花旗(台灣)商業銀行" },
-            { code: "048", name: "王道商業銀行" },
-            { code: "050", name: "臺灣中小企業銀行" },
-            { code: "052", name: "渣打國際商業銀行" },
-            { code: "053", name: "台中商業銀行" },
-            { code: "054", name: "京城商業銀行" },
-            { code: "081", name: "匯豐(台灣)商業銀行" },
-            { code: "101", name: "瑞興商業銀行" },
-            { code: "102", name: "華泰商業銀行" },
-            { code: "103", name: "臺灣新光商業銀行" },
-            { code: "108", name: "陽信商業銀行" },
-            { code: "118", name: "板信商業銀行" },
-            { code: "147", name: "三信商業銀行" },
-            { code: "700", name: "中華郵政" },
-            { code: "803", name: "聯邦商業銀行" },
-            { code: "805", name: "遠東國際商業銀行" },
-            { code: "806", name: "元大商業銀行" },
-            { code: "807", name: "永豐商業銀行" },
-            { code: "808", name: "玉山商業銀行" },
-            { code: "809", name: "凱基商業銀行" },
-            { code: "810", name: "星展(台灣)商業銀行" },
-            { code: "812", name: "台新國際商業銀行" },
-            { code: "815", name: "日盛國際商業銀行" },
-            { code: "816", name: "安泰商業銀行" },
-            { code: "822", name: "中國信託商業銀行" },
-            { code: "823", name: "將來商業銀行" },
-            { code: "824", name: "連線商業銀行 (LINE Bank)" },
-            { code: "826", name: "樂天國際商業銀行" }
+            { code: "004", name: "臺灣銀行" }, { code: "006", name: "合作金庫商業銀行" }, { code: "007", name: "第一商業銀行" },
+            { code: "008", name: "華南商業銀行" }, { code: "009", name: "彰化商業銀行" }, { code: "012", name: "台北富邦商業銀行" },
+            { code: "013", name: "國泰世華商業銀行" }, { code: "017", name: "兆豐國際商業銀行" }, { code: "808", name: "玉山商業銀行" },
+            { code: "812", name: "台新國際商業銀行" }, { code: "822", name: "中國信託商業銀行" }, { code: "700", name: "中華郵政" }
         ];
 
-        // ================= 模擬多租戶資料庫 =================
+        // 初始店家資料（包含獨立登入帳密）
         let shopsData = [
             {
                 id: 'shop_1',
+                username: 'shop1',
+                password: '1234',
                 name: '沐光微醺美學工作室',
                 city: '苗栗縣',
                 district: '頭份市',
@@ -1154,79 +1193,35 @@
                 address: '苗栗縣頭份市中央路 288 號 2 樓',
                 bankName: '(822) 中國信託商業銀行',
                 bankAccount: '1025-4008-9912',
+                depositRule: '請於預約後 24 小時內匯款定金 $500，並填寫後五碼，逾期自動取消時段。',
+                successMsg: '預約申請已成功送出！請等待店家確認收款。',
                 subscribed: true,
                 featured: true,
-                openTime: '10:00',
-                closeTime: '21:00',
-                closedDates: [],
+                blacklist: [{ name: '陳小壞', phone: '0988111222' }],
+                slots: {
+                    '2026-11-13': ['10:00', '12:00', '14:30', '16:00', '18:00', '20:00'],
+                    '2026-11-18': ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00']
+                },
                 serviceCategories: [
                     {
                         id: 'cat_1',
-                        title: '自然感美睫嫁接系列',
+                        title: '自然感美睫系列',
+                        type: 'service',
                         items: [
                             { id: 's1', name: '小漫畫款 (150根)', price: 1200, deposit: 500, duration: 120 },
-                            { id: 's2', name: '仿真毛絨款 (濃密400根)', price: 1400, deposit: 500, duration: 120 }
+                            { id: 's2', name: '仿真毛絨款 (400根)', price: 1400, deposit: 500, duration: 120 }
                         ]
                     },
                     {
                         id: 'cat_2',
-                        title: '半永久紋繡定妝系列',
-                        items: [
-                            { id: 's3', name: '原生感粉霧眉（含三個月內補色）', price: 4800, deposit: 1000, duration: 150 }
-                        ]
+                        title: '📌 預約與到場注意事項',
+                        type: 'text',
+                        content: '1. 請準時抵達，若遲到超過15分鐘將視情況取消預約。\n2. 工作室空間有限，請盡量避免攜帶伴侶或寵物同行。'
                     }
                 ],
                 addons: [
-                    { id: 'a1', name: '本店卸睫重接', price: 200, duration: 30 },
-                    { id: 'a2', name: '他店卸睫重接', price: 300, duration: 30 },
-                    { id: 'a3', name: '深層睫毛 SPA 清潔', price: 150, duration: 15 }
+                    { id: 'a1', name: '本店卸睫重接', price: 200, duration: 30 }
                 ]
-            },
-            {
-                id: 'shop_2',
-                name: 'Atelier Luna 凝膠指尖',
-                city: '新竹市',
-                district: '東區',
-                categories: ['美甲'],
-                address: '新竹市東區關新路 63 號 3 樓之 1',
-                bankName: '(808) 玉山商業銀行',
-                bankAccount: '0041-9790-1122',
-                subscribed: true,
-                featured: false,
-                openTime: '10:00',
-                closeTime: '20:30',
-                closedDates: [],
-                serviceCategories: [
-                    {
-                        id: 'cat_3',
-                        title: '手部質感凝膠美甲',
-                        items: [
-                            { id: 's4', name: '日系單色 / 貓眼凝膠（含基礎保養）', price: 990, deposit: 300, duration: 90 },
-                            { id: 's5', name: '每月不挑款質感設計款', price: 1390, deposit: 500, duration: 120 }
-                        ]
-                    }
-                ],
-                addons: [
-                    { id: 'a4', name: '本店卸甲續作', price: 250, duration: 30 },
-                    { id: 'a5', name: '單指延甲修補', price: 150, duration: 20 }
-                ]
-            },
-            {
-                id: 'shop_3',
-                name: '若水半永久紋繡工坊',
-                city: '桃園市',
-                district: '中壢區',
-                categories: ['霧眉', '飄眉', '霧唇'],
-                address: '', // 未填寫地址測試強制上架防呆
-                bankName: '(013) 國泰世華商業銀行',
-                bankAccount: '2210-3344-5566',
-                subscribed: true,
-                featured: false,
-                openTime: '10:00',
-                closeTime: '20:00',
-                closedDates: [],
-                serviceCategories: [],
-                addons: []
             }
         ];
 
@@ -1234,55 +1229,48 @@
             {
                 id: 'b_101',
                 shopId: 'shop_1',
-                date: new Date().toISOString().split('T')[0],
-                startMinutes: 10 * 60,
-                duration: 150,
-                serviceSummary: '小漫畫款 (150根) (+ 本店卸睫重接)',
-                totalPrice: 1400,
+                date: '2026-11-13',
+                time: '14:30',
+                duration: 120,
+                serviceSummary: '小漫畫款 (150根)',
+                totalPrice: 1200,
                 deposit: 500,
-                custName: '陳思妤',
+                custName: '王小美',
                 custPhone: '0912345678',
-                custLine: 'Siyu_Chen',
                 last5: '88421',
-                status: 'unread' // unread: 待確認未閱, read: 已閱確認, done: 已完工入帳
+                status: 'unread'
             }
         ];
 
-        let accountingData = [
-            {
-                id: 'acc_1',
-                shopId: 'shop_1',
-                date: new Date().toISOString().split('T')[0],
-                type: 'expense',
-                category: '材料/耗材採購',
-                note: '補貨日系抗菌黑膠與山茶花睫毛盤',
-                amount: 1850
-            }
-        ];
+        let accountingData = [];
 
-        // 狀態控制變數
         let currentBookingShop = null;
         let selectedService = null;
         let selectedAddons = [];
-        let selectedTimeMinutes = null;
-        let currentMerchantId = 'shop_1';
-        let secretClickCount = 0;
-        let secretTimer = null;
+        let selectedDateStr = null;
+        let selectedTimeSlot = null;
+        let loggedInMerchantId = null;
+        let homeSelectedServices = [];
+        
+        let bookYear = 2026, bookMonth = 10;
+        let merchYear = 2026, merchMonth = 10;
+        let merchantSelectedDate = '2026-11-13';
+        let secretClickCount = 0, secretTimer = null;
 
-        // ================= 初始化設定 =================
         window.onload = function() {
-            const today = new Date().toISOString().split('T')[0];
-            const thisMonth = today.slice(0, 7);
-
-            document.getElementById('booking-date').value = today;
-            document.getElementById('booking-date').min = today;
-            document.getElementById('acc-date').value = today;
-            document.getElementById('acc-filter-month').value = thisMonth;
-
             initSelectOptions();
+            renderHomeServicePills();
             renderShopList();
 
-            // 點擊外部關閉銀行下拉選單
+            // 檢查是否有記憶的店家帳號
+            const rememberedUser = localStorage.getItem('oomu_remember_user');
+            if (rememberedUser) {
+                const found = shopsData.find(s => s.username === rememberedUser);
+                if (found) {
+                    // 自動填入登入快取
+                }
+            }
+
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.bank-search-wrapper')) {
                     document.getElementById('bank-dropdown-list').style.display = 'none';
@@ -1292,18 +1280,8 @@
 
         function initSelectOptions() {
             const cities = Object.keys(TAIWAN_REGIONS);
-            
-            // 首頁縣市選單
-            const homeCitySel = document.getElementById('filter-city');
-            homeCitySel.innerHTML = '<option value="">所有縣市</option>' + cities.map(c => `<option value="${c}">${c}</option>`).join('');
-
-            // 首頁服務類別選單
-            const homeCatSel = document.getElementById('filter-category');
-            homeCatSel.innerHTML = '<option value="">所有服務項目</option>' + BEAUTY_SERVICE_OPTIONS.map(c => `<option value="${c}">${c}</option>`).join('');
-
-            // 店家後台縣市選單
-            const mCitySel = document.getElementById('m-city');
-            mCitySel.innerHTML = '<option value="">-- 請選擇縣市 --</option>' + cities.map(c => `<option value="${c}">${c}</option>`).join('');
+            document.getElementById('filter-city').innerHTML = '<option value="">所有縣市</option>' + cities.map(c => `<option value="${c}">${c}</option>`).join('');
+            document.getElementById('m-city').innerHTML = '<option value="">-- 請選擇縣市 --</option>' + cities.map(c => `<option value="${c}">${c}</option>`).join('');
         }
 
         function switchView(viewId) {
@@ -1312,35 +1290,90 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             if (viewId === 'home-view') renderShopList();
-            if (viewId === 'merchant-view') initMerchantPanel();
             if (viewId === 'admin-view') renderAdminPanel();
         }
 
-        // 檢查店家是否符合上架防呆條件
         function isShopPublishable(shop) {
-            const hasBasic = shop.name && shop.city && shop.district && shop.address && shop.bankName && shop.bankAccount;
-            const hasCats = shop.categories && shop.categories.length > 0;
-            const hasServices = shop.serviceCategories && shop.serviceCategories.some(cat => cat.items && cat.items.length > 0);
-            return shop.subscribed && hasBasic && hasCats && hasServices;
+            return shop.name && shop.city && shop.district && shop.address && shop.bankName && shop.bankAccount && shop.categories.length > 0 && shop.serviceCategories.length > 0;
         }
 
-        // ================= 1. 消費者首頁邏輯 =================
+        // ================= 登入系統邏輯 =================
+        function openMerchantLoginModal() {
+            const remembered = localStorage.getItem('oomu_remember_user') || '';
+            const modalBody = `
+                <div class="form-group" style="margin-bottom:0.8rem;">
+                    <label class="form-label">店家帳號</label>
+                    <input type="text" id="login-username" value="${remembered}" placeholder="請輸入您的帳號" style="width:100%;">
+                </div>
+                <div class="form-group" style="margin-bottom:0.8rem;">
+                    <label class="form-label">店家密碼</label>
+                    <input type="password" id="login-password" placeholder="請輸入密碼" style="width:100%;">
+                </div>
+                <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.5rem; font-size:0.9rem;">
+                    <input type="checkbox" id="login-remember" ${remembered ? 'checked' : ''} style="width:auto;">
+                    <label for="login-remember" style="cursor:pointer; color:var(--primary-dark);">記住我的帳號</label>
+                </div>
+            `;
+            showModal('🔐 店家專屬後台登入', modalBody, executeMerchantLogin);
+            document.getElementById('modal-cancel-btn').style.display = 'inline-block';
+        }
+
+        function executeMerchantLogin() {
+            const u = document.getElementById('login-username').value.trim();
+            const p = document.getElementById('login-password').value.trim();
+            const remember = document.getElementById('login-remember').checked;
+
+            const shop = shopsData.find(s => s.username === u && s.password === p);
+            if (!shop) {
+                showModal('⚠️ 登入失敗', '帳號或密碼錯誤，請重新輸入！');
+                return;
+            }
+
+            if (remember) {
+                localStorage.setItem('oomu_remember_user', u);
+            } else {
+                localStorage.removeItem('oomu_remember_user');
+            }
+
+            loggedInMerchantId = shop.id;
+            closeModal();
+            loadMerchantData();
+            switchView('merchant-view');
+        }
+
+        function logoutMerchant() {
+            loggedInMerchantId = null;
+            switchView('home-view');
+        }
+
+        // ================= 1. 消費者首頁 =================
+        function renderHomeServicePills() {
+            const container = document.getElementById('home-service-pills');
+            container.innerHTML = BEAUTY_SERVICE_OPTIONS.map(srv => {
+                const isSelected = homeSelectedServices.includes(srv);
+                return `<div class="pill-check ${isSelected ? 'checked' : ''}" onclick="toggleHomeServiceFilter('${srv}')">${isSelected ? '✔' : '+'} ${srv}</div>`;
+            }).join('');
+        }
+
+        function toggleHomeServiceFilter(srvName) {
+            const idx = homeSelectedServices.indexOf(srvName);
+            if (idx > -1) homeSelectedServices.splice(idx, 1);
+            else homeSelectedServices.push(srvName);
+            renderHomeServicePills();
+            renderShopList();
+        }
+
         function onHomeCityChange() {
             const city = document.getElementById('filter-city').value;
             const distSel = document.getElementById('filter-district');
-            if (!city) {
-                distSel.innerHTML = '<option value="">所有區域</option>';
-            } else {
-                const districts = TAIWAN_REGIONS[city] || [];
-                distSel.innerHTML = '<option value="">所有區域</option>' + districts.map(d => `<option value="${d}">${d}</option>`).join('');
-            }
+            if (!city) distSel.innerHTML = '<option value="">所有區域</option>';
+            else distSel.innerHTML = '<option value="">所有區域</option>' + (TAIWAN_REGIONS[city] || []).map(d => `<option value="${d}">${d}</option>`).join('');
             renderShopList();
         }
 
         function renderShopList() {
             const cityFilter = document.getElementById('filter-city').value;
             const distFilter = document.getElementById('filter-district').value;
-            const catFilter = document.getElementById('filter-category').value;
             const grid = document.getElementById('shop-grid');
             grid.innerHTML = '';
 
@@ -1348,22 +1381,23 @@
                 if (!isShopPublishable(shop)) return false;
                 if (cityFilter && shop.city !== cityFilter) return false;
                 if (distFilter && shop.district !== distFilter) return false;
-                if (catFilter && !shop.categories.includes(catFilter)) return false;
+                if (homeSelectedServices.length > 0 && !homeSelectedServices.some(s => shop.categories.includes(s))) return false;
                 return true;
             }).sort((a, b) => (b.featured === true) - (a.featured === true));
 
             document.getElementById('shop-count-label').innerText = `共找到 ${filtered.length} 間可預約工作室`;
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted); background: var(--bg-card); border-radius: 16px;">目前此條件尚無符合的工作室，試試看切換其他縣市或項目吧 ✨</div>`;
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-muted);">目前此條件尚無符合的工作室 ✨</div>`;
                 return;
             }
 
             filtered.forEach(shop => {
                 const catBadges = shop.categories.map(c => `<span class="tag tag-cat">${c}</span>`).join('');
-                // 抓取前 2 項代表性服務顯示
                 let sampleItems = [];
-                shop.serviceCategories.forEach(sc => sc.items.forEach(it => sampleItems.push(it)));
+                shop.serviceCategories.forEach(sc => {
+                    if (sc.type === 'service' && sc.items) sc.items.forEach(it => sampleItems.push(it));
+                });
                 const priceTags = sampleItems.slice(0, 2).map(s => `<span class="tag">${s.name} $${s.price}</span>`).join('');
 
                 const card = document.createElement('div');
@@ -1376,278 +1410,283 @@
                         <div class="tag-list">${catBadges}</div>
                         <div class="tag-list">${priceTags}</div>
                     </div>
-                    <button class="btn-primary" style="width: 100%;" onclick="openShopBooking('${shop.id}')">查看時段並預約</button>
+                    <button class="btn-primary" style="width: 100%; margin-top:1rem;" onclick="openShopBooking('${shop.id}')">查看時段並預約</button>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        // ================= 2. 獨立店家預約與防撞單邏輯 =================
+        // ================= 2. 顧客預約流程 =================
         function openShopBooking(shopId) {
             currentBookingShop = shopsData.find(s => s.id === shopId);
             selectedService = null;
             selectedAddons = [];
-            selectedTimeMinutes = null;
+            selectedDateStr = null;
+            selectedTimeSlot = null;
 
             document.getElementById('booking-shop-header').innerHTML = `
                 <h2 style="color: var(--primary-dark); margin-bottom: 0.3rem;">${currentBookingShop.name}</h2>
-                <div style="color: var(--text-muted); font-size: 0.9rem;">📍 地區：${currentBookingShop.city} ${currentBookingShop.district}（完整地址將於預約送出後顯示）</div>
+                <div style="color: var(--text-muted); font-size: 0.9rem;">📍 地區：${currentBookingShop.city} ${currentBookingShop.district}</div>
+                <div style="color: var(--text-muted); font-size: 0.9rem; margin-top:0.2rem;">🏠 地址：${currentBookingShop.address}</div>
             `;
 
-            document.getElementById('bank-info-display').innerHTML = `
-                <strong>🏦 店家訂金匯款資訊：</strong><br>
-                ${currentBookingShop.bankName} 帳號：<strong>${currentBookingShop.bankAccount}</strong><br>
-                <span style="color: var(--text-muted); font-size: 0.8rem;">（請先完成該項目對應訂金轉帳後，於下方填寫匯款後五碼）</span>
-            `;
-
-            // 依大分類渲染服務項目
             const srvList = document.getElementById('booking-services-list');
             srvList.innerHTML = '';
             currentBookingShop.serviceCategories.forEach(cat => {
-                if (cat.items.length === 0) return;
-                const catHeader = document.createElement('div');
-                catHeader.style.cssText = 'font-weight: 700; color: var(--primary-coffee); margin: 1rem 0 0.5rem; font-size: 0.98rem;';
-                catHeader.innerText = `▪ ${cat.title}`;
-                srvList.appendChild(catHeader);
-
-                cat.items.forEach(srv => {
-                    const div = document.createElement('div');
-                    div.className = 'option-item';
-                    div.id = `srv-opt-${srv.id}`;
-                    div.innerHTML = `
-                        <div>
-                            <div style="font-weight: 500;">${srv.name}</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">工時：${srv.duration} 分鐘 ｜ 需預付訂金：$${srv.deposit}</div>
+                if (cat.type === 'text') {
+                    // 純文字公告分類
+                    srvList.innerHTML += `
+                        <div style="background:var(--bg-sand); border-radius:12px; padding:0.9rem; margin:0.8rem 0; font-size:0.9rem;">
+                            <div style="font-weight:700; color:var(--primary-dark); margin-bottom:0.3rem;">📌 ${cat.title}</div>
+                            <div style="white-space:pre-line; color:var(--text-main);">${cat.content || ''}</div>
                         </div>
-                        <div style="font-weight: 700; color: var(--primary-dark);">$${srv.price}</div>
                     `;
-                    div.onclick = () => selectService(srv);
-                    srvList.appendChild(div);
-                });
+                } else if (cat.items && cat.items.length > 0) {
+                    srvList.innerHTML += `<div style="font-weight: 700; color: var(--primary-coffee); margin: 0.8rem 0 0.4rem; font-size: 0.95rem;">▪ ${cat.title}</div>`;
+                    cat.items.forEach(srv => {
+                        srvList.innerHTML += `
+                            <div class="option-item" id="srv-opt-${srv.id}" onclick="selectBookingService('${srv.id}')">
+                                <div>
+                                    <div style="font-weight: 500;">${srv.name}</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">工時：${srv.duration} 分鐘 ｜ 定金：$${srv.deposit}</div>
+                                </div>
+                                <div style="font-weight: 700; color: var(--primary-dark);">$${srv.price}</div>
+                            </div>
+                        `;
+                    });
+                }
             });
 
-            // 渲染加購項目
             const addonList = document.getElementById('booking-addons-list');
-            addonList.innerHTML = '';
-            if (currentBookingShop.addons.length === 0) {
-                addonList.innerHTML = `<div style="font-size: 0.85rem; color: var(--text-muted);">此工作室無額外加購選項</div>`;
-            } else {
-                currentBookingShop.addons.forEach(addon => {
-                    const div = document.createElement('div');
-                    div.className = 'option-item';
-                    div.id = `addon-opt-${addon.id}`;
-                    div.innerHTML = `
-                        <div>
-                            <div style="font-weight: 500;">+ ${addon.name}</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">增加工時：+${addon.duration} 分鐘</div>
-                        </div>
+            addonList.innerHTML = currentBookingShop.addons.length === 0 ? '<div style="font-size:0.85rem; color:var(--text-muted);">無加購項目</div>' : '';
+            currentBookingShop.addons.forEach(addon => {
+                addonList.innerHTML += `
+                    <div class="option-item" id="addon-opt-${addon.id}" onclick="toggleBookingAddon('${addon.id}')">
+                        <div><div style="font-weight: 500;">+ ${addon.name}</div><div style="font-size: 0.8rem; color: var(--text-muted);">+${addon.duration} 分鐘</div></div>
                         <div style="font-weight: 700; color: var(--primary-coffee);">+$${addon.price}</div>
-                    `;
-                    div.onclick = () => toggleAddon(addon);
-                    addonList.appendChild(div);
-                });
-            }
+                    </div>
+                `;
+            });
 
-            clearFormErrors();
+            document.getElementById('deposit-rule-display').innerText = currentBookingShop.depositRule || '請於 24 小時內匯款定金並填寫後五碼。';
+            
+            document.getElementById('bank-info-display').innerHTML = `
+                <strong>🏦 店家匯款帳號：</strong>
+                <div class="bank-copy-row">
+                    <span>${currentBookingShop.bankName} 帳號：<strong>${currentBookingShop.bankAccount}</strong></span>
+                    <button type="button" id="copy-bank-btn" class="btn-outline btn-sm" onclick="copyShopBankAccount()">📋 複製帳號</button>
+                </div>
+            `;
+
+            renderBookingCalendar();
             updateBookingSummary();
-            renderTimeSlots();
             switchView('booking-view');
         }
 
-        function selectService(srv) {
-            selectedService = srv;
-            document.querySelectorAll('[id^="srv-opt-"]').forEach(el => el.classList.remove('selected'));
-            document.getElementById(`srv-opt-${srv.id}`).classList.add('selected');
-            document.getElementById('err-service').style.display = 'none';
-            selectedTimeMinutes = null;
-            updateBookingSummary();
-            renderTimeSlots();
-        }
-
-        function toggleAddon(addon) {
-            const idx = selectedAddons.findIndex(a => a.id === addon.id);
-            const el = document.getElementById(`addon-opt-${addon.id}`);
-            if (idx > -1) {
-                selectedAddons.splice(idx, 1);
-                el.classList.remove('selected');
-            } else {
-                selectedAddons.push(addon);
-                el.classList.add('selected');
+        function selectBookingService(srvId) {
+            for (let cat of currentBookingShop.serviceCategories) {
+                if (cat.items) {
+                    let found = cat.items.find(i => i.id === srvId);
+                    if (found) { selectedService = found; break; }
+                }
             }
-            selectedTimeMinutes = null;
+            document.querySelectorAll('[id^="srv-opt-"]').forEach(el => el.classList.remove('selected'));
+            document.getElementById(`srv-opt-${srvId}`).classList.add('selected');
+            document.getElementById('err-service').style.display = 'none';
             updateBookingSummary();
-            renderTimeSlots();
         }
 
-        function getTotalDuration() {
-            let total = selectedService ? selectedService.duration : 60;
-            selectedAddons.forEach(a => total += a.duration);
-            return total;
-        }
-
-        function getTotalPrice() {
-            let price = selectedService ? selectedService.price : 0;
-            selectedAddons.forEach(a => price += a.price);
-            return price;
+        function toggleBookingAddon(addonId) {
+            const addon = currentBookingShop.addons.find(a => a.id === addonId);
+            const idx = selectedAddons.findIndex(a => a.id === addonId);
+            const el = document.getElementById(`addon-opt-${addonId}`);
+            if (idx > -1) { selectedAddons.splice(idx, 1); el.classList.remove('selected'); }
+            else { selectedAddons.push(addon); el.classList.add('selected'); }
+            updateBookingSummary();
         }
 
         function updateBookingSummary() {
-            const dur = selectedService ? getTotalDuration() : 0;
-            const price = getTotalPrice();
-            const deposit = selectedService ? selectedService.deposit : 0;
+            let dur = selectedService ? selectedService.duration : 60;
+            selectedAddons.forEach(a => dur += a.duration);
+            let price = selectedService ? selectedService.price : 0;
+            selectedAddons.forEach(a => price += a.price);
+            let dep = selectedService ? selectedService.deposit : 0;
 
             document.getElementById('sum-duration').innerText = `${dur} 分鐘`;
             document.getElementById('sum-total').innerText = `$${price}`;
-            document.getElementById('sum-deposit').innerText = `$${deposit}`;
+            document.getElementById('sum-deposit').innerText = `$${dep}`;
         }
 
-        function timeStrToMinutes(str) {
-            const [h, m] = str.split(':').map(Number);
-            return h * 60 + m;
+        function copyShopBankAccount() {
+            if (!currentBookingShop) return;
+            navigator.clipboard.writeText(currentBookingShop.bankAccount).then(() => {
+                const btn = document.getElementById('copy-bank-btn');
+                btn.innerText = '✔ 已複製';
+                setTimeout(() => btn.innerText = '📋 複製帳號', 2000);
+            });
         }
 
-        function renderTimeSlots() {
+        function checkBlacklistAndPhone() {
+            const phone = document.getElementById('cust-phone').value.trim();
+            if (!currentBookingShop || !currentBookingShop.blacklist) return;
+            const hit = currentBookingShop.blacklist.find(b => b.phone === phone);
+            if (hit) {
+                showModal('⚠️ 預約受阻', `此手機號碼（${phone}）已被店家列入黑名單，無法進行預約。如有疑問請直接聯繫店家。`);
+                document.getElementById('cust-phone').value = '';
+            }
+        }
+
+        function renderBookingCalendar() {
+            const titleEl = document.getElementById('booking-cal-title');
+            const daysEl = document.getElementById('booking-cal-days');
+            titleEl.innerText = `${bookYear} 年 ${bookMonth + 1} 月`;
+            daysEl.innerHTML = '';
+
+            ['日', '一', '二', '三', '四', '五', '六'].forEach(w => daysEl.innerHTML += `<div class="cal-week-name">${w}</div>`);
+
+            const firstDay = new Date(bookYear, bookMonth, 1).getDay();
+            const totalDays = new Date(bookYear, bookMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) daysEl.innerHTML += `<div class="cal-day empty"></div>`;
+
+            for (let d = 1; d <= totalDays; d++) {
+                const mm = String(bookMonth + 1).padStart(2, '0');
+                const dd = String(d).padStart(2, '0');
+                const dateStr = `${bookYear}-${mm}-${dd}`;
+                const isSelected = selectedDateStr === dateStr;
+
+                daysEl.innerHTML += `<div class="cal-day ${isSelected ? 'selected' : ''}" onclick="selectBookingDate('${dateStr}')">${d}</div>`;
+            }
+        }
+
+        function changeBookingMonth(dir) {
+            bookMonth += dir;
+            if (bookMonth > 11) { bookMonth = 0; bookYear++; }
+            if (bookMonth < 0) { bookMonth = 11; bookYear--; }
+            renderBookingCalendar();
+        }
+
+        function selectBookingDate(dateStr) {
+            selectedDateStr = dateStr;
+            selectedTimeSlot = null;
+            document.getElementById('booking-selected-date-label').innerText = `已選擇日期：${dateStr}`;
+            renderBookingCalendar();
+            renderBookingTimeSlots();
+        }
+
+        function renderBookingTimeSlots() {
             const container = document.getElementById('time-slots-container');
             container.innerHTML = '';
-            const chosenDate = document.getElementById('booking-date').value;
-            const closedNotice = document.getElementById('closed-day-notice');
+            if (!selectedDateStr) return;
 
-            // 檢查是否為公休日
-            if (currentBookingShop.closedDates && currentBookingShop.closedDates.includes(chosenDate)) {
-                closedNotice.style.display = 'block';
+            const slots = (currentBookingShop.slots && currentBookingShop.slots[selectedDateStr]) || [];
+            if (slots.length === 0) {
+                container.innerHTML = `<div style="font-size:0.88rem; color:var(--text-muted);">此日期無開放預約時段</div>`;
                 return;
-            } else {
-                closedNotice.style.display = 'none';
             }
 
-            const neededDuration = getTotalDuration();
-            const openMins = timeStrToMinutes(currentBookingShop.openTime || '10:00');
-            const closeMins = timeStrToMinutes(currentBookingShop.closeTime || '21:00');
-            const dayBookings = bookingsData.filter(b => b.shopId === currentBookingShop.id && b.date === chosenDate);
-
-            for (let mins = openMins; mins <= closeMins - 60; mins += 30) {
-                const endMins = mins + neededDuration;
-                let isConflict = endMins > closeMins;
-
-                for (let b of dayBookings) {
-                    const bEnd = b.startMinutes + b.duration;
-                    if (mins < bEnd && endMins > b.startMinutes) {
-                        isConflict = true;
-                        break;
-                    }
-                }
-
-                const hh = String(Math.floor(mins / 60)).padStart(2, '0');
-                const mm = String(mins % 60).padStart(2, '0');
-                const timeStr = `${hh}:${mm}`;
-
-                const btn = document.createElement('div');
-                btn.className = 'time-slot' + (isConflict ? ' disabled' : '') + (selectedTimeMinutes === mins ? ' selected' : '');
-                btn.innerText = timeStr;
-
-                if (!isConflict) {
-                    btn.onclick = () => {
-                        selectedTimeMinutes = mins;
-                        document.getElementById('err-time').style.display = 'none';
-                        renderTimeSlots();
-                    };
-                }
-                container.appendChild(btn);
-            }
+            slots.forEach(time => {
+                const isSelected = selectedTimeSlot === time;
+                container.innerHTML += `<div class="time-slot ${isSelected ? 'selected' : ''}" onclick="selectBookingTime('${time}')">${time}</div>`;
+            });
         }
 
-        function clearFormErrors() {
-            document.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('input').forEach(el => el.classList.remove('input-error'));
+        function selectBookingTime(time) {
+            selectedTimeSlot = time;
+            document.getElementById('err-time').style.display = 'none';
+            renderBookingTimeSlots();
         }
 
         function submitBooking() {
-            clearFormErrors();
             let hasError = false;
-
-            if (!selectedService) {
-                document.getElementById('err-service').style.display = 'block';
-                hasError = true;
-            }
-            if (selectedTimeMinutes === null) {
-                document.getElementById('err-time').style.display = 'block';
-                hasError = true;
-            }
+            if (!selectedService) { document.getElementById('err-service').style.display = 'block'; hasError = true; }
+            if (!selectedDateStr || !selectedTimeSlot) { document.getElementById('err-time').style.display = 'block'; hasError = true; }
 
             const name = document.getElementById('cust-name').value.trim();
             const phone = document.getElementById('cust-phone').value.trim();
-            const line = document.getElementById('cust-line').value.trim();
             const last5 = document.getElementById('cust-last5').value.trim();
 
-            if (!name) {
-                document.getElementById('err-name').style.display = 'block';
-                document.getElementById('cust-name').classList.add('input-error');
-                hasError = true;
-            }
-            if (!/^09\d{8}$/.test(phone)) {
-                document.getElementById('err-phone').style.display = 'block';
-                document.getElementById('cust-phone').classList.add('input-error');
-                hasError = true;
-            }
-            if (!line) {
-                document.getElementById('err-line').style.display = 'block';
-                document.getElementById('cust-line').classList.add('input-error');
-                hasError = true;
-            }
-            if (!/^\d{5}$/.test(last5)) {
-                document.getElementById('err-last5').style.display = 'block';
-                document.getElementById('cust-last5').classList.add('input-error');
-                hasError = true;
-            }
+            if (!name) { document.getElementById('err-name').style.display = 'block'; hasError = true; }
+            if (!/^09\d{8}$/.test(phone)) { document.getElementById('err-phone').style.display = 'block'; hasError = true; }
+            if (!/^\d{5}$/.test(last5)) { document.getElementById('err-last5').style.display = 'block'; hasError = true; }
 
             if (hasError) {
-                showModal('資料尚未填寫完整', '請檢查紅色標示的必填欄位與匯款後五碼格式喔！');
+                showModal('資料尚未填寫完整', '請檢查紅色標示的必填項目與匯款後五碼！');
                 return;
             }
 
-            const hh = String(Math.floor(selectedTimeMinutes / 60)).padStart(2, '0');
-            const mm = String(selectedTimeMinutes % 60).padStart(2, '0');
+            let dur = selectedService.duration;
+            selectedAddons.forEach(a => dur += a.duration);
+            let price = selectedService.price;
+            selectedAddons.forEach(a => price += a.price);
             const addonNames = selectedAddons.map(a => a.name).join(' + ');
             const summaryText = selectedService.name + (addonNames ? ` (+ ${addonNames})` : '');
+
+            const shopSlots = currentBookingShop.slots[selectedDateStr];
+            const idx = shopSlots.indexOf(selectedTimeSlot);
+            if (idx > -1) shopSlots.splice(idx, 1);
 
             bookingsData.push({
                 id: 'b_' + Date.now(),
                 shopId: currentBookingShop.id,
-                date: document.getElementById('booking-date').value,
-                startMinutes: selectedTimeMinutes,
-                duration: getTotalDuration(),
+                date: selectedDateStr,
+                time: selectedTimeSlot,
+                duration: dur,
                 serviceSummary: summaryText,
-                totalPrice: getTotalPrice(),
+                totalPrice: price,
                 deposit: selectedService.deposit,
                 custName: name,
                 custPhone: phone,
-                custLine: line,
                 last5: last5,
                 status: 'unread'
             });
 
             document.getElementById('cust-name').value = '';
             document.getElementById('cust-phone').value = '';
-            document.getElementById('cust-line').value = '';
             document.getElementById('cust-last5').value = '';
 
+            const customMsg = currentBookingShop.successMsg || '預約申請已成功送出！';
             showModal(
-                '🎉 預約申請已成功送出！',
-                `工作室：${currentBookingShop.name}\n預約時間：${document.getElementById('booking-date').value} ${hh}:${mm}\n項目：${summaryText}\n\n📍 工作室詳細地址：\n${currentBookingShop.address}\n\n店家核對您的訂金後五碼（${last5}）並按「已閱」後即完成保留！`,
+                '🎉 預約申請成功！',
+                `工作室：${currentBookingShop.name}\n預約時間：${selectedDateStr} ${selectedTimeSlot}\n項目：${summaryText}\n\n📍 地址：${currentBookingShop.address}\n\n${customMsg}`,
                 () => switchView('home-view')
             );
         }
 
-        // ================= 3. 店家專屬小後台（安你好全功能） =================
-        function initMerchantPanel() {
-            const switcher = document.getElementById('merchant-switcher');
-            switcher.innerHTML = shopsData.map(s => `<option value="${s.id}" ${s.id === currentMerchantId ? 'selected' : ''}>切換店家：${s.name}</option>`).join('');
-            loadMerchantData();
+        // ================= 3. 店家專屬工作台 =================
+        function loadMerchantData() {
+            if (!loggedInMerchantId) return;
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            document.getElementById('merchant-panel-title').innerText = `${shop.name} - 店家工作台`;
+
+            const publishable = isShopPublishable(shop);
+            document.getElementById('merchant-status-badge').className = `status-pill ${publishable ? 'status-done' : 'status-unread'}`;
+            document.getElementById('merchant-status-badge').innerText = publishable ? '訂閱中・首頁公開上架' : '未上架・請補齊基本與價目資料';
+            document.getElementById('merchant-warning-banner').style.display = publishable ? 'none' : 'block';
+
+            renderMerchantCategories();
+            renderMerchantAddons();
+            renderMerchantBookings();
+            renderBlacklistTable();
+            renderAccounting();
+
+            document.getElementById('m-username').value = shop.username || '';
+            document.getElementById('m-password').value = shop.password || '';
+            document.getElementById('m-name').value = shop.name;
+            document.getElementById('m-city').value = shop.city || '';
+            onMerchantCityChange(shop.district);
+            document.getElementById('m-address').value = shop.address || '';
+            document.getElementById('m-bank-search').value = shop.bankName || '';
+            document.getElementById('m-bank-account').value = shop.bankAccount || '';
+            document.getElementById('m-deposit-rule').value = shop.depositRule || '';
+            document.getElementById('m-success-popup-msg').value = shop.successMsg || '';
+            renderMerchantCategoryCheckboxes(shop.categories || []);
+            renderMerchantCalendar();
         }
 
-        function switchMerchantAccount() {
-            currentMerchantId = document.getElementById('merchant-switcher').value;
-            loadMerchantData();
+        function previewCurrentShop() {
+            if (!loggedInMerchantId) return;
+            openShopBooking(loggedInMerchantId);
         }
 
         function switchMerchantTab(tabId, btnEl) {
@@ -1655,220 +1694,192 @@
             document.querySelectorAll('.m-tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             btnEl.classList.add('active');
+            if (tabId === 'tab-schedule') renderMerchantCalendar();
         }
 
-        function loadMerchantData() {
-            const shop = shopsData.find(s => s.id === currentMerchantId);
-            document.getElementById('merchant-panel-title').innerText = `${shop.name} - 店家工作台`;
+        function renderMerchantCalendar() {
+            const titleEl = document.getElementById('merchant-cal-title');
+            const daysEl = document.getElementById('merchant-cal-days');
+            titleEl.innerText = `${merchYear} 年 ${merchMonth + 1} 月`;
+            daysEl.innerHTML = '';
 
-            // 檢查上架防呆狀態
-            const publishable = isShopPublishable(shop);
-            const badge = document.getElementById('merchant-status-badge');
-            const banner = document.getElementById('merchant-warning-banner');
-            if (publishable) {
-                badge.className = 'status-pill status-done';
-                badge.innerText = '訂閱中・首頁公開上架';
-                banner.style.display = 'none';
-            } else {
-                badge.className = 'status-pill status-unread';
-                badge.innerText = '未上架・請補齊資料或確認訂閱';
-                banner.style.display = 'block';
+            ['日', '一', '二', '三', '四', '五', '六'].forEach(w => daysEl.innerHTML += `<div class="cal-week-name">${w}</div>`);
+
+            const firstDay = new Date(merchYear, merchMonth, 1).getDay();
+            const totalDays = new Date(merchYear, merchMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) daysEl.innerHTML += `<div class="cal-day empty"></div>`;
+
+            for (let d = 1; d <= totalDays; d++) {
+                const mm = String(merchMonth + 1).padStart(2, '0');
+                const dd = String(d).padStart(2, '0');
+                const dateStr = `${merchYear}-${mm}-${dd}`;
+                const isSelected = merchantSelectedDate === dateStr;
+
+                daysEl.innerHTML += `<div class="cal-day ${isSelected ? 'selected' : ''}" onclick="selectMerchantDate('${dateStr}')">${d}</div>`;
             }
-
-            // 載入分頁 1：訂單與未閱/已閱對帳
-            renderMerchantBookings();
-
-            // 載入分頁 2：大分類與細項價目/訂金/工時
-            renderMerchantCategories();
-            renderMerchantAddons();
-
-            // 載入分頁 3：記帳與報表
-            renderAccounting();
-
-            // 載入分頁 4：營業時間與公休日
-            document.getElementById('sched-open').value = shop.openTime || '10:00';
-            document.getElementById('sched-close').value = shop.closeTime || '21:00';
-            renderClosedDates();
-
-            // 載入分頁 5：基本資料、縣市區域連動、服務複選、銀行
-            document.getElementById('m-name').value = shop.name;
-            document.getElementById('m-city').value = shop.city || '';
-            onMerchantCityChange(shop.district);
-            document.getElementById('m-address').value = shop.address || '';
-            document.getElementById('m-bank-search').value = shop.bankName || '';
-            document.getElementById('m-bank-account').value = shop.bankAccount || '';
-            renderMerchantCategoryCheckboxes(shop.categories || []);
+            renderMerchantDateSlots();
         }
 
-        // --- 分頁 1：預約訂單已閱與完工入帳 ---
-        function renderMerchantBookings() {
-            const tbody = document.getElementById('m-bookings-table');
-            const myBookings = bookingsData.filter(b => b.shopId === currentMerchantId);
-            const unreadCount = myBookings.filter(b => b.status === 'unread').length;
-            document.getElementById('unread-order-badge').innerText = unreadCount > 0 ? `🔔 您有 ${unreadCount} 筆新預約尚未按「已閱」！` : '✔ 所有預約皆已確認';
+        function changeMerchantMonth(dir) {
+            merchMonth += dir;
+            if (merchMonth > 11) { merchMonth = 0; merchYear++; }
+            if (merchMonth < 0) { merchMonth = 11; merchYear--; }
+            renderMerchantCalendar();
+        }
 
-            if (myBookings.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">目前尚無預約訂單</td></tr>`;
+        function selectMerchantDate(dateStr) {
+            merchantSelectedDate = dateStr;
+            renderMerchantCalendar();
+        }
+
+        function renderMerchantDateSlots() {
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            document.getElementById('merchant-selected-date-title').innerText = `修改 ${merchantSelectedDate} 開放時段：`;
+            const listEl = document.getElementById('merchant-date-slots-list');
+            listEl.innerHTML = '';
+
+            if (!shop.slots) shop.slots = {};
+            const slots = shop.slots[merchantSelectedDate] || [];
+
+            if (slots.length === 0) {
+                listEl.innerHTML = `<div style="font-size:0.88rem; color:var(--text-muted);">此日尚無開放時段</div>`;
                 return;
             }
 
-            tbody.innerHTML = myBookings.map(b => {
-                const hh = String(Math.floor(b.startMinutes / 60)).padStart(2, '0');
-                const mm = String(b.startMinutes % 60).padStart(2, '0');
-
-                let statusHtml = '';
-                let actionBtns = '';
-
-                if (b.status === 'unread') {
-                    statusHtml = `<span class="status-pill status-unread">新預約・未閱</span>`;
-                    actionBtns = `<button class="btn-primary btn-sm" onclick="markBookingRead('${b.id}')">✔ 按已閱確認</button>`;
-                } else if (b.status === 'read') {
-                    statusHtml = `<span class="status-pill status-read">已閱・已核對訂金</span>`;
-                    actionBtns = `<button class="btn-outline btn-sm" onclick="completeBookingToAccount('${b.id}')">💰 完工並自動入帳</button>`;
-                } else {
-                    statusHtml = `<span class="status-pill status-done">已完工入帳</span>`;
-                    actionBtns = `<span style="font-size:0.8rem; color:var(--text-muted);">已拋轉記帳本</span>`;
-                }
-
-                return `
-                    <tr>
-                        <td>${b.date}<br><strong>${hh}:${mm}</strong></td>
-                        <td>${b.custName}<br><span style="font-size:0.8rem;color:var(--text-muted);">${b.custPhone}<br>LINE: ${b.custLine}</span></td>
-                        <td>${b.serviceSummary}<br><span style="font-size:0.8rem;color:var(--text-muted);">工時 ${b.duration} 分鐘</span></td>
-                        <td>總價 $${b.totalPrice}<br>訂金 $${b.deposit}（後五碼：<strong>${b.last5}</strong>）</td>
-                        <td>${statusHtml}</td>
-                        <td>${actionBtns}</td>
-                    </tr>
+            slots.sort().forEach((t, idx) => {
+                listEl.innerHTML += `
+                    <div style="background:#FFF; padding:0.5rem 0.8rem; border-radius:8px; border:1px solid var(--border-soft); display:flex; justify-content:space-between; align-items:center;">
+                        <strong>${t}</strong>
+                        <button class="btn-soft btn-sm" style="color:var(--danger-red);" onclick="removeMerchantSlot('${merchantSelectedDate}', ${idx})">刪除</button>
+                    </div>
                 `;
-            }).join('');
+            });
         }
 
-        function markBookingRead(bookingId) {
-            const b = bookingsData.find(item => item.id === bookingId);
-            if (b) {
-                b.status = 'read';
-                renderMerchantBookings();
-                showModal('已確認預約', `已標記為「已閱」，並完成訂金後五碼（${b.last5}）核對！`);
+        function addMerchantSlotForDate() {
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            const timeVal = document.getElementById('merchant-add-time').value;
+            if (!timeVal) return;
+            if (!shop.slots) shop.slots = {};
+            if (!shop.slots[merchantSelectedDate]) shop.slots[merchantSelectedDate] = [];
+            if (!shop.slots[merchantSelectedDate].includes(timeVal)) {
+                shop.slots[merchantSelectedDate].push(timeVal);
+            }
+            renderMerchantDateSlots();
+        }
+
+        function removeMerchantSlot(dateStr, idx) {
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            if (shop.slots && shop.slots[dateStr]) {
+                shop.slots[dateStr].splice(idx, 1);
+                renderMerchantDateSlots();
             }
         }
 
-        function completeBookingToAccount(bookingId) {
-            const b = bookingsData.find(item => item.id === bookingId);
-            if (b) {
-                b.status = 'done';
-                accountingData.push({
-                    id: 'acc_' + Date.now(),
-                    shopId: currentMerchantId,
-                    date: b.date,
-                    type: 'income',
-                    category: '美業服務營收',
-                    note: `客人：${b.custName} - ${b.serviceSummary}`,
-                    amount: b.totalPrice
-                });
-                renderMerchantBookings();
-                renderAccounting();
-                showModal('💰 完工入帳成功', `已將「${b.custName}」的服務金額 $${b.totalPrice} 自動寫入工作室記帳本！`);
-            }
-        }
-
-        // --- 分頁 2：大分類與細項價目/訂金/工時管理 ---
+        // 店家服務與純文字分類管理
         function renderMerchantCategories() {
-            const shop = shopsData.find(s => s.id === currentMerchantId);
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
             const container = document.getElementById('m-categories-container');
-            
             if (!shop.serviceCategories || shop.serviceCategories.length === 0) {
-                container.innerHTML = `<div style="text-align:center; padding: 1.5rem; color:var(--text-muted);">尚未建立任何服務大分類，請先在上方新增分類（例如：自然感美睫系列）</div>`;
+                container.innerHTML = `<div style="text-align:center; padding:1.2rem; color:var(--text-muted);">尚未建立分類</div>`;
                 return;
             }
 
             container.innerHTML = shop.serviceCategories.map((cat, catIdx) => {
-                const itemsHtml = cat.items.map((srv, srvIdx) => `
-                    <div class="service-row-item">
-                        <div>
-                            <strong>${srv.name}</strong>
-                            <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 8px;">
-                                售價 <strong style="color:var(--primary-dark);">$${srv.price}</strong> ｜ 
-                                訂金 <strong style="color:var(--primary-coffee);">$${srv.deposit}</strong> ｜ 
-                                工時 ${srv.duration} 分鐘
-                            </span>
+                if (cat.type === 'text') {
+                    return `
+                        <div class="category-block">
+                            <div class="category-header">
+                                <strong style="color:var(--primary-dark);">📌 ${cat.title} <span style="font-size:0.75rem; background:var(--bg-sand); padding:2px 6px; border-radius:6px;">純文字公告</span></strong>
+                                <button class="btn-soft btn-sm" style="color:var(--danger-red);" onclick="removeServiceCategory(${catIdx})">刪除分類</button>
+                            </div>
+                            <textarea rows="3" id="text-cat-content-${catIdx}" oninput="updateTextCatContent(${catIdx}, this.value)" placeholder="請輸入公告或規則內容..." style="width:100%; background:#FFF;">${cat.content || ''}</textarea>
                         </div>
-                        <button class="btn-soft btn-sm" style="color: var(--danger-red);" onclick="removeServiceItem(${catIdx}, ${srvIdx})">刪除細項</button>
-                    </div>
-                `).join('');
+                    `;
+                } else {
+                    let itemsHtml = (cat.items || []).map((srv, srvIdx) => `
+                        <div class="service-row-item">
+                            <div>
+                                <strong>${srv.name}</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 6px;">售價 $${srv.price} ｜ 訂金 $${srv.deposit} ｜ ${srv.duration}分</span>
+                            </div>
+                            <button class="btn-soft btn-sm" style="color:var(--danger-red);" onclick="removeServiceItem(${catIdx}, ${srvIdx})">刪除</button>
+                        </div>
+                    `).join('');
 
-                return `
-                    <div class="category-block">
-                        <div class="category-header">
-                            <strong style="font-size: 1.05rem; color: var(--primary-dark);">📂 大分類：${cat.title}</strong>
-                            <button class="btn-soft btn-sm" style="color: var(--danger-red);" onclick="removeServiceCategory(${catIdx})">刪除整個分類</button>
+                    return `
+                        <div class="category-block">
+                            <div class="category-header">
+                                <strong style="color:var(--primary-dark);">📂 ${cat.title}</strong>
+                                <button class="btn-soft btn-sm" style="color:var(--danger-red);" onclick="removeServiceCategory(${catIdx})">刪除分類</button>
+                            </div>
+                            ${itemsHtml}
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem;">
+                                <input type="text" id="new-srv-name-${catIdx}" placeholder="細項名稱" style="flex:2; min-width:130px; background:#FFF;">
+                                <input type="number" id="new-srv-price-${catIdx}" placeholder="售價" style="flex:1; min-width:75px; background:#FFF;">
+                                <input type="number" id="new-srv-dep-${catIdx}" placeholder="定金" style="flex:1; min-width:75px; background:#FFF;">
+                                <input type="number" id="new-srv-dur-${catIdx}" placeholder="工時(分)" style="flex:1; min-width:75px; background:#FFF;">
+                                <button class="btn-outline btn-sm" onclick="addServiceItem(${catIdx})">+ 新增</button>
+                            </div>
                         </div>
-                        ${itemsHtml || '<div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.6rem;">此分類尚無細項服務，請於下方新增：</div>'}
-                        
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem;">
-                            <input type="text" id="new-srv-name-${catIdx}" placeholder="細項名稱（例：小漫畫款）" style="flex: 2; min-width: 150px; background:#FFF;">
-                            <input type="number" id="new-srv-price-${catIdx}" placeholder="價格 ($)" style="flex: 1; min-width: 85px; background:#FFF;">
-                            <input type="number" id="new-srv-dep-${catIdx}" placeholder="預付訂金 ($)" style="flex: 1; min-width: 95px; background:#FFF;">
-                            <input type="number" id="new-srv-dur-${catIdx}" placeholder="工時(分鐘)" style="flex: 1; min-width: 95px; background:#FFF;">
-                            <button class="btn-outline btn-sm" onclick="addServiceItem(${catIdx})">+ 新增細項</button>
-                        </div>
-                    </div>
-                `;
+                    `;
+                }
             }).join('');
         }
 
         function addServiceCategory() {
             const title = document.getElementById('new-cat-title').value.trim();
-            if (!title) {
-                showModal('提示', '請輸入項目大分類名稱！');
-                return;
+            const type = document.getElementById('new-cat-type').value;
+            if (!title) return;
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            if (!shop.serviceCategories) shop.serviceCategories = [];
+            
+            if (type === 'text') {
+                shop.serviceCategories.push({ id: 'cat_' + Date.now(), title, type: 'text', content: '' });
+            } else {
+                shop.serviceCategories.push({ id: 'cat_' + Date.now(), title, type: 'service', items: [] });
             }
-            const shop = shopsData.find(s => s.id === currentMerchantId);
-            shop.serviceCategories.push({ id: 'cat_' + Date.now(), title, items: [] });
             document.getElementById('new-cat-title').value = '';
             renderMerchantCategories();
         }
 
+        function updateTextCatContent(catIdx, val) {
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            shop.serviceCategories[catIdx].content = val;
+        }
+
         function removeServiceCategory(catIdx) {
-            const shop = shopsData.find(s => s.id === currentMerchantId);
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
             shop.serviceCategories.splice(catIdx, 1);
-            loadMerchantData();
+            renderMerchantCategories();
         }
 
         function addServiceItem(catIdx) {
             const name = document.getElementById(`new-srv-name-${catIdx}`).value.trim();
             const price = Number(document.getElementById(`new-srv-price-${catIdx}`).value);
             const deposit = Number(document.getElementById(`new-srv-dep-${catIdx}`).value) || 0;
-            const duration = Number(document.getElementById(`new-srv-dur-${catIdx}`).value);
+            const dur = Number(document.getElementById(`new-srv-dur-${catIdx}`).value);
+            if (!name || !price || !dur) return;
 
-            if (!name || !price || !duration) {
-                showModal('資料不完整', '請填寫細項名稱、價格與預計工時（分鐘）！');
-                return;
-            }
-
-            const shop = shopsData.find(s => s.id === currentMerchantId);
-            shop.serviceCategories[catIdx].items.push({
-                id: 's_' + Date.now(),
-                name,
-                price,
-                deposit,
-                duration
-            });
-            loadMerchantData();
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            if (!shop.serviceCategories[catIdx].items) shop.serviceCategories[catIdx].items = [];
+            shop.serviceCategories[catIdx].items.push({ id: 's_' + Date.now(), name, price, deposit, duration: dur });
+            renderMerchantCategories();
         }
 
         function removeServiceItem(catIdx, srvIdx) {
-            const shop = shopsData.find(s => s.id === currentMerchantId);
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
             shop.serviceCategories[catIdx].items.splice(srvIdx, 1);
-            loadMerchantData();
+            renderMerchantCategories();
         }
 
         function renderMerchantAddons() {
-            const shop = shopsData.find(s => s.id === currentMerchantId);
-            const editor = document.getElementById('m-addons-editor');
-            editor.innerHTML = shop.addons.map((a, idx) => `
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            document.getElementById('m-addons-editor').innerHTML = (shop.addons || []).map((a, idx) => `
                 <div class="service-row-item">
-                    <span><strong>+ ${a.name}</strong> — 加價 $${a.price}（+${a.duration} 分鐘）</span>
-                    <button class="btn-soft btn-sm" style="color: var(--danger-red);" onclick="removeMerchantAddon(${idx})">刪除</button>
+                    <span><strong>+ ${a.name}</strong> — $${a.price}（+${a.duration}分）</span>
+                    <button class="btn-soft btn-sm" style="color:var(--danger-red);" onclick="removeMerchantAddon(${idx})">刪除</button>
                 </div>
             `).join('');
         }
@@ -1876,11 +1887,11 @@
         function addMerchantAddon() {
             const name = document.getElementById('new-addon-name').value.trim();
             const price = Number(document.getElementById('new-addon-price').value);
-            const duration = Number(document.getElementById('new-addon-dur').value);
+            const dur = Number(document.getElementById('new-addon-dur').value);
             if (!name || !price) return;
-
-            const shop = shopsData.find(s => s.id === currentMerchantId);
-            shop.addons.push({ id: 'a_' + Date.now(), name, price, duration: duration || 0 });
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            if (!shop.addons) shop.addons = [];
+            shop.addons.push({ id: 'a_' + Date.now(), name, price, duration: dur || 0 });
             document.getElementById('new-addon-name').value = '';
             document.getElementById('new-addon-price').value = '';
             document.getElementById('new-addon-dur').value = '';
@@ -1888,48 +1899,101 @@
         }
 
         function removeMerchantAddon(idx) {
-            const shop = shopsData.find(s => s.id === currentMerchantId);
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
             shop.addons.splice(idx, 1);
             renderMerchantAddons();
         }
 
-        // --- 分頁 3：記帳與日/月報表 ---
+        function renderBlacklistTable() {
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            const tbody = document.getElementById('m-blacklist-table');
+            if (!shop.blacklist || shop.blacklist.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--text-muted);">目前無黑名單紀錄</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = shop.blacklist.map((b, idx) => `
+                <tr>
+                    <td>${b.name}</td>
+                    <td>${b.phone}</td>
+                    <td><button class="btn-soft btn-sm" style="color:var(--danger-red);" onclick="removeBlacklist(${idx})">移除</button></td>
+                </tr>
+            `).join('');
+        }
+
+        function addBlacklist() {
+            const name = document.getElementById('bl-name').value.trim();
+            const phone = document.getElementById('bl-phone').value.trim();
+            if (!name || !phone) { showModal('提示', '請填寫完整姓名與手機號碼！'); return; }
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            if (!shop.blacklist) shop.blacklist = [];
+            shop.blacklist.push({ name, phone });
+            document.getElementById('bl-name').value = '';
+            document.getElementById('bl-phone').value = '';
+            renderBlacklistTable();
+        }
+
+        function removeBlacklist(idx) {
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            shop.blacklist.splice(idx, 1);
+            renderBlacklistTable();
+        }
+
+        function renderMerchantBookings() {
+            const tbody = document.getElementById('m-bookings-table');
+            const myBookings = bookingsData.filter(b => b.shopId === loggedInMerchantId);
+            if (myBookings.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">尚無預約紀錄</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = myBookings.map(b => `
+                <tr>
+                    <td>${b.date}<br><strong>${b.time}</strong></td>
+                    <td>${b.custName}<br><span style="font-size:0.8rem; color:var(--text-muted);">${b.custPhone}</span></td>
+                    <td>${b.serviceSummary}</td>
+                    <td>$${b.deposit}（後五碼: <strong>${b.last5}</strong>）</td>
+                    <td><span class="status-pill status-unread">待確認</span></td>
+                    <td><button class="btn-primary btn-sm" onclick="completeBooking('${b.id}')">完成服務</button></td>
+                </tr>
+            `).join('');
+        }
+
+        function completeBooking(bookingId) {
+            const b = bookingsData.find(item => item.id === bookingId);
+            if (b) {
+                accountingData.push({
+                    id: 'acc_' + Date.now(), shopId: loggedInMerchantId, date: b.date, type: 'income', category: '美業服務營收', note: `${b.custName} - ${b.serviceSummary}`, amount: b.totalPrice
+                });
+                bookingsData = bookingsData.filter(item => item.id !== bookingId);
+                renderMerchantBookings();
+                renderAccounting();
+                showModal('✔ 服務完成', '已將訂單金額自動寫入記帳本！');
+            }
+        }
+
         function renderAccounting() {
             const todayStr = new Date().toISOString().split('T')[0];
-            const filterMonth = document.getElementById('acc-filter-month').value;
-            const myRecords = accountingData.filter(r => r.shopId === currentMerchantId);
+            const filterMonth = document.getElementById('acc-filter-month').value || todayStr.slice(0, 7);
+            const myRecs = accountingData.filter(r => r.shopId === loggedInMerchantId);
 
-            // 計算今日營收
-            const todayInc = myRecords
-                .filter(r => r.date === todayStr && r.type === 'income')
-                .reduce((sum, r) => sum + r.amount, 0);
-
-            // 篩選指定月份紀錄
-            const monthRecords = myRecords.filter(r => r.date.startsWith(filterMonth));
-            const monthInc = monthRecords.filter(r => r.type === 'income').reduce((sum, r) => sum + r.amount, 0);
-            const monthExp = monthRecords.filter(r => r.type === 'expense').reduce((sum, r) => sum + r.amount, 0);
-            const monthNet = monthInc - monthExp;
+            const todayInc = myRecs.filter(r => r.date === todayStr && r.type === 'income').reduce((s, r) => s + r.amount, 0);
+            const monthRecs = myRecs.filter(r => r.date.startsWith(filterMonth));
+            const monthInc = monthRecs.filter(r => r.type === 'income').reduce((s, r) => s + r.amount, 0);
+            const monthExp = monthRecs.filter(r => r.type === 'expense').reduce((s, r) => s + r.amount, 0);
 
             document.getElementById('acc-today-inc').innerText = `$${todayInc.toLocaleString()}`;
             document.getElementById('acc-month-inc').innerText = `$${monthInc.toLocaleString()}`;
             document.getElementById('acc-month-exp').innerText = `$${monthExp.toLocaleString()}`;
-            document.getElementById('acc-month-net').innerText = `$${monthNet.toLocaleString()}`;
+            document.getElementById('acc-month-net').innerText = `$${(monthInc - monthExp).toLocaleString()}`;
 
             const tbody = document.getElementById('acc-records-table');
-            if (monthRecords.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">該月份尚無收支記帳紀錄</td></tr>`;
-                return;
-            }
-
-            tbody.innerHTML = monthRecords.sort((a, b) => b.date.localeCompare(a.date)).map(r => `
+            if (monthRecs.length === 0) { tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">無記帳紀錄</td></tr>`; return; }
+            tbody.innerHTML = monthRecs.map(r => `
                 <tr>
                     <td>${r.date}</td>
-                    <td><span class="status-pill ${r.type === 'income' ? 'status-done' : 'status-expired'}">${r.type === 'income' ? '收入 (+)' : '支出 (-)'}</span></td>
+                    <td><span class="status-pill ${r.type === 'income' ? 'status-done' : 'status-expired'}">${r.type === 'income' ? '收入' : '支出'}</span></td>
                     <td>${r.category}</td>
                     <td>${r.note || '-'}</td>
-                    <td style="font-weight:700; color:${r.type === 'income' ? 'var(--success-green)' : 'var(--danger-red)'};">
-                        ${r.type === 'income' ? '+' : '-'}$${r.amount.toLocaleString()}
-                    </td>
+                    <td style="font-weight:700; color:${r.type === 'income' ? 'var(--success-green)' : 'var(--danger-red)'};">$${r.amount.toLocaleString()}</td>
                     <td><button class="btn-soft btn-sm" onclick="deleteAccountRecord('${r.id}')">刪除</button></td>
                 </tr>
             `).join('');
@@ -1941,184 +2005,111 @@
             const category = document.getElementById('acc-cat').value;
             const note = document.getElementById('acc-note').value.trim();
             const amount = Number(document.getElementById('acc-amount').value);
-
-            if (!date || !amount || amount <= 0) {
-                showModal('提示', '請選擇日期並輸入正確的金額！');
-                return;
-            }
-
-            accountingData.push({
-                id: 'acc_' + Date.now(),
-                shopId: currentMerchantId,
-                date,
-                type,
-                category,
-                note,
-                amount
-            });
-
+            if (!date || !amount) return;
+            accountingData.push({ id: 'acc_' + Date.now(), shopId: loggedInMerchantId, date, type, category, note, amount });
             document.getElementById('acc-note').value = '';
             document.getElementById('acc-amount').value = '';
             renderAccounting();
         }
 
-        function deleteAccountRecord(recId) {
-            accountingData = accountingData.filter(r => r.id !== recId);
+        function deleteAccountRecord(id) {
+            accountingData = accountingData.filter(r => r.id !== id);
             renderAccounting();
         }
 
-        // --- 分頁 4：營業時間與公休日 ---
-        function saveScheduleSettings() {
-            const shop = shopsData.find(s => s.id === currentMerchantId);
-            shop.openTime = document.getElementById('sched-open').value;
-            shop.closeTime = document.getElementById('sched-close').value;
-            showModal('✅ 儲存成功', `營業時間已更新為 ${shop.openTime} ~ ${shop.closeTime}`);
-        }
-
-        function renderClosedDates() {
-            const shop = shopsData.find(s => s.id === currentMerchantId);
-            const list = document.getElementById('closed-dates-list');
-            if (!shop.closedDates || shop.closedDates.length === 0) {
-                list.innerHTML = `<span style="font-size:0.85rem; color:var(--text-muted);">目前無設定特定公休日</span>`;
-                return;
-            }
-            list.innerHTML = shop.closedDates.map(d => `
-                <span class="pill-check checked" onclick="removeClosedDate('${d}')">🏖️ ${d} ✕</span>
-            `).join('');
-        }
-
-        function addClosedDate() {
-            const d = document.getElementById('new-closed-date').value;
-            if (!d) return;
-            const shop = shopsData.find(s => s.id === currentMerchantId);
-            if (!shop.closedDates.includes(d)) {
-                shop.closedDates.push(d);
-                shop.closedDates.sort();
-            }
-            renderClosedDates();
-        }
-
-        function removeClosedDate(d) {
-            const shop = shopsData.find(s => s.id === currentMerchantId);
-            shop.closedDates = shop.closedDates.filter(item => item !== d);
-            renderClosedDates();
-        }
-
-        // --- 分頁 5：基本資料、縣市區域二段連動、服務項目複選、銀行搜尋 ---
-        function onMerchantCityChange(preselectDistrict = '') {
+        function onMerchantCityChange(preDist = '') {
             const city = document.getElementById('m-city').value;
             const distSel = document.getElementById('m-district');
-            if (!city) {
-                distSel.innerHTML = '<option value="">-- 請先選擇縣市 --</option>';
-                return;
-            }
-            const districts = TAIWAN_REGIONS[city] || [];
-            distSel.innerHTML = '<option value="">-- 請選擇區域 --</option>' + districts.map(d => `<option value="${d}">${d}</option>`).join('');
-            if (preselectDistrict) {
-                distSel.value = preselectDistrict;
-            }
+            if (!city) { distSel.innerHTML = '<option value="">-- 請先選擇縣市 --</option>'; return; }
+            distSel.innerHTML = '<option value="">-- 請選擇區域 --</option>' + (TAIWAN_REGIONS[city] || []).map(d => `<option value="${d}">${d}</option>`).join('');
+            if (preDist) distSel.value = preDist;
         }
 
         function renderMerchantCategoryCheckboxes(selectedCats) {
-            const container = document.getElementById('m-categories-checkboxes');
-            container.innerHTML = BEAUTY_SERVICE_OPTIONS.map(cat => {
+            document.getElementById('m-categories-checkboxes').innerHTML = BEAUTY_SERVICE_OPTIONS.map(cat => {
                 const isChecked = selectedCats.includes(cat);
-                return `
-                    <div class="pill-check ${isChecked ? 'checked' : ''}" onclick="toggleMerchantCategoryPill(this, '${cat}')">
-                        ${isChecked ? '✔' : '+'} ${cat}
-                    </div>
-                `;
+                return `<div class="pill-check ${isChecked ? 'checked' : ''}" onclick="toggleMerchantCatPill(this, '${cat}')">${isChecked ? '✔' : '+'} ${cat}</div>`;
             }).join('');
         }
 
-        function toggleMerchantCategoryPill(el, catName) {
+        function toggleMerchantCatPill(el, name) {
             el.classList.toggle('checked');
-            const isChecked = el.classList.contains('checked');
-            el.innerText = `${isChecked ? '✔' : '+'} ${catName}`;
+            el.innerText = `${el.classList.contains('checked') ? '✔' : '+'} ${name}`;
         }
 
-        // 銀行代碼搜尋下拉邏輯
         function showBankDropdown() {
-            filterBankDropdown();
             document.getElementById('bank-dropdown-list').style.display = 'block';
+            document.getElementById('bank-dropdown-list').innerHTML = TAIWAN_BANKS.map(b => `
+                <div class="bank-dropdown-item" onclick="selectBank('(${b.code}) ${b.name}')"><strong>(${b.code})</strong> ${b.name}</div>
+            `).join('');
         }
 
         function filterBankDropdown() {
-            const keyword = document.getElementById('m-bank-search').value.trim().toLowerCase();
-            const listEl = document.getElementById('bank-dropdown-list');
-            const matched = TAIWAN_BANKS.filter(b => 
-                b.code.includes(keyword) || b.name.toLowerCase().includes(keyword) || `(${b.code}) ${b.name}`.toLowerCase().includes(keyword)
-            );
-
-            if (matched.length === 0) {
-                listEl.innerHTML = `<div class="bank-dropdown-item" style="color:var(--text-muted);">查無相符銀行代碼</div>`;
-            } else {
-                listEl.innerHTML = matched.map(b => `
-                    <div class="bank-dropdown-item" onclick="selectBankOption('(${b.code}) ${b.name}')">
-                        <strong>(${b.code})</strong> ${b.name}
-                    </div>
-                `).join('');
-            }
+            const kw = document.getElementById('m-bank-search').value.trim();
+            const matched = TAIWAN_BANKS.filter(b => b.code.includes(kw) || b.name.includes(kw));
+            document.getElementById('bank-dropdown-list').innerHTML = matched.map(b => `
+                <div class="bank-dropdown-item" onclick="selectBank('(${b.code}) ${b.name}')"><strong>(${b.code})</strong> ${b.name}</div>
+            `).join('');
         }
 
-        function selectBankOption(fullText) {
-            document.getElementById('m-bank-search').value = fullText;
+        function selectBank(txt) {
+            document.getElementById('m-bank-search').value = txt;
             document.getElementById('bank-dropdown-list').style.display = 'none';
         }
 
         function saveMerchantProfile() {
-            const shop = shopsData.find(s => s.id === currentMerchantId);
+            const shop = shopsData.find(s => s.id === loggedInMerchantId);
+            const newU = document.getElementById('m-username').value.trim();
+            const newP = document.getElementById('m-password').value.trim();
+
+            if (!newU || !newP) { showModal('提示', '帳號與密碼不得為空！'); return; }
+
+            // 檢查帳號是否與其他店家重複
+            const duplicate = shopsData.find(s => s.username === newU && s.id !== loggedInMerchantId);
+            if (duplicate) {
+                showModal('⚠️ 帳號重複', '此店家帳號已經被其他店家註冊使用，請更換其他帳號！');
+                return;
+            }
+
+            shop.username = newU;
+            shop.password = newP;
             shop.name = document.getElementById('m-name').value.trim();
             shop.city = document.getElementById('m-city').value;
             shop.district = document.getElementById('m-district').value;
             shop.address = document.getElementById('m-address').value.trim();
             shop.bankName = document.getElementById('m-bank-search').value.trim();
             shop.bankAccount = document.getElementById('m-bank-account').value.trim();
+            shop.depositRule = document.getElementById('m-deposit-rule').value.trim();
+            shop.successMsg = document.getElementById('m-success-popup-msg').value.trim();
 
-            // 收集所有勾選的服務項目
-            const checkedPills = document.querySelectorAll('#m-categories-checkboxes .pill-check.checked');
-            shop.categories = Array.from(checkedPills).map(el => el.innerText.replace('✔ ', '').trim());
+            shop.categories = Array.from(document.querySelectorAll('#m-categories-checkboxes .pill-check.checked')).map(el => el.innerText.replace('✔ ', '').trim());
 
             loadMerchantData();
-            if (isShopPublishable(shop)) {
-                showModal('✅ 儲存並上架成功', '您的工作室資料、服務複選標籤與價目已完整設定，目前已在 OomuBook 首頁正常公開曝光！');
-            } else {
-                showModal('⚠️ 資料已儲存但尚未上架', '系統檢測到仍有必填欄位空白（縣市區域、詳細地址、服務項目複選，或尚未建立大分類價目細項），補齊後即可自動上架！');
-            }
+            showModal('✅ 儲存成功', '工作室資料與帳密已順利更新儲存！');
         }
 
-        // ================= 4. 極低調隱藏平台總控中心 =================
+        // ================= 4. 大後台創辦人總控 =================
         function handleSecretClick() {
             secretClickCount++;
             clearTimeout(secretTimer);
-            secretTimer = setTimeout(() => { secretClickCount = 0; }, 1200);
-
-            if (secretClickCount >= 3) {
-                secretClickCount = 0;
-                openAdminAuth();
-            }
+            secretTimer = setTimeout(() => secretClickCount = 0, 1200);
+            if (secretClickCount >= 3) { secretClickCount = 0; openAdminAuth(); }
         }
 
         function openAdminAuth() {
-            const modal = document.getElementById('custom-modal');
-            document.getElementById('modal-title').innerText = '🔐 平台管理者驗證';
-            document.getElementById('modal-body').innerText = '請輸入 OomuBook 創辦人通行密碼：';
-            document.getElementById('modal-input-wrap').style.display = 'block';
-            document.getElementById('admin-pass-input').value = '';
-            document.getElementById('modal-cancel-btn').style.display = 'inline-block';
-
-            const confirmBtn = document.getElementById('modal-confirm-btn');
-            confirmBtn.innerText = '驗證登入';
-            confirmBtn.onclick = function() {
-                const pwd = document.getElementById('admin-pass-input').value;
-                if (pwd === '8888') {
-                    closeModal();
+            const modalBody = `
+                <div class="form-group">
+                    <input type="password" id="admin-pass-input" placeholder="請輸入創辦人通行密碼" style="width: 100%; text-align: center;">
+                </div>
+            `;
+            showModal('🔐 平台管理者驗證', modalBody, () => {
+                if (document.getElementById('admin-pass-input').value === 'Oomubook0921827360') {
                     switchView('admin-view');
                 } else {
-                    alert('密碼錯誤');
+                    alert('密碼錯誤！');
                 }
-            };
-            modal.classList.add('active');
+            });
+            document.getElementById('modal-cancel-btn').style.display = 'inline-block';
         }
 
         function renderAdminPanel() {
@@ -2126,64 +2117,40 @@
             document.getElementById('admin-stat-active').innerText = shopsData.filter(s => s.subscribed).length;
             document.getElementById('admin-stat-bookings').innerText = bookingsData.length;
 
-            const tbody = document.getElementById('admin-shops-table');
-            tbody.innerHTML = shopsData.map(shop => {
-                const complete = isShopPublishable({ ...shop, subscribed: true });
-                return `
-                    <tr>
-                        <td><strong>${shop.name}</strong></td>
-                        <td>${shop.city || '未填'} ${shop.district || ''}<br><span style="font-size:0.78rem; color:var(--text-muted);">${(shop.categories || []).join('、') || '未選服務'}</span></td>
-                        <td>${complete ? '<span style="color:var(--success-green);">✔ 完整</span>' : '<span style="color:var(--danger-red);">✘ 資料未齊全</span>'}</td>
-                        <td>
-                            <span class="status-pill ${shop.subscribed ? 'status-done' : 'status-expired'}">
-                                ${shop.subscribed ? '已繳費開通' : '已停權下架'}
-                            </span>
-                        </td>
-                        <td>
-                            <button class="btn-soft btn-sm" onclick="toggleShopFeatured('${shop.id}')">
-                                ${shop.featured ? '⭐ 置頂中' : '設為置頂'}
-                            </button>
-                        </td>
-                        <td>
-                            <button class="${shop.subscribed ? 'btn-outline' : 'btn-primary'} btn-sm" onclick="toggleShopSub('${shop.id}')">
-                                ${shop.subscribed ? '暫停租約' : '開通續約'}
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
+            document.getElementById('admin-shops-table').innerHTML = shopsData.map(shop => `
+                <tr>
+                    <td><strong>${shop.name}</strong></td>
+                    <td><code>${shop.username}</code></td>
+                    <td>${shop.city || ''} ${shop.district || ''}</td>
+                    <td><span class="status-pill ${isShopPublishable(shop) ? 'status-done' : 'status-unread'}">${isShopPublishable(shop) ? '已上架' : '資料未齊'}</span></td>
+                    <td><button class="btn-soft btn-sm" onclick="toggleSub('${shop.id}')">${shop.subscribed ? '收租中' : '已停權'}</button></td>
+                    <td><button class="btn-soft btn-sm" onclick="toggleFeatured('${shop.id}')">${shop.featured ? '⭐ 置頂' : '一般'}</button></td>
+                </tr>
+            `).join('');
         }
 
-        function toggleShopSub(shopId) {
-            const shop = shopsData.find(s => s.id === shopId);
-            shop.subscribed = !shop.subscribed;
-            renderAdminPanel();
-        }
+        function toggleSub(id) { const s = shopsData.find(x => x.id === id); s.subscribed = !s.subscribed; renderAdminPanel(); }
+        function toggleFeatured(id) { const s = shopsData.find(x => x.id === id); s.featured = !s.featured; renderAdminPanel(); }
 
-        function toggleShopFeatured(shopId) {
-            const shop = shopsData.find(s => s.id === shopId);
-            shop.featured = !shop.featured;
-            renderAdminPanel();
-        }
-
-        function showModal(title, body, onConfirmCallback = null) {
+        function showModal(title, bodyContent, confirmCb = null) {
             document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-body').innerText = body;
-            document.getElementById('modal-input-wrap').style.display = 'none';
+            const bodyEl = document.getElementById('modal-body');
+            if (typeof bodyContent === 'string' && (bodyContent.includes('<') || bodyContent.includes('&'))) {
+                bodyEl.innerHTML = bodyContent;
+            } else {
+                bodyEl.innerText = bodyContent;
+            }
             document.getElementById('modal-cancel-btn').style.display = 'none';
-
-            const confirmBtn = document.getElementById('modal-confirm-btn');
-            confirmBtn.innerText = '確定';
-            confirmBtn.onclick = function() {
+            const btn = document.getElementById('modal-confirm-btn');
+            btn.innerText = '確定';
+            btn.onclick = function() {
                 closeModal();
-                if (onConfirmCallback) onConfirmCallback();
+                if (confirmCb) confirmCb();
             };
             document.getElementById('custom-modal').classList.add('active');
         }
 
-        function closeModal() {
-            document.getElementById('custom-modal').classList.remove('active');
-        }
+        function closeModal() { document.getElementById('custom-modal').classList.remove('active'); }
     </script>
 </body>
 </html>
