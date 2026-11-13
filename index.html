@@ -2,195 +2,809 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OomuBook 輕約美業預約平台 | 雲端多租戶系統</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome 固定的圖示庫 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OomuBook 輕約美業平台｜尋找最適合妳的美學職人</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'jf-openhuninn';
+            src: url('https://cdn.jsdelivr.net/gh/justfont/open-huninn-font@master/font/jf-openhuninn-2.0.ttf') format('truetype');
+            font-display: swap;
+        }
+
+        :root {
+            --bg-cream: #FAF6F0;
+            --bg-card: #FFFFFF;
+            --bg-sand: #F2EAE1;
+            --primary-coffee: #8C6D53;
+            --primary-dark: #5C4533;
+            --accent-latte: #C7A88C;
+            --text-main: #4A3B32;
+            --text-muted: #8A796D;
+            --border-soft: #E6DDD3;
+            --danger-red: #D9534F;
+            --success-green: #4E9A51;
+            --font-main: 'jf-openhuninn', 'Noto Sans TC', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-main);
+            max-width: 100%;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-soft);
+            padding: 0.9rem 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(92, 69, 51, 0.04);
+            width: 100%;
+        }
+
+        .nav-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: var(--primary-dark);
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            background-color: var(--primary-coffee);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: -1px;
+        }
+
+        .brand-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-sub {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg-sand);
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 0.65rem;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            padding: 0.55rem 1rem;
+            font-size: 0.92rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-coffee);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1.5px solid var(--primary-coffee);
+            color: var(--primary-coffee);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-sand);
+        }
+
+        .btn-soft {
+            background-color: var(--bg-sand);
+            color: var(--primary-dark);
+        }
+
+        .btn-soft:hover {
+            background-color: var(--border-soft);
+        }
+
+        .btn-sm {
+            padding: 0.35rem 0.75rem;
+            font-size: 0.82rem;
+            border-radius: 8px;
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+            overflow-x: hidden;
+        }
+
+        .view-section {
+            display: none;
+            animation: fadeIn 0.25s ease;
+            width: 100%;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        select, input[type="text"], input[type="tel"], input[type="date"], input[type="time"], input[type="number"], input[type="month"], input[type="password"], textarea {
+            padding: 0.65rem 0.9rem;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 12px;
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            font-size: 0.92rem;
+            outline: none;
+            transition: border-color 0.2s;
+            width: 100%;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            border-color: var(--primary-coffee);
+            background-color: #FFF;
+        }
+
+        .hero-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 20px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 15px rgba(92, 69, 51, 0.03);
+        }
+
+        .hero-box h1 {
+            color: var(--primary-dark);
+            font-size: 1.55rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-box p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .search-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-bar select {
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .home-service-filter-box {
+            margin-top: 1.2rem;
+            padding-top: 1.1rem;
+            border-top: 1px dashed var(--border-soft);
+            text-align: center;
+        }
+
+        .home-filter-label {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .home-pills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .section-heading {
+            font-size: 1.15rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .shop-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 18px;
+            padding: 1.3rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .shop-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(92, 69, 51, 0.08);
+        }
+
+        .badge-featured {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: var(--primary-coffee);
+            color: white;
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+
+        .shop-title {
+            font-size: 1.15rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.3rem;
+            padding-right: 65px;
+        }
+
+        .shop-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .tag {
+            background: var(--bg-sand);
+            color: var(--primary-dark);
+            font-size: 0.78rem;
+            padding: 3px 8px;
+            border-radius: 8px;
+        }
+
+        .card-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-soft);
+            border-radius: 18px;
+            padding: 1.4rem;
+            margin-bottom: 1.3rem;
+            width: 100%;
+        }
+
+        .panel-title {
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+            font-size: 0.92rem;
+        }
+
+        .req-mark {
+            color: var(--danger-red);
+            margin-left: 3px;
+        }
+
+        .error-text {
+            color: var(--danger-red);
+            font-size: 0.82rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .calendar-box {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .cal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 1.05rem;
+        }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            text-align: center;
+        }
+
+        .cal-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: var(--bg-cream);
+            border: 1px solid var(--border-soft);
+            font-size: 0.9rem;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.15s;
+        }
+
+        .cal-day:hover {
+            background: var(--bg-sand);
+        }
+
+        .cal-day.selected {
+            background: var(--primary-dark) !important;
+            color: white !important;
+            border-color: var(--primary-dark) !important;
+            font-weight: bold;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+            gap: 0.6rem;
+            margin-top: 0.8rem;
+        }
+
+        .time-slot {
+            padding: 0.6rem;
+            text-align: center;
+            border: 1.5px solid var(--border-soft);
+            border-radius: 10px;
+            background: var(--bg-card);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .time-slot.selected {
+            background: var(--primary-coffee);
+            color: white;
+            border-color: var(--primary-coffee);
+        }
+
+        .merchant-tabs {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            width: 100%;
+        }
+
+        .m-tab-btn {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-soft);
+            color: var(--text-muted);
+            padding: 0.55rem 0.95rem;
+            border-radius: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            font-size: 0.88rem;
+        }
+
+        .m-tab-btn.active {
+            background: var(--primary-coffee);
+            color: white;
+            border-color: var(--primary-coffee);
+        }
+
+        .m-tab-content {
+            display: none;
+        }
+
+        .m-tab-content.active {
+            display: block;
+        }
+
+        .summary-box {
+            background: var(--bg-sand);
+            border-radius: 14px;
+            padding: 1.2rem;
+            margin: 1.2rem 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .summary-total {
+            border-top: 1px dashed var(--accent-latte);
+            padding-top: 0.6rem;
+            margin-top: 0.6rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+        }
+
+        /* 彈窗樣式 */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(74, 59, 50, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.8rem;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            border-top: 1px solid var(--border-soft);
+            margin-top: 3rem;
+            width: 100%;
+        }
+
+        .secret-trigger {
+            cursor: default;
+            user-select: none;
+            padding: 0 4px;
+        }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body>
 
     <!-- 頂部導覽列 -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="goHome()">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-pink-400 flex items-center justify-center text-white font-bold text-lg shadow-md">
-                    Oo
-                </div>
+    <header>
+        <div class="nav-container">
+            <div class="brand-logo" onclick="switchView('home-view')">
+                <div class="logo-icon">Oo</div>
                 <div>
-                    <h1 class="font-bold text-lg leading-tight tracking-wide bg-gradient-to-r from-rose-600 to-pink-500 bg-clip-text text-transparent">OomuBook</h1>
-                    <p class="text-xs text-slate-400">輕約美業預約平台 (雲端同步版)</p>
+                    <div class="brand-title">OomuBook</div>
                 </div>
+                <span class="brand-sub">輕約美業平台</span>
             </div>
-            <div class="flex items-center space-x-3">
-                <button onclick="openCustomerPortal()" class="px-4 py-2 text-sm font-medium text-slate-600 hover:text-rose-600 transition">
-                    <i class="fa-solid fa-store mr-1.5"></i>顧客進入
-                </button>
-                <button onclick="openShopLoginModal()" class="px-4 py-2 text-sm font-medium bg-rose-600 text-white rounded-xl shadow-sm hover:bg-rose-700 transition">
-                    <i class="fa-solid fa-lock mr-1.5"></i>店家登入 / 註冊
-                </button>
+            <div class="nav-actions">
+                <button class="btn-outline" onclick="openMerchantLoginModal()">店家登入</button>
+                <button class="btn-primary" onclick="switchView('home-view')">顧客進入</button>
             </div>
         </div>
     </header>
 
-    <!-- 主內容區 -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        <!-- 首頁：店家清單展示 -->
-        <div id="home-view" class="space-y-6">
-            <div class="bg-gradient-to-r from-rose-500 to-pink-500 rounded-2xl p-8 text-white shadow-lg">
-                <h2 class="text-3xl font-bold mb-2">無人化預約，讓美業經營更輕鬆</h2>
-                <p class="text-rose-100 text-sm max-w-xl">全台首創多租戶獨立美業預約系統。告別繁瑣人工對話，自動防撞時段、手機黑名單攔截、線上定金與獨立後台管理。</p>
-            </div>
-
-            <div class="flex justify-between items-center mt-8">
-                <h3 class="text-xl font-bold text-slate-800"><i class="fa-solid fa-shops mr-2 text-rose-500"></i>線上預約合作美業店家</h3>
-                <span id="shop-count-badge" class="text-xs bg-rose-100 text-rose-700 px-3 py-1 rounded-full font-medium">載入雲端店家清單中...</span>
-            </div>
-
-            <!-- 店家列表網格 -->
-            <div id="public-shops-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- 動態載入店家 -->
-            </div>
-        </div>
-
-        <!-- 顧客預約頁面 (點入特定店家後顯示) -->
-        <div id="customer-booking-view" class="hidden space-y-6">
-            <button onclick="goHome()" class="text-sm text-slate-500 hover:text-rose-600 font-medium flex items-center mb-4">
-                <i class="fa-solid fa-arrow-left mr-2"></i>返回所有店家
-            </button>
-            <div id="customer-shop-banner" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex justify-between items-center">
-                <!-- 店家標題與公告 -->
-            </div>
-            <!-- 預約行事曆與步驟 -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
-                <h3 class="font-bold text-lg mb-4 text-slate-700">選擇預約日期與時段</h3>
-                <div id="booking-calendar-container">
-                    <!-- 預約互動介面 -->
+    <main>
+        <!-- ================= 1. 消費者首頁 ================= -->
+        <section id="home-view" class="view-section active">
+            <div class="hero-box">
+                <h1>預約屬於妳的日常微光 ✨</h1>
+                <p>嚴選個人美學工作室｜透明價目・即時防撞時段・安心線上預約</p>
+                
+                <div class="search-bar">
+                    <select id="filter-city" onchange="onHomeCityChange()">
+                        <option value="">所有縣市</option>
+                    </select>
+                    <select id="filter-district" onchange="renderShopList()">
+                        <option value="">所有區域</option>
+                    </select>
+                    <button class="btn-primary" onclick="renderShopList()">立即搜尋</button>
                 </div>
             </div>
-        </div>
 
-        <!-- 店家管理後台 (登入後顯示) -->
-        <div id="shop-admin-view" class="hidden space-y-6">
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-wrap justify-between items-center gap-4">
+            <div class="section-heading">
+                <span>精選美學工作室</span>
+                <span id="shop-count-label" style="font-size: 0.85rem; color: var(--text-muted);">載入雲端店家清單中...</span>
+            </div>
+            <div id="shop-grid" class="shop-grid"></div>
+        </section>
+
+        <!-- ================= 2. 獨立店家預約頁面 ================= -->
+        <section id="booking-view" class="view-section">
+            <button class="btn-soft" style="margin-bottom: 1rem;" onclick="switchView('home-view')">← 返回工作室列表</button>
+            
+            <div class="card-panel" id="booking-shop-header"></div>
+
+            <div class="card-panel">
+                <h3 style="color: var(--primary-dark); margin-bottom: 0.8rem;">步驟 1：選擇服務項目 <span class="req-mark">*</span></h3>
+                <div id="booking-services-list"></div>
+                <div id="err-service" class="error-text">請至少選擇一項主要服務</div>
+            </div>
+
+            <div class="card-panel">
+                <h3 style="color: var(--primary-dark); margin-bottom: 0.8rem;">步驟 2：填寫聯絡資料 <span class="req-mark">*</span></h3>
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label class="form-label">姓名 <span class="req-mark">*</span></label>
+                        <input type="text" id="cust-name">
+                        <div id="err-name" class="error-text">請填寫您的姓名</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">手機號碼（10碼） <span class="req-mark">*</span></label>
+                        <input type="tel" id="cust-phone" maxlength="10" placeholder="0912345678">
+                        <div id="err-phone" class="error-text">請輸入正確的 10 碼手機號碼（09開頭）</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-panel">
+                <h3 style="color: var(--primary-dark); margin-bottom: 0.8rem;">步驟 3：選擇預約日期與時段 <span class="req-mark">*</span></h3>
+                <div class="calendar-box">
+                    <div class="cal-header">
+                        <button class="btn-soft btn-sm" onclick="changeBookingMonth(-1)">〈</button>
+                        <span id="booking-cal-title">2026 年 5 月</span>
+                        <button class="btn-soft btn-sm" onclick="changeBookingMonth(1)">〉</button>
+                    </div>
+                    <div class="cal-grid" id="booking-cal-days"></div>
+                </div>
+                <div style="font-size: 0.9rem; color: var(--primary-dark); margin-bottom: 0.5rem; font-weight: 500;" id="booking-selected-date-label">請點選上方月曆日期</div>
+                <div id="time-slots-container" class="time-grid"></div>
+                <div id="err-time" class="error-text">請選擇可預約時段</div>
+            </div>
+
+            <div class="card-panel">
+                <h3 style="color: var(--primary-dark); margin-bottom: 0.8rem;">步驟 4：定金匯款與確認</h3>
+                <div class="summary-box">
+                    <div class="summary-row">
+                        <span>服務總金額：</span>
+                        <span id="sum-total">$0</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>此項目需預付訂金：</span>
+                        <span id="sum-deposit">$0</span>
+                    </div>
+                    <div style="margin-top: 1rem; border-top: 1px dashed var(--accent-latte); padding-top: 0.8rem;">
+                        <strong style="color: var(--primary-dark); font-size: 0.92rem;">📋 店家定金匯款規則：</strong>
+                        <div id="deposit-rule-display" style="font-size: 0.88rem; color: var(--text-main); margin-top: 0.3rem;">提供 ATM 轉帳或網銀匯款</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">訂金匯款帳號後五碼 <span class="req-mark">*</span></label>
+                    <input type="text" id="cust-last5" maxlength="5" placeholder="請輸入 5 碼數字" style="max-width: 300px;">
+                    <div id="err-last5" class="error-text">請輸入完整的 5 碼數字匯款後五碼</div>
+                </div>
+                <button class="btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1.05rem; margin-top: 0.5rem;" onclick="submitBooking()">確認送出預約申請</button>
+            </div>
+        </section>
+
+        <!-- ================= 3. 店家專屬工作台 ================= -->
+        <section id="merchant-view" class="view-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.6rem;">
                 <div>
-                    <span class="text-xs bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full font-semibold">雲端同步後台</span>
-                    <h2 id="admin-shop-title" class="text-2xl font-bold text-slate-800 mt-1">載入中...</h2>
+                    <h2 style="color: var(--primary-dark);" id="merchant-panel-title">店家工作台</h2>
+                    <span id="merchant-status-badge" class="status-pill" style="background: #E3F5E3; color: #2E7D32; padding: 3px 8px; border-radius: 12px; font-size: 0.76rem;">雲端訂閱中・試用期免月費</span>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <button onclick="previewShopPage()" class="px-4 py-2 text-sm font-medium bg-slate-100 text-slate-700 rounded-xl hover:bg-slate-200 transition">
-                        <i class="fa-solid fa-eye mr-1.5"></i>預覽顧客頁面
-                    </button>
-                    <button onclick="logoutShop()" class="px-4 py-2 text-sm font-medium bg-rose-50 text-rose-600 rounded-xl hover:bg-rose-100 transition">
-                        <i class="fa-solid fa-right-from-bracket mr-1.5"></i>登出
-                    </button>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button class="btn-outline" onclick="previewCurrentShop()">👁️ 預覽顧客頁面</button>
+                    <button class="btn-soft" onclick="switchView('home-view')">🏠 切換回首頁</button>
+                    <button class="btn-soft" style="color: var(--danger-red);" onclick="logoutMerchant()">登出</button>
                 </div>
             </div>
 
-            <!-- 後台分頁按鈕 -->
-            <div class="flex space-x-2 border-b border-slate-200 pb-2 overflow-x-auto">
-                <button onclick="switchAdminTab('services')" class="admin-tab-btn px-4 py-2 text-sm font-semibold rounded-xl bg-rose-600 text-white transition">服務與公告管理</button>
-                <button onclick="switchAdminTab('slots')" class="admin-tab-btn px-4 py-2 text-sm font-semibold rounded-xl text-slate-600 hover:bg-slate-100 transition">時段與預約訂單</button>
-                <button onclick="switchAdminTab('accounting')" class="admin-tab-btn px-4 py-2 text-sm font-semibold rounded-xl text-slate-600 hover:bg-slate-100 transition">記帳與營收報表</button>
+            <div class="merchant-tabs">
+                <button class="m-tab-btn active" onclick="switchMerchantTab('tab-services', this)">服務與規則項目</button>
+                <button class="m-tab-btn" onclick="switchMerchantTab('tab-schedule', this)">時段設定</button>
+                <button class="m-tab-btn" onclick="switchMerchantTab('tab-orders', this)">預約紀錄</button>
+                <button class="m-tab-btn" onclick="switchMerchantTab('tab-accounting', this)">記帳報表</button>
+                <button class="m-tab-btn" onclick="switchMerchantTab('tab-profile', this)">工作室設定</button>
             </div>
 
-            <!-- 分頁內容 -->
-            <div id="admin-tab-content" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 min-h-[400px]">
-                <!-- 動態載入後台內容 -->
+            <!-- 分頁 1：服務設定 -->
+            <div id="tab-services" class="m-tab-content active">
+                <div class="card-panel">
+                    <div class="panel-title"><span>✨ 服務項目管理</span></div>
+                    <div id="m-services-container" style="margin-bottom: 1rem;"></div>
+                    <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; background: var(--bg-sand); padding: 1rem; border-radius: 12px;">
+                        <input type="text" id="new-srv-name" placeholder="服務名稱（例：精緻美睫）" style="flex: 2; background: #FFF;">
+                        <input type="number" id="new-srv-price" placeholder="價格 ($)" style="flex: 1; background: #FFF;">
+                        <input type="number" id="new-srv-deposit" placeholder="定金 ($)" style="flex: 1; background: #FFF;">
+                        <button class="btn-primary" onclick="addMerchantService()">+ 新增服務</button>
+                    </div>
+                </div>
             </div>
-        </div>
 
+            <!-- 分頁 2：時段設定 -->
+            <div id="tab-schedule" class="m-tab-content">
+                <div class="card-panel">
+                    <div class="panel-title"><span>📅 開放預約時段管理</span></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">在此設定店家的營業時段與可預約時間點。</p>
+                </div>
+            </div>
+
+            <!-- 分頁 3：預約紀錄 -->
+            <div id="tab-orders" class="m-tab-content">
+                <div class="card-panel">
+                    <div class="panel-title"><span>📋 雲端預約訂單列表</span></div>
+                    <div id="merchant-orders-list"><p style="color: var(--text-muted); font-size: 0.9rem;">目前尚無客戶預約訂單。</p></div>
+                </div>
+            </div>
+
+            <!-- 分頁 4：記帳報表 -->
+            <div id="tab-accounting" class="m-tab-content">
+                <div class="card-panel">
+                    <div class="panel-title"><span>💰 營收與記帳統計</span></div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">雲端自動統計已完成與預收定金。</p>
+                </div>
+            </div>
+
+            <!-- 分頁 5：工作室設定 -->
+            <div id="tab-profile" class="m-tab-content">
+                <div class="card-panel">
+                    <div class="panel-title"><span>⚙️ 工作室基本資料</span></div>
+                    <div class="form-group">
+                        <label class="form-label">工作室名稱</label>
+                        <input type="text" id="prof-shopname">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">負責人姓名</label>
+                        <input type="text" id="prof-owner">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">公告與注意事項</label>
+                        <textarea id="prof-announcement" rows="3"></textarea>
+                    </div>
+                    <button class="btn-primary" onclick="saveMerchantProfile()">儲存變更</button>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- 店家登入與註冊彈窗 Modal -->
-    <div id="shop-login-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl relative">
-            <button onclick="closeShopLoginModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
+    <!-- ================= 4. 店家登入與註冊彈窗 ================= -->
+    <div id="merchant-login-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button onclick="closeMerchantLoginModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; font-size: 1.2rem; color: var(--text-muted);">✕</button>
             
             <!-- 登入表單 -->
-            <div id="login-form-container">
-                <div class="text-center mb-6">
-                    <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl font-bold">
-                        <i class="fa-solid fa-lock"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-800">店家專屬後台登入</h3>
-                    <p class="text-xs text-slate-400 mt-1">輸入您的帳號密碼管理預約與雲端資料</p>
+            <div id="login-box">
+                <h3 style="color: var(--primary-dark); margin-bottom: 0.5rem; text-align: center;">店家後台登入</h3>
+                <p style="font-size: 0.82rem; color: var(--text-muted); text-align: center; margin-bottom: 1.2rem;">登入您的雲端美業管理後台</p>
+                <div class="form-group">
+                    <label class="form-label">登入帳號</label>
+                    <input type="text" id="login-username">
                 </div>
-                <form onsubmit="handleShopLogin(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">登入帳號</label>
-                        <input type="text" id="login-username" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-rose-500 text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">登入密碼</label>
-                        <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-rose-500 text-sm">
-                    </div>
-                    <button type="submit" class="w-full py-3 bg-rose-600 text-white rounded-xl font-semibold shadow-md hover:bg-rose-700 transition">立即登入後台</button>
-                </form>
-                <div class="text-center mt-6">
-                    <p class="text-xs text-slate-500">還沒有店家帳號？ 
-                        <button onclick="toggleRegisterMode(true)" class="text-rose-600 font-semibold hover:underline">立即免費註冊</button>
-                    </p>
+                <div class="form-group">
+                    <label class="form-label">登入密碼</label>
+                    <input type="password" id="login-password">
+                </div>
+                <button class="btn-primary" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem;" onclick="handleLogin()">登入</button>
+                <div style="text-align: center; margin-top: 1rem; font-size: 0.85rem;">
+                    還沒有帳號？ <span style="color: var(--primary-coffee); font-weight: bold; cursor: pointer;" onclick="toggleRegisterView(true)">立即免費註冊店家</span>
                 </div>
             </div>
 
-            <!-- 註冊表單 -->
-            <div id="register-form-container" class="hidden">
-                <div class="text-center mb-4">
-                    <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-2 text-xl font-bold">
-                        <i class="fa-solid fa-store"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-800">註冊美業店家帳號</h3>
-                    <p class="text-xs text-slate-400">享有前兩個月免費試用，立即建立專屬預約系統</p>
+            <!-- 註冊表單（含前兩個月免費試用與綁定說明） -->
+            <div id="register-box" style="display: none;">
+                <h3 style="color: var(--primary-dark); margin-bottom: 0.3rem; text-align: center;">註冊美業店家帳號</h3>
+                <p style="font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-bottom: 1rem;">享有前兩個月免費試用，自動記錄註冊時間</p>
+                <div class="form-group" style="margin-bottom: 0.6rem;">
+                    <label class="form-label" style="font-size: 0.82rem;">工作室名稱</label>
+                    <input type="text" id="reg-shopname" placeholder="例：沐光微醺美學">
                 </div>
-                <form onsubmit="handleShopRegister(event)" class="space-y-3">
+                <div class="form-grid-2" style="gap: 0.5rem; margin-bottom: 0.6rem;">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">工作室／店家名稱</label>
-                        <input type="text" id="reg-shopname" required placeholder="例：沐光微醺美學" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-rose-500 text-sm">
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">負責人姓名</label>
-                            <input type="text" id="reg-owner" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-rose-500 text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">手機號碼</label>
-                            <input type="tel" id="reg-phone" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-rose-500 text-sm">
-                        </div>
+                        <label class="form-label" style="font-size: 0.82rem;">負責人</label>
+                        <input type="text" id="reg-owner">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 mb-1">電子信箱 (Email)</label>
-                        <input type="email" id="reg-email" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-rose-500 text-sm">
+                        <label class="form-label" style="font-size: 0.82rem;">手機號碼</label>
+                        <input type="tel" id="reg-phone">
                     </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">自訂登入帳號</label>
-                            <input type="text" id="reg-username" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-rose-500 text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 mb-1">自訂登入密碼</label>
-                            <input type="password" id="reg-password" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-rose-500 text-sm">
-                        </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 0.6rem;">
+                    <label class="form-label" style="font-size: 0.82rem;">電子信箱 Email</label>
+                    <input type="email" id="reg-email">
+                </div>
+                <div class="form-grid-2" style="gap: 0.5rem; margin-bottom: 0.8rem;">
+                    <div>
+                        <label class="form-label" style="font-size: 0.82rem;">設定帳號</label>
+                        <input type="text" id="reg-username">
                     </div>
-                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-rose-600 to-pink-500 text-white rounded-xl font-semibold shadow-md hover:opacity-90 transition mt-2">確認註冊並開啟免費體驗</button>
-                </form>
-                <div class="text-center mt-4">
-                    <p class="text-xs text-slate-500">已經有帳號了？ 
-                        <button onclick="toggleRegisterMode(false)" class="text-rose-600 font-semibold hover:underline">返回登入</button>
-                    </p>
+                    <div>
+                        <label class="form-label" style="font-size: 0.82rem;">設定密碼</label>
+                        <input type="password" id="reg-password">
+                    </div>
+                </div>
+                <button class="btn-primary" style="width: 100%; padding: 0.75rem;" onclick="handleRegister()">確認註冊並啟用免費試用</button>
+                <div style="text-align: center; margin-top: 0.8rem; font-size: 0.85rem;">
+                    已經有帳號？ <span style="color: var(--primary-coffee); font-weight: bold; cursor: pointer;" onclick="toggleRegisterView(false)">返回登入</span>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- 頁尾與管理員隱藏入口 -->
-    <footer class="mt-auto py-6 border-t border-slate-200 text-center text-xs text-slate-400">
-        <p>&copy; 2026 OomuBook 輕約美業預約平台. All rights reserved. <span onclick="triggerAdminSecret()" class="cursor-pointer hover:text-rose-600 ml-1">✦</span></p>
+    <footer>
+        <p>&copy; 2026 OomuBook 輕約美業預約平台. All rights reserved. <span class="secret-trigger" onclick="triggerAdminSecret()">✦</span></p>
     </footer>
 
     <!-- Firebase 雲端資料庫 SDK 串接與核心邏輯 -->
@@ -212,7 +826,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 將 db 與 firebase 方法掛載至全域變數供下方函式使用
         window.db = db;
         window.collection = collection;
         window.getDocs = getDocs;
@@ -223,98 +836,84 @@
         window.query = query;
         window.where = where;
 
-        // 頁面載入完成後自動抓取雲端店家清單
         window.addEventListener('DOMContentLoaded', () => {
-            loadPublicShops();
+            loadCloudShops();
         });
     </script>
 
     <script>
-        let currentLoggedInShop = null; // 目前登入的店家物件
-        let currentViewingShopId = null; // 目前顧客正在瀏覽的店家ID
+        let currentLoggedInMerchant = null;
+        let currentViewingShopId = null;
+        let selectedBookingDate = null;
+        let selectedTimeSlot = null;
+        let selectedServices = [];
 
-        // 切換視圖
-        function goHome() {
-            document.getElementById('home-view').classList.remove('hidden');
-            document.getElementById('customer-booking-view').classList.add('hidden');
-            document.getElementById('shop-admin-view').classList.add('hidden');
-            loadPublicShops();
+        // 切換畫面
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function openCustomerPortal() {
-            goHome();
-        }
-
-        // 開啟登入彈窗
-        function openShopLoginModal() {
-            document.getElementById('shop-login-modal').classList.remove('hidden');
-            toggleRegisterMode(false);
-        }
-
-        function closeShopLoginModal() {
-            document.getElementById('shop-login-modal').classList.add('hidden');
-        }
-
-        function toggleRegisterMode(isRegister) {
-            if (isRegister) {
-                document.getElementById('login-form-container').classList.add('hidden');
-                document.getElementById('register-form-container').classList.remove('hidden');
-            } else {
-                document.getElementById('login-form-container').classList.remove('hidden');
-                document.getElementById('register-form-container').classList.add('hidden');
-            }
-        }
-
-        // 載入首頁雲端店家清單
-        async function loadPublicShops() {
-            const grid = document.getElementById('public-shops-grid');
-            const badge = document.getElementById('shop-count-badge');
-            grid.innerHTML = '<p class="text-sm text-slate-400 col-span-3 text-center py-8">正在從雲端載入店家...</p>';
+        // 載入雲端店家清單
+        async function loadCloudShops() {
+            const grid = document.getElementById('shop-grid');
+            const label = document.getElementById('shop-count-label');
+            grid.innerHTML = '<p style="color: var(--text-muted); grid-column: span 3; text-align: center; padding: 2rem;">正在從雲端載入店家...</p>';
 
             try {
                 const querySnapshot = await window.getDocs(window.collection(window.db, "shops"));
                 let shops = [];
-                querySnapshot.forEach((docSnap) => {
+                querySnapshot.forEach(docSnap => {
                     shops.push({ id: docSnap.id, ...docSnap.data() });
                 });
 
-                badge.innerText = `目前共 ${shops.length} 家合作店家`;
+                label.innerText = `目前共 ${shops.length} 家合作店家`;
 
                 if (shops.length === 0) {
-                    grid.innerHTML = `
-                        <div class="col-span-3 text-center py-12 bg-white rounded-2xl border border-slate-100">
-                            <p class="text-slate-500 mb-2">目前尚無店家註冊上線</p>
-                            <button onclick="openShopLoginModal(); toggleRegisterMode(true);" class="text-rose-600 font-semibold text-sm hover:underline">立即註冊您的第一家美業工作室</button>
-                        </div>
-                    `;
+                    grid.innerHTML = `<p style="color: var(--text-muted); grid-column: span 3; text-align: center; padding: 2rem;">目前尚無店家註冊上線，請點選右上角「店家登入」建立第一家工作室！</p>`;
                     return;
                 }
 
                 grid.innerHTML = shops.map(shop => `
-                    <div onclick="enterCustomerShop('${shop.id}')" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md hover:border-rose-200 transition cursor-pointer flex flex-col justify-between">
+                    <div class="shop-card" onclick="enterShopBooking('${shop.id}')">
+                        <span class="badge-featured">雲端試用中</span>
                         <div>
-                            <div class="flex justify-between items-start mb-3">
-                                <span class="text-xs bg-rose-50 text-rose-600 px-2.5 py-1 rounded-full font-semibold">美業預約</span>
-                                <span class="text-xs text-slate-400">試用中</span>
+                            <div class="shop-title">${shop.shopName || '未命名工作室'}</div>
+                            <div class="shop-meta">負責人：${shop.ownerName || '美學職人'}</div>
+                            <div class="tag-list">
+                                <span class="tag">美業預約</span>
+                                <span class="tag">線上訂金</span>
                             </div>
-                            <h4 class="font-bold text-lg text-slate-800 mb-1">${shop.shopName || '未命名工作室'}</h4>
-                            <p class="text-xs text-slate-500 mb-4"><i class="fa-solid fa-user-tie mr-1"></i>負責人：${shop.ownerName || '老闆'}</p>
                         </div>
-                        <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-rose-600 text-sm font-semibold">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 0.8rem; margin-top: 1rem; color: var(--primary-coffee); font-size: 0.9rem; font-weight: bold;">
                             <span>進入預約</span>
-                            <i class="fa-solid fa-arrow-right"></i>
+                            <span>→</span>
                         </div>
                     </div>
                 `).join('');
             } catch (e) {
-                console.error("載入店家失敗", e);
-                grid.innerHTML = `<p class="text-sm text-rose-500 col-span-3 text-center py-8">載入雲端資料發生錯誤，請檢查網路連線。</p>`;
+                console.error("載入失敗", e);
+                label.innerText = "連線雲端發生錯誤";
+                grid.innerHTML = `<p style="color: var(--danger-red); grid-column: span 3; text-align: center;">無法讀取雲端資料，請檢查網路連線。</p>`;
             }
         }
 
-        // 店家註冊處理
-        async function handleShopRegister(event) {
-            event.preventDefault();
+        // 彈窗控制
+        function openMerchantLoginModal() {
+            document.getElementById('merchant-login-modal').classList.add('active');
+            toggleRegisterView(false);
+        }
+        function closeMerchantLoginModal() {
+            document.getElementById('merchant-login-modal').classList.remove('active');
+        }
+        function toggleRegisterView(isReg) {
+            document.getElementById('login-box').style.display = isReg ? 'none' : 'block';
+            document.getElementById('register-box').style.display = isReg ? 'block' : 'none';
+        }
+
+        // 店家註冊（含記錄註冊時間與前兩個月免費試用邏輯）
+        async function handleRegister() {
             const shopName = document.getElementById('reg-shopname').value.trim();
             const ownerName = document.getElementById('reg-owner').value.trim();
             const phone = document.getElementById('reg-phone').value.trim();
@@ -322,19 +921,24 @@
             const username = document.getElementById('reg-username').value.trim();
             const password = document.getElementById('reg-password').value.trim();
 
-            const shopId = 'shop_' + Date.now(); // 產生唯一識別碼
+            if (!shopName || !username || !password) {
+                alert("請填寫工作室名稱、帳號與密碼！");
+                return;
+            }
+
+            const shopId = 'shop_' + Date.now();
+            const registerDate = new Date().toISOString(); // 記錄註冊時間
 
             try {
-                // 檢查帳號是否已被註冊
+                // 檢查帳號是否重複
                 const q = window.query(window.collection(window.db, "shops"), window.where("username", "==", username));
-                const querySnapshot = await window.getDocs(q);
-                if (!querySnapshot.empty) {
-                    alert("此登入帳號已被使用，請更換其他帳號！");
+                const snap = await window.getDocs(q);
+                if (!snap.empty) {
+                    alert("此登入帳號已被使用，請更換其他帳號名稱！");
                     return;
                 }
 
-                // 寫入雲端 Firestore
-                const shopData = {
+                const newShopData = {
                     shopId,
                     shopName,
                     ownerName,
@@ -342,229 +946,281 @@
                     email,
                     username,
                     password,
-                    createdAt: new Date().toISOString(),
+                    registerDate,
+                    announcement: "歡迎光臨！請提前 10 分鐘到場。",
                     services: [
-                        { name: "精緻美睫單根嫁接", price: 1200, deposit: 300, duration: "90分鐘" },
-                        { name: "無創除色 / 霧眉專屬服務", price: 2500, deposit: 500, duration: "120分鐘" }
+                        { name: "精緻美睫單根嫁接", price: 1200, deposit: 300 },
+                        { name: "無創除色 / 霧眉專屬服務", price: 2500, deposit: 500 }
                     ],
-                    announcement: "歡迎光臨！請提前 10 分鐘到場，預約保留 10 分鐘。"
+                    orders: []
                 };
 
-                await window.setDoc(window.doc(window.db, "shops", shopId), shopData);
-                
-                alert("註冊成功！已為您開通前兩個月免費試用。請使用剛剛設定的帳密登入後台。");
-                closeShopLoginModal();
-                openShopLoginModal();
+                await window.setDoc(window.doc(window.db, "shops", shopId), newShopData);
+                alert("註冊成功！系統已記錄您的註冊時間，並為您開通前兩個月免費試用。請登入後台！");
+                toggleRegisterView(false);
             } catch (e) {
                 console.error("註冊失敗", e);
                 alert("註冊發生錯誤：" + e.message);
             }
         }
 
-        // 店家登入處理
-        async function handleShopLogin(event) {
-            event.preventDefault();
+        // 店家登入
+        async function handleLogin() {
             const username = document.getElementById('login-username').value.trim();
             const password = document.getElementById('login-password').value.trim();
 
             try {
                 const q = window.query(window.collection(window.db, "shops"), window.where("username", "==", username));
-                const querySnapshot = await window.getDocs(q);
+                const snap = await window.getDocs(q);
 
-                if (querySnapshot.empty) {
-                    alert("找不到此登入帳號，請確認帳號是否正確或先註冊！");
+                if (snap.empty) {
+                    alert("找不到此帳號，請確認或先註冊！");
                     return;
                 }
 
-                let matchedShop = null;
-                querySnapshot.forEach((docSnap) => {
-                    matchedShop = { id: docSnap.id, ...docSnap.data() };
+                let shopObj = null;
+                snap.forEach(docSnap => {
+                    shopObj = { id: docSnap.id, ...docSnap.data() };
                 });
 
-                if (matchedShop.password !== password) {
-                    alert("密碼錯誤，請重新輸入！");
+                if (shopObj.password !== password) {
+                    alert("密碼錯誤！");
                     return;
                 }
 
-                // 登入成功
-                currentLoggedInShop = matchedShop;
-                closeShopLoginModal();
-                enterAdminDashboard();
+                currentLoggedInMerchant = shopObj;
+                closeMerchantLoginModal();
+                enterMerchantDashboard();
             } catch (e) {
                 console.error("登入失敗", e);
                 alert("登入發生錯誤：" + e.message);
             }
         }
 
-        // 進入店家管理後台
-        function enterAdminDashboard() {
-            document.getElementById('home-view').classList.add('hidden');
-            document.getElementById('customer-booking-view').classList.add('hidden');
-            document.getElementById('shop-admin-view').classList.remove('hidden');
-
-            document.getElementById('admin-shop-title').innerText = currentLoggedInShop.shopName + " - 管理後台";
-            switchAdminTab('services');
+        function enterMerchantDashboard() {
+            switchView('merchant-view');
+            document.getElementById('merchant-panel-title').innerText = currentLoggedInMerchant.shopName + " - 工作台";
+            document.getElementById('prof-shopname').value = currentLoggedInMerchant.shopName || '';
+            document.getElementById('prof-owner').value = currentLoggedInMerchant.ownerName || '';
+            document.getElementById('prof-announcement').value = currentLoggedInMerchant.announcement || '';
+            renderMerchantServices();
         }
 
-        function logoutShop() {
-            currentLoggedInShop = null;
-            goHome();
+        function logoutMerchant() {
+            currentLoggedInMerchant = null;
+            switchView('home-view');
+            loadCloudShops();
         }
 
-        // 後台分頁切換
-        function switchAdminTab(tabName) {
-            const content = document.getElementById('admin-tab-content');
-            
-            if (tabName === 'services') {
-                content.innerHTML = `
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="font-bold text-lg text-slate-800 mb-1">店內純文字公告與規範</h3>
-                            <p class="text-xs text-slate-400 mb-3">自訂顯示在顧客預約頁面的重要公告與注意事項</p>
-                            <textarea id="admin-announcement" rows="3" class="w-full p-4 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-rose-500">${currentLoggedInShop.announcement || ''}</textarea>
-                            <button onclick="saveAnnouncement()" class="mt-2 px-4 py-2 bg-rose-600 text-white rounded-xl text-sm font-semibold shadow-sm hover:bg-rose-700 transition">儲存公告</button>
-                        </div>
-                        <div class="border-t border-slate-100 pt-6">
-                            <h3 class="font-bold text-lg text-slate-800 mb-1">服務項目設定</h3>
-                            <p class="text-xs text-slate-400 mb-3">管理您的項目名稱、價格與定金</p>
-                            <div id="services-list-container" class="space-y-3">
-                                ${(currentLoggedInShop.services || []).map((s, idx) => `
-                                    <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
-                                        <div>
-                                            <h4 class="font-bold text-slate-800">${s.name}</h4>
-                                            <p class="text-xs text-slate-500">價格: $${s.price} | 定金: $${s.deposit} | 時長: ${s.duration}</p>
-                                        </div>
-                                        <button onclick="removeService(${idx})" class="text-rose-500 hover:text-rose-700 text-sm font-medium"><i class="fa-solid fa-trash"></i></button>
-                                    </div>
-                                `).join('')}
-                            </div>
-                            <div class="mt-4 p-4 bg-rose-50/50 rounded-xl border border-rose-100 grid grid-cols-1 md:grid-cols-4 gap-3">
-                                <input type="text" id="new-srv-name" placeholder="服務名稱" class="p-2.5 rounded-lg border border-slate-200 text-sm">
-                                <input type="number" id="new-srv-price" placeholder="價格 ($)" class="p-2.5 rounded-lg border border-slate-200 text-sm">
-                                <input type="number" id="new-srv-deposit" placeholder="定金 ($)" class="p-2.5 rounded-lg border border-slate-200 text-sm">
-                                <button onclick="addNewService()" class="bg-rose-600 text-white rounded-lg text-sm font-semibold hover:bg-rose-700 transition">新增服務</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            } else if (tabName === 'slots') {
-                content.innerHTML = `
-                    <div class="text-center py-12">
-                        <i class="fa-solid fa-calendar-days text-4xl text-slate-300 mb-3"></i>
-                        <h3 class="font-bold text-lg text-slate-700">預約時段與訂單管理</h3>
-                        <p class="text-xs text-slate-400 mt-1">雲端即時預約訂單與防撞時段同步功能已就緒。</p>
-                    </div>
-                `;
-            } else if (tabName === 'accounting') {
-                content.innerHTML = `
-                    <div class="text-center py-12">
-                        <i class="fa-solid fa-wallet text-4xl text-slate-300 mb-3"></i>
-                        <h3 class="font-bold text-lg text-slate-700">記帳與營收報表</h3>
-                        <p class="text-xs text-slate-400 mt-1">各店家的專屬記帳與營收統計正在雲端運算中。</p>
-                    </div>
-                `;
-            }
+        // 工作台分頁切換
+        function switchMerchantTab(tabId, btn) {
+            document.querySelectorAll('.m-tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.m-tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
         }
 
-        async function saveAnnouncement() {
-            const val = document.getElementById('admin-announcement').value.trim();
-            currentLoggedInShop.announcement = val;
-            try {
-                await window.updateDoc(window.doc(window.db, "shops", currentLoggedInShop.id), { announcement: val });
-                alert("公告儲存成功！已同步至雲端。");
-            } catch (e) {
-                alert("儲存失敗：" + e.message);
-            }
-        }
-
-        async function addNewService() {
-            const name = document.getElementById('new-srv-name').value.trim();
-            const price = Number(document.getElementById('new-srv-price').value);
-            const deposit = Number(document.getElementById('new-srv-deposit').value);
-            if (!name || !price) {
-                alert("請填寫完整的服務名稱與價格！");
+        // 渲染店家服務項目
+        function renderMerchantServices() {
+            const container = document.getElementById('m-services-container');
+            const list = currentLoggedInMerchant.services || [];
+            if (list.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.88rem;">尚未建立服務項目。</p>';
                 return;
             }
-            if (!currentLoggedInShop.services) currentLoggedInShop.services = [];
-            currentLoggedInShop.services.push({ name, price, deposit: deposit || 0, duration: "60分鐘" });
+            container.innerHTML = list.map((s, idx) => `
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #FFF; padding: 0.7rem 1rem; border-radius: 10px; border: 1px solid var(--border-soft); margin-bottom: 0.5rem;">
+                    <div>
+                        <strong>${s.name}</strong>
+                        <span style="font-size: 0.85rem; color: var(--text-muted); margin-left: 0.8rem;">價格: $${s.price} | 定金: $${s.deposit}</span>
+                    </div>
+                    <button class="btn-soft btn-sm" style="color: var(--danger-red);" onclick="removeMerchantService(${idx})">刪除</button>
+                </div>
+            `).join('');
+        }
+
+        async function addMerchantService() {
+            const name = document.getElementById('new-srv-name').value.trim();
+            const price = Number(document.getElementById('new-srv-price').value);
+            const deposit = Number(document.getElementById('new-srv-deposit').value) || 0;
+
+            if (!name || !price) {
+                alert("請填寫服務名稱與價格！");
+                return;
+            }
+
+            if (!currentLoggedInMerchant.services) currentLoggedInMerchant.services = [];
+            currentLoggedInMerchant.services.push({ name, price, deposit });
 
             try {
-                await window.updateDoc(window.doc(window.db, "shops", currentLoggedInShop.id), { services: currentLoggedInShop.services });
-                switchAdminTab('services');
-                alert("新增服務成功！");
+                await window.updateDoc(window.doc(window.db, "shops", currentLoggedInMerchant.id), { services: currentLoggedInMerchant.services });
+                document.getElementById('new-srv-name').value = '';
+                document.getElementById('new-srv-price').value = '';
+                document.getElementById('new-srv-deposit').value = '';
+                renderMerchantServices();
             } catch (e) {
                 alert("更新失敗：" + e.message);
             }
         }
 
-        async function removeService(idx) {
-            currentLoggedInShop.services.splice(idx, 1);
+        async function removeMerchantService(idx) {
+            currentLoggedInMerchant.services.splice(idx, 1);
             try {
-                await window.updateDoc(window.doc(window.db, "shops", currentLoggedInShop.id), { services: currentLoggedInShop.services });
-                switchAdminTab('services');
+                await window.updateDoc(window.doc(window.db, "shops", currentLoggedInMerchant.id), { services: currentLoggedInMerchant.services });
+                renderMerchantServices();
             } catch (e) {
                 alert("刪除失敗：" + e.message);
             }
         }
 
-        // 顧客進入特定店家預約頁面
-        async function enterCustomerShop(shopId) {
-            currentViewingShopId = shopId;
-            document.getElementById('home-view').classList.add('hidden');
-            document.getElementById('customer-booking-view').classList.remove('hidden');
+        async function saveMerchantProfile() {
+            const shopName = document.getElementById('prof-shopname').value.trim();
+            const ownerName = document.getElementById('prof-owner').value.trim();
+            const announcement = document.getElementById('prof-announcement').value.trim();
 
-            const banner = document.getElementById('customer-shop-banner');
-            banner.innerHTML = '<p class="text-sm text-slate-400">載入店家預約頁面中...</p>';
+            currentLoggedInMerchant.shopName = shopName;
+            currentLoggedInMerchant.ownerName = ownerName;
+            currentLoggedInMerchant.announcement = announcement;
+
+            try {
+                await window.updateDoc(window.doc(window.db, "shops", currentLoggedInMerchant.id), {
+                    shopName, ownerName, announcement
+                });
+                alert("工作室資料儲存成功！");
+            } catch (e) {
+                alert("儲存失敗：" + e.message);
+            }
+        }
+
+        // 顧客端進入特定店家預約
+        async function enterShopBooking(shopId) {
+            currentViewingShopId = shopId;
+            switchView('booking-view');
+
+            const header = document.getElementById('booking-shop-header');
+            header.innerHTML = '<p style="color: var(--text-muted);">載入店家預約資訊中...</p>';
 
             try {
                 const docSnap = await window.getDoc(window.doc(window.db, "shops", shopId));
                 if (!docSnap.exists()) {
-                    alert("找不到此店家資料！");
-                    goHome();
+                    alert("找不到此店家！");
+                    switchView('home-view');
                     return;
                 }
                 const shop = docSnap.data();
-                banner.innerHTML = `
-                    <div>
-                        <span class="text-xs bg-rose-100 text-rose-700 px-2.5 py-1 rounded-full font-semibold">線上預約中</span>
-                        <h2 class="text-2xl font-bold text-slate-800 mt-1">${shop.shopName}</h2>
-                        <p class="text-xs text-slate-500 mt-1"><i class="fa-solid fa-bullhorn mr-1 text-rose-500"></i>公告：${shop.announcement || '無公告'}</p>
-                    </div>
+                header.innerHTML = `
+                    <h2 style="color: var(--primary-dark); font-size: 1.3rem; margin-bottom: 0.3rem;">${shop.shopName}</h2>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">負責人：${shop.ownerName || '美學職人'} | 公告：${shop.announcement || '無'}</p>
                 `;
 
-                // 渲染預約行事曆與服務選單
-                const calContainer = document.getElementById('booking-calendar-container');
-                calContainer.innerHTML = `
-                    <div class="space-y-4">
-                        <h4 class="font-semibold text-sm text-slate-700">1. 選擇預約服務項目：</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            ${(shop.services || []).map((s, i) => `
-                                <div class="p-4 rounded-xl border border-slate-200 hover:border-rose-500 cursor-pointer transition flex justify-between items-center">
-                                    <div>
-                                        <h5 class="font-bold text-slate-800">${s.name}</h5>
-                                        <p class="text-xs text-slate-500">價格: $${s.price} (需付定金 $${s.deposit})</p>
-                                    </div>
-                                    <span class="text-xs bg-rose-600 text-white px-3 py-1.5 rounded-lg font-semibold">選擇</span>
-                                </div>
-                            `).join('')}
+                // 渲染服務項目選擇
+                const srvContainer = document.getElementById('booking-services-list');
+                const services = shop.services || [];
+                srvContainer.innerHTML = services.map((s, idx) => `
+                    <div class="option-item" onclick="toggleBookingService(${idx}, ${s.price}, ${s.deposit}, '${s.name}')" id="srv-opt-${idx}">
+                        <div>
+                            <strong>${s.name}</strong>
+                            <div style="font-size: 0.82rem; color: var(--text-muted);">價格：$${s.price} (需付定金 $${s.deposit})</div>
                         </div>
+                        <span style="font-weight: bold; color: var(--primary-coffee);">選擇</span>
                     </div>
-                `;
+                `).join('');
+
+                renderBookingCalendar();
             } catch (e) {
-                console.error("載入預約頁面失敗", e);
+                console.error("載入預約頁失敗", e);
             }
         }
 
-        function previewShopPage() {
-            if (currentLoggedInShop) {
-                enterCustomerShop(currentLoggedInShop.id);
+        function toggleBookingService(idx, price, deposit, name) {
+            const el = document.getElementById(`srv-opt-${idx}`);
+            el.classList.toggle('selected');
+            // 簡化示範單選或多選邏輯
+            selectedServices = [{ name, price, deposit }];
+            document.getElementById('sum-total').innerText = `$${price}`;
+            document.getElementById('sum-deposit').innerText = `$${deposit}`;
+        }
+
+        function renderBookingCalendar() {
+            const daysContainer = document.getElementById('booking-cal-days');
+            daysContainer.innerHTML = `
+                <div class="cal-week-name">日</div><div class="cal-week-name">一</div><div class="cal-week-name">二</div>
+                <div class="cal-week-name">三</div><div class="cal-week-name">四</div><div class="cal-week-name">五</div><div class="cal-week-name">六</div>
+            `;
+            for (let i = 1; i <= 31; i++) {
+                daysContainer.innerHTML += `<div class="cal-day" onclick="selectBookingDate(this, ${i})">${i}</div>`;
+            }
+        }
+
+        function selectBookingDate(el, day) {
+            document.querySelectorAll('#booking-cal-days .cal-day').forEach(d => d.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedBookingDate = `2026-05-${day < 10 ? '0' + day : day}`;
+            document.getElementById('booking-selected-date-label').innerText = `已選擇日期：${selectedBookingDate}`;
+            
+            // 模擬可用時段
+            const timeContainer = document.getElementById('time-slots-container');
+            const slots = ["10:00", "11:30", "14:00", "15:30", "18:00"];
+            timeContainer.innerHTML = slots.map(t => `
+                <div class="time-slot" onclick="selectTimeSlot(this, '${t}')">${t}</div>
+            `).join('');
+        }
+
+        function selectTimeSlot(el, time) {
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedTimeSlot = time;
+        }
+
+        async function submitBooking() {
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const last5 = document.getElementById('cust-last5').value.trim();
+
+            if (!name || !phone || selectedServices.length === 0 || !selectedBookingDate || !selectedTimeSlot || last5.length !== 5) {
+                alert("請完整填寫服務、姓名、10碼手機、預約日期時段以及 5 碼匯款後五碼！");
+                return;
+            }
+
+            try {
+                const bookingData = {
+                    customerName: name,
+                    customerPhone: phone,
+                    service: selectedServices[0].name,
+                    date: selectedBookingDate,
+                    time: selectedTimeSlot,
+                    last5,
+                    status: "已預約",
+                    createdAt: new Date().toISOString()
+                };
+
+                // 讀取該店家原本的訂單並寫入雲端
+                const shopRef = window.doc(window.db, "shops", currentViewingShopId);
+                const snap = await window.getDoc(shopRef);
+                if (snap.exists()) {
+                    const shopData = snap.data();
+                    const orders = shopData.orders || [];
+                    orders.push(bookingData);
+                    await window.updateDoc(shopRef, { orders });
+                }
+
+                alert("預約申請送出成功！店家將盡快為您審核確認。");
+                switchView('home-view');
+            } catch (e) {
+                alert("送出預約發生錯誤：" + e.message);
+            }
+        }
+
+        function previewCurrentShop() {
+            if (currentLoggedInMerchant) {
+                enterShopBooking(currentLoggedInMerchant.id);
             }
         }
 
         function triggerAdminSecret() {
             const pwd = prompt("請輸入管理員總控密碼：");
             if (pwd === "Oomubook0921827360") {
-                alert("管理員總控權限驗證成功！ (這裡可擴充所有店家總覽管理)");
+                alert("管理員總控驗證成功！");
             } else if (pwd !== null) {
                 alert("密碼錯誤！");
             }
