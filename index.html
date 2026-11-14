@@ -45,19 +45,21 @@
     body { background-color: var(--bg-main); color: var(--text-main); display: flex; justify-content: center; min-height: 100vh; padding: 12px; }
     .app-container { width: 100%; max-width: 480px; background: var(--bg-main); min-height: 100vh; position: relative; padding-bottom: 90px; }
     
-    /* 頂部導覽列與平台首頁樣式 */
-    .platform-header { background: #fff; border-bottom: 1px solid var(--border-color); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-radius: var(--radius-md); margin-bottom: 12px; box-shadow: var(--shadow); }
-    .brand-logo { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; color: var(--primary-color); }
-    .logo-icon { background-color: var(--primary-color); color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
-    
+    /* 歐姆系統原生頂部導覽與首頁風格 */
+    .oomu-platform-nav { background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; box-shadow: var(--shadow); }
+    .oomu-brand { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .oomu-brand-icon { width: 38px; height: 38px; background: var(--primary-color); color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; }
+    .oomu-brand-text h2 { font-size: 16px; color: var(--primary-color); font-weight: 700; letter-spacing: 1px; }
+    .oomu-brand-text p { font-size: 11px; color: var(--text-sub); }
+
     .header { text-align: center; padding: 15px 0 10px; cursor: pointer; user-select: none; }
     .header h1 { font-size: 22px; color: var(--primary-color); letter-spacing: 2px; font-weight: 700; }
     .header p { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
     .card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid var(--border-color); }
     .card-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--primary-color); display: flex; justify-content: space-between; align-items: center; }
     
-    .shop-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 10px; cursor: pointer; transition: transform 0.15s; }
-    .shop-card:hover { transform: translateY(-2px); border-color: var(--primary-color); }
+    .shop-card { background: var(--card-bg); border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+    .shop-card:hover { transform: translateY(-2px); border-color: var(--primary-color); background: #FAF6F0; }
 
     .item-option { display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 8px; cursor: pointer; background-color: #fff; }
     .item-option.selected { border-color: var(--primary-color); background-color: #F4EBE1; }
@@ -113,31 +115,35 @@
 <body>
 
 <div class="app-container">
-  <!-- 平台頂部導覽 -->
-  <div class="platform-header">
-    <div class="brand-logo" onclick="backToPlatformHome()">
-      <div class="logo-icon">Oo</div>
-      <div><strong>OomuBook</strong> <span style="font-size:11px; color:var(--text-sub);">美業平台</span></div>
+  <!-- 歐姆系統原生平台首頁導覽 -->
+  <div class="oomu-platform-nav" id="oomuPlatformNav">
+    <div class="oomu-brand" onclick="backToPlatformHome()">
+      <div class="oomu-brand-icon">歐</div>
+      <div class="oomu-brand-text">
+        <h2>OomuBook</h2>
+        <p>輕約美業預約平台</p>
+      </div>
     </div>
-    <div style="display:flex; gap:6px;">
-      <button type="button" class="btn-secondary" style="font-size:11px; padding:6px 10px;" onclick="openMerchantLoginModal()">店家登入</button>
+    <div>
+      <button type="button" class="btn-secondary" style="font-size: 12px; padding: 8px 14px; border-radius: 20px;" onclick="openMerchantLoginModal()">店家後台登入</button>
     </div>
   </div>
 
-  <div class="header" id="headerClickArea">
+  <div class="header" id="headerClickArea" style="display: none;">
     <h1 id="shopTitle">OomuBook 輕約美業平台</h1>
     <p id="shopSubTitle">嚴選個人美學工作室｜線上預約系統</p>
   </div>
 
-  <!-- 平台首頁：店家列表檢視 -->
+  <!-- 歐姆系統原生平台首頁：嚴選工作室列表 -->
   <div id="platformHomeView">
     <div class="card">
-      <div class="card-title">✨ 合作美學工作室列表</div>
-      <div style="font-size:12px; color:var(--text-sub); margin-bottom:12px;">請選擇您想預約的工作室：</div>
+      <div class="card-title">✨ 嚴選美學工作室</div>
+      <div style="font-size: 13px; color: var(--text-sub); margin-bottom: 14px; line-height: 1.5;">歡迎來到 OomuBook！請點選下方您想要預約的工作室：</div>
       <div id="platformShopsList">載入中...</div>
     </div>
   </div>
 
+  <!-- 後台導覽與標題區 -->
   <div id="adminHeader" style="display: none;">
     <div class="admin-bar">
       <span>👑 <span id="currentAdminShopName">店家工作台</span> <button type="button" class="btn-secondary" onclick="requestPushPermission()" style="margin-left:6px; font-size:10px;">🔔 開啟推播</button></span>
@@ -157,8 +163,9 @@
     </div>
   </div>
 
+  <!-- 顧客預約端介面 -->
   <div id="clientView" style="display: none;">
-    <div style="margin-bottom:10px;">
+    <div style="margin-bottom:12px;">
       <button type="button" class="btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="backToPlatformHome()">‹ 返回工作室列表</button>
     </div>
 
@@ -174,7 +181,7 @@
       </div>
 
       <div class="card">
-        <div class="card-title">⚠️ 重要請詳細閱讀您預約的項目‼️</div>
+        <div class="card-title">⚠️ 重要預約須知</div>
         <div id="clientNoticesContainer"></div>
 
         <hr style="border: none; border-top: 1px solid var(--border-color); margin: 16px 0;">
@@ -281,6 +288,7 @@
     </div>
   </div>
 
+  <!-- 後台管理介面 -->
   <div id="adminView" style="display: none;">
     <!-- 服務管理 -->
     <div id="adminTabServices" class="admin-tab-content">
@@ -594,7 +602,6 @@
   const app = initializeApp(firebaseConfig);
   const dbCloud = getFirestore(app);
 
-  // 掛載至全域變數供系統調用
   window.dbCloud = dbCloud;
   window.fbCollection = collection;
   window.fbGetDocs = getDocs;
@@ -609,10 +616,11 @@
 </script>
 
 <script>
-  let currentShopId = null; // 當前操作的店家 ID (多租戶隔離)
-  let currentLoggedInMerchant = null; // 當前登入的店家物件
+  let currentShopId = null; 
+  let currentLoggedInMerchant = null; 
 
   let defaultDb = {
+    shopName: "安,你好ANNEHO",
     settings: { bankCode: "812", bankName: "台新銀行", bankAcc: "", bankHolder: "", payNotice: "" },
     notices: [],
     categories: [],
@@ -627,7 +635,6 @@
     initApp();
   });
 
-  // 若 Firebase 載入稍慢的備用觸發
   setTimeout(() => {
     if(!window.dbCloud) initApp();
   }, 1000);
@@ -642,18 +649,17 @@
     initReportSelectors();
     document.getElementById('headerClickArea').addEventListener('click', handleHeaderClick);
 
-    // 載入多店家平台首頁列表
     loadPlatformShops();
   }
 
-  // 1. 載入多店家列表 (平台首頁)
+  // 1. 載入多店家列表 (歐姆平台首頁)
   async function loadPlatformShops() {
     let listEl = document.getElementById('platformShopsList');
     listEl.innerHTML = "<div style='color:var(--text-sub); font-size:13px; text-align:center;'>正在載入雲端合作店家...</div>";
     
     try {
       if(!window.dbCloud) {
-        listEl.innerHTML = "<div style='color:#D9534F; font-size:13px; text-align:center;'>雲端連線中初始化...</div>";
+        listEl.innerHTML = "<div style='color:#D9534F; font-size:13px; text-align:center;'>雲端連線初始化中...</div>";
         return;
       }
       let snapshot = await window.fbGetDocs(window.fbCollection(window.dbCloud, "shops"));
@@ -663,7 +669,6 @@
       });
 
       if(shops.length === 0) {
-        // 自動初始化預設第一家「安你好」店家供體驗
         await createDefaultAnneHoShop();
         loadPlatformShops();
         return;
@@ -672,8 +677,11 @@
       let html = "";
       shops.forEach(s => {
         html += `<div class="shop-card" onclick="selectShop('${s.id}')">
-          <div style="font-size:15px; font-weight:bold; color:var(--primary-color);">${escapeHtml(s.shopName || '未命名工作室')}</div>
-          <div style="font-size:12px; color:var(--text-sub); margin-top:2px;">線上預約系統 ➔</div>
+          <div>
+            <div style="font-size:15px; font-weight:bold; color:var(--primary-color);">${escapeHtml(s.shopName || '未命名工作室')}</div>
+            <div style="font-size:12px; color:var(--text-sub); margin-top:2px;">點擊進入預約系統</div>
+          </div>
+          <div style="color:var(--primary-color); font-weight:bold; font-size:14px;">›</div>
         </div>`;
       });
       listEl.innerHTML = html;
@@ -713,6 +721,8 @@
   async function selectShop(shopId) {
     currentShopId = shopId;
     document.getElementById('platformHomeView').style.display = 'none';
+    document.getElementById('oomuPlatformNav').style.display = 'none';
+    document.getElementById('headerClickArea').style.display = 'block';
     document.getElementById('clientView').style.display = 'block';
     
     await fetchCloudData(() => {
@@ -726,11 +736,12 @@
     document.getElementById('clientView').style.display = 'none';
     document.getElementById('adminView').style.display = 'none';
     document.getElementById('adminHeader').style.display = 'none';
+    document.getElementById('headerClickArea').style.display = 'none';
     document.getElementById('platformHomeView').style.display = 'block';
+    document.getElementById('oomuPlatformNav').style.display = 'flex';
     loadPlatformShops();
   }
 
-  // 開啟店家登入彈窗
   function openMerchantLoginModal() {
     document.getElementById('loginUsername').value = '';
     document.getElementById('loginPassword').value = '';
@@ -764,6 +775,9 @@
       currentLoggedInMerchant = shopObj;
       db = { ...defaultDb, ...shopObj };
       closeMerchantLoginModal();
+      document.getElementById('platformHomeView').style.display = 'none';
+      document.getElementById('oomuPlatformNav').style.display = 'none';
+      document.getElementById('headerClickArea').style.display = 'none';
       switchView('admin');
     } catch(e) {
       alert("登入發生錯誤：" + e.message);
@@ -852,6 +866,10 @@
     document.getElementById('adminView').style.display = view === 'admin' ? 'block' : 'none';
     document.getElementById('adminHeader').style.display = view === 'admin' ? 'block' : 'none';
     document.getElementById('platformHomeView').style.display = 'none';
+    document.getElementById('oomuPlatformNav').style.display = 'none';
+    if(view === 'admin') document.getElementById('headerClickArea').style.display = 'none';
+    else document.getElementById('headerClickArea').style.display = 'block';
+
     window.scrollTo(0, 0);
     fetchCloudData(() => { if(view === 'admin') renderAdmin(); else renderClient(); });
   }
@@ -1171,7 +1189,6 @@
   function closePayModal() { document.getElementById('payModal').classList.remove('active'); }
   function validatePayForm() { document.getElementById('btnSubmitPay').disabled = (document.getElementById('payLast5').value.trim().length !== 5); }
 
-  // 嚴格修正：複製帳號只複製純數字帳號
   function copyBankAccount() {
     let accText = document.getElementById('payBankAcc').innerText.trim();
     if(!accText) { alert("目前無帳號可複製"); return; }
