@@ -17,17 +17,17 @@
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-main: #FBF8F3;
+      --bg-main: #F7F5F0;
       --card-bg: #FFFFFF;
-      --text-main: #3D2E24;
-      --text-sub: #8C7C73;
-      --primary-color: #4A3B32;
-      --border-color: #EFE8DF;
-      --input-bg: #FAF6F0;
-      --radius-lg: 20px;
-      --radius-md: 12px;
+      --text-main: #2C221E;
+      --text-sub: #7A6B63;
+      --primary-color: #6A5348;
+      --border-color: #E6E0D5;
+      --input-bg: #FDFCF9;
+      --radius-lg: 24px;
+      --radius-md: 14px;
       --radius-sm: 8px;
-      --shadow: 0 4px 15px rgba(74, 59, 50, 0.05);
+      --shadow: 0 4px 20px rgba(106, 83, 72, 0.06);
     }
     * { 
       box-sizing: border-box; 
@@ -45,102 +45,95 @@
     body { background-color: var(--bg-main); color: var(--text-main); display: flex; justify-content: center; min-height: 100vh; padding: 12px; }
     .app-container { width: 100%; max-width: 480px; background: var(--bg-main); min-height: 100vh; position: relative; padding-bottom: 90px; }
     
-    /* 歐姆系統原生頂部導覽與首頁風格 */
-    .oomu-platform-nav { background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; box-shadow: var(--shadow); }
-    .oomu-brand { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-    .oomu-brand-icon { width: 38px; height: 38px; background: var(--primary-color); color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px; }
-    .oomu-brand-text h2 { font-size: 16px; color: var(--primary-color); font-weight: 700; letter-spacing: 1px; }
-    .oomu-brand-text p { font-size: 11px; color: var(--text-sub); }
+    /* 🌟 OomuBook 原生平台頂部導覽列與首頁質感風格 */
+    .oomu-header-card { background: linear-gradient(135deg, #6A5348 0%, #4E3D34 100%); color: #fff; padding: 24px 20px; border-radius: var(--radius-lg); margin-bottom: 16px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .oomu-header-card h1 { font-size: 22px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+    .oomu-header-card p { font-size: 13px; opacity: 0.85; line-height: 1.5; }
+    
+    .shop-card { background: var(--card-bg); border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 18px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); }
+    .shop-card:hover { transform: translateY(-2px); border-color: var(--primary-color); background: #FAF7F2; }
 
     .header { text-align: center; padding: 15px 0 10px; cursor: pointer; user-select: none; }
     .header h1 { font-size: 22px; color: var(--primary-color); letter-spacing: 2px; font-weight: 700; }
     .header p { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
-    .card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid var(--border-color); }
-    .card-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--primary-color); display: flex; justify-content: space-between; align-items: center; }
     
-    .shop-card { background: var(--card-bg); border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
-    .shop-card:hover { transform: translateY(-2px); border-color: var(--primary-color); background: #FAF6F0; }
-
-    .item-option { display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 8px; cursor: pointer; background-color: #fff; }
-    .item-option.selected { border-color: var(--primary-color); background-color: #F4EBE1; }
+    .card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid var(--border-color); }
+    .card-title { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: var(--primary-color); display: flex; justify-content: space-between; align-items: center; }
+    
+    .item-option { display: flex; justify-content: space-between; align-items: center; padding: 14px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 10px; cursor: pointer; background-color: #fff; transition: all 0.15s; }
+    .item-option.selected { border-color: var(--primary-color); background-color: #F4EFEA; }
     .item-info { flex: 1; padding-right: 12px; min-width: 0; }
-    .item-info .title { font-size: 14px; font-weight: 700; word-break: break-all; }
-    .item-info .desc { font-size: 12px; color: var(--text-sub); margin-top: 2px; word-break: break-all; }
-    .item-info .subtitle { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
-    .item-price { font-weight: 700; color: var(--primary-color); font-size: 14px; white-space: nowrap; text-align: right; }
+    .item-info .title { font-size: 14px; font-weight: 700; word-break: break-all; color: var(--text-main); }
+    .item-info .desc { font-size: 12px; color: var(--text-sub); margin-top: 3px; word-break: break-all; }
+    .item-info .subtitle { font-size: 12px; color: var(--text-sub); margin-top: 3px; }
+    .item-price { font-weight: 700; color: var(--primary-color); font-size: 15px; white-space: nowrap; text-align: right; }
     
     .cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .cal-btn { background: none; border: none; font-size: 16px; color: var(--primary-color); cursor: pointer; padding: 4px 8px; font-weight: bold; }
+    .cal-btn { background: none; border: none; font-size: 18px; color: var(--primary-color); cursor: pointer; padding: 4px 10px; font-weight: bold; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; font-size: 13px; }
     .cal-day-label { font-weight: 700; color: var(--text-sub); padding-bottom: 6px; }
-    .cal-day { padding: 10px 0; border-radius: var(--radius-sm); border: 1px solid transparent; cursor: pointer; background: var(--input-bg); }
+    .cal-day { padding: 12px 0; border-radius: var(--radius-sm); border: 1px solid transparent; cursor: pointer; background: var(--input-bg); font-weight: 500; }
     .cal-day.empty { background: transparent; cursor: default; }
     .cal-day.selected { background: var(--primary-color); color: #fff; font-weight: 700; }
     .cal-day.disabled { opacity: 0.3; cursor: not-allowed; }
     
     .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
-    .time-btn { padding: 10px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); background: #fff; text-align: center; font-size: 13px; cursor: pointer; color: var(--text-main); position: relative; }
-    .time-btn.selected { border-color: var(--primary-color); background: var(--primary-color); color: #fff; }
-    .time-btn.booked { background: #f2ede4; color: #8c7c73; border-color: #dcd6ce; cursor: pointer; font-size: 12px; font-weight: 500; }
+    .time-btn { padding: 12px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); background: #fff; text-align: center; font-size: 13px; cursor: pointer; color: var(--text-main); font-weight: 500; }
+    .time-btn.selected { border-color: var(--primary-color); background: var(--primary-color); color: #fff; font-weight: 700; }
+    .time-btn.booked { background: #EFECE6; color: #9E8E84; border-color: #E2DCD2; cursor: not-allowed; font-size: 12px; }
 
-    .form-group { margin-bottom: 12px; }
-    .form-group label { display: block; font-size: 12px; color: var(--text-sub); margin-bottom: 4px; font-weight: 500; }
-    .form-input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--input-bg); font-size: 14px; outline: none; }
-    .form-input:focus { border-color: var(--primary-color); background: var(--input-bg); }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 12px; color: var(--text-sub); margin-bottom: 6px; font-weight: 600; }
+    .form-input { width: 100%; padding: 13px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); background: var(--input-bg); font-size: 14px; outline: none; color: var(--text-main); }
+    .form-input:focus { border-color: var(--primary-color); background: #fff; }
 
-    .bottom-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; z-index: 100; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); }
+    .bottom-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 100; box-shadow: 0 -4px 20px rgba(0,0,0,0.06); }
     .price-summary { font-size: 12px; color: var(--text-sub); }
     .price-summary .total { font-size: 16px; font-weight: 700; color: var(--primary-color); }
-    .btn-submit { background: var(--primary-color); color: #fff; border: none; padding: 12px 24px; border-radius: 30px; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .btn-submit { background: var(--primary-color); color: #fff; border: none; padding: 13px 26px; border-radius: 30px; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(106, 83, 72, 0.2); }
     .btn-submit:active { opacity: 0.8; }
 
-    .admin-bar { background: var(--primary-color); color: #fff; padding: 10px 16px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    /* 後台管理介面維持安你好完整功能與風格 */
+    .admin-bar { background: var(--primary-color); color: #fff; padding: 12px 18px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
     .admin-tab-group { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 16px; }
-    .admin-tab { padding: 8px 12px; background: #fff; border: 1px solid var(--border-color); border-radius: 20px; font-size: 11px; white-space: nowrap; cursor: pointer; position: relative; font-weight: 500; color: var(--primary-color); }
+    .admin-tab { padding: 8px 14px; background: #fff; border: 1px solid var(--border-color); border-radius: 20px; font-size: 12px; white-space: nowrap; cursor: pointer; position: relative; font-weight: 600; color: var(--primary-color); }
     .admin-tab.active { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
     .badge-unread { position: absolute; top: -4px; right: -4px; background: #D9534F; color: #fff; font-size: 10px; font-weight: bold; border-radius: 10px; padding: 2px 5px; min-width: 16px; text-align: center; }
 
-    .btn-danger { background: #D9534F; color: white; border: none; padding: 5px 8px; border-radius: var(--radius-sm); font-size: 11px; cursor: pointer; }
-    .btn-secondary { background: #EFE8DF; color: var(--primary-color); border: none; padding: 6px 10px; border-radius: var(--radius-md); font-size: 11px; cursor: pointer; }
+    .btn-danger { background: #D9534F; color: white; border: none; padding: 6px 10px; border-radius: var(--radius-sm); font-size: 11px; cursor: pointer; font-weight: 600; }
+    .btn-secondary { background: #EFECE6; color: var(--primary-color); border: none; padding: 8px 12px; border-radius: var(--radius-md); font-size: 12px; cursor: pointer; font-weight: 600; }
 
     .notice-accordion { border: 1.5px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 10px; overflow: hidden; background: #fff; }
-    .notice-header { padding: 14px; font-size: 14px; font-weight: 700; color: var(--primary-color); display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #FAF6F0; }
+    .notice-header { padding: 14px; font-size: 14px; font-weight: 700; color: var(--primary-color); display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #FDFCF9; }
     .notice-body { padding: 14px; font-size: 13px; line-height: 1.6; display: none; border-top: 1px solid var(--border-color); }
 
-    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 16px; }
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 16px; backdrop-filter: blur(3px); }
     .modal-overlay.active { display: flex; }
-    .modal-content { background: #fff; border-radius: var(--radius-lg); padding: 20px; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; z-index: 10000; }
+    .modal-content { background: #fff; border-radius: var(--radius-lg); padding: 24px; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; z-index: 10000; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
   </style>
 </head>
 <body>
 
 <div class="app-container">
-  <!-- 歐姆系統原生平台首頁導覽 -->
-  <div class="oomu-platform-nav" id="oomuPlatformNav">
-    <div class="oomu-brand" onclick="backToPlatformHome()">
-      <div class="oomu-brand-icon">歐</div>
-      <div class="oomu-brand-text">
-        <h2>OomuBook</h2>
-        <p>輕約美業預約平台</p>
-      </div>
+  <!-- 🌟 歐姆系統原生平台首頁 (Logo與質感標題) -->
+  <div id="platformHomeView">
+    <div class="oomu-header-card">
+      <h1>OomuBook 輕約美業</h1>
+      <p>嚴選個人美學工作室｜透明價目・即時防撞時段・安心線上預約</p>
     </div>
-    <div>
-      <button type="button" class="btn-secondary" style="font-size: 12px; padding: 8px 14px; border-radius: 20px;" onclick="openMerchantLoginModal()">店家後台登入</button>
+    <div class="card">
+      <div class="card-title">✨ 合作美學工作室列表</div>
+      <div style="font-size: 13px; color: var(--text-sub); margin-bottom: 14px;">請選擇您想預約的工作室：</div>
+      <div id="platformShopsList">載入中...</div>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+      <button type="button" class="btn-secondary" style="font-size: 12px; padding: 10px 20px; border-radius: 20px;" onclick="openMerchantLoginModal()">👑 店家後台登入</button>
     </div>
   </div>
 
   <div class="header" id="headerClickArea" style="display: none;">
-    <h1 id="shopTitle">OomuBook 輕約美業平台</h1>
+    <h1 id="shopTitle">OomuBook 輕約美業</h1>
     <p id="shopSubTitle">嚴選個人美學工作室｜線上預約系統</p>
-  </div>
-
-  <!-- 歐姆系統原生平台首頁：嚴選工作室列表 -->
-  <div id="platformHomeView">
-    <div class="card">
-      <div class="card-title">✨ 嚴選美學工作室</div>
-      <div style="font-size: 13px; color: var(--text-sub); margin-bottom: 14px; line-height: 1.5;">歡迎來到 OomuBook！請點選下方您想要預約的工作室：</div>
-      <div id="platformShopsList">載入中...</div>
-    </div>
   </div>
 
   <!-- 後台導覽與標題區 -->
@@ -163,19 +156,19 @@
     </div>
   </div>
 
-  <!-- 顧客預約端介面 -->
+  <!-- 🌟 歐姆系統質感顧客預約端介面 -->
   <div id="clientView" style="display: none;">
-    <div style="margin-bottom:12px;">
-      <button type="button" class="btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="backToPlatformHome()">‹ 返回工作室列表</button>
+    <div style="margin-bottom:14px;">
+      <button type="button" class="btn-secondary" style="padding:8px 14px; font-size:12px; border-radius:20px;" onclick="backToPlatformHome()">‹ 返回工作室列表</button>
     </div>
 
     <div id="stepNoticeView">
       <div class="card">
         <div class="card-title">🔍 查詢我的預約</div>
-        <div style="font-size: 12px; color: var(--text-sub); margin-bottom: 8px;">輸入預約時的手機號碼即可查詢</div>
+        <div style="font-size: 13px; color: var(--text-sub); margin-bottom: 10px;">輸入預約時的手機號碼即可查詢</div>
         <div style="display: flex; gap: 8px;">
           <input type="tel" id="searchPhoneInput" class="form-input" placeholder="請輸入手機號碼" autocomplete="off" style="flex:1;">
-          <button type="button" class="btn-submit" style="padding: 0 16px; border-radius: var(--radius-md); font-size: 13px;" onclick="clientSearchOrder()">查詢</button>
+          <button type="button" class="btn-submit" style="padding: 0 18px; border-radius: var(--radius-md); font-size: 13px;" onclick="clientSearchOrder()">查詢</button>
         </div>
         <div id="clientSearchResult" style="margin-top: 12px;"></div>
       </div>
@@ -185,38 +178,38 @@
         <div id="clientNoticesContainer"></div>
 
         <hr style="border: none; border-top: 1px solid var(--border-color); margin: 16px 0;">
-        <div id="clientShopContactInfo" style="font-size: 13px; line-height: 1.6; color: var(--text-main); margin-bottom: 14px;">
+        <div id="clientShopContactInfo" style="font-size: 13px; line-height: 1.7; color: var(--text-main); margin-bottom: 14px;">
           ✉ <a href="https://lin.ee/QSxJwfB" target="_blank" style="color: #06C755; font-weight: bold; text-decoration: none;">官方LINE諮詢 請點我</a><br>
           🅿️ <strong>汽/機車皆可停放門口</strong><br>
           ❌ <strong>個人工作室 不開放攜伴</strong><br>
           💰 <strong>支付方式：現金、轉帳</strong>
         </div>
 
-        <div style="margin-top: 16px; background: var(--input-bg); padding: 12px; border-radius: var(--radius-md);">
-          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-            <input type="checkbox" id="chkNoticeAgree" onchange="checkNoticeValid()" style="width: 18px; height: 18px; accent-color: var(--primary-color);">
+        <div style="margin-top: 16px; background: var(--input-bg); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+            <input type="checkbox" id="chkNoticeAgree" onchange="checkNoticeValid()" style="width: 20px; height: 20px; accent-color: var(--primary-color);">
             <span style="color: #D9534F; font-weight: bold; font-size: 13px;">我已詳細閱讀完畢，確認沒問題👌</span>
           </label>
         </div>
       </div>
       
       <div style="padding: 0 4px; margin-top: 16px;">
-        <button type="button" class="btn-submit" id="btnStepNoticeNext" style="width: 100%; padding: 14px; font-size: 15px; border-radius: var(--radius-md); opacity: 0.5; cursor: not-allowed;" onclick="goToStepService()">下一步：選擇服務項目</button>
+        <button type="button" class="btn-submit" id="btnStepNoticeNext" style="width: 100%; padding: 15px; font-size: 15px; border-radius: var(--radius-md); opacity: 0.5; cursor: not-allowed;" onclick="goToStepService()">下一步：選擇服務項目</button>
       </div>
     </div>
 
     <div id="stepBookingView" style="display: none;">
       <div style="margin-bottom: 12px;">
-        <button type="button" class="btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="backToNotice()">‹ 返回閱讀須知</button>
+        <button type="button" class="btn-secondary" style="padding: 8px 14px; font-size: 12px; border-radius: 20px;" onclick="backToNotice()">‹ 返回閱讀須知</button>
       </div>
 
       <div id="clientDynamicCategoriesContainer"></div>
 
       <div class="card" id="eyebrowBaseColorCard" style="display: none;">
         <div class="card-title">眉毛有無底色 <span style="color:#D9534F;">( 必填 )</span></div>
-        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-          <button type="button" class="btn-secondary" style="flex:1; padding:10px;" id="btnEyebrowNone" onclick="selectEyebrowBase('無')">無底色</button>
-          <button type="button" class="btn-secondary" style="flex:1; padding:10px;" id="btnEyebrowHas" onclick="selectEyebrowBase('有')">有底色</button>
+        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+          <button type="button" class="btn-secondary" style="flex:1; padding:12px;" id="btnEyebrowNone" onclick="selectEyebrowBase('無')">無底色</button>
+          <button type="button" class="btn-secondary" style="flex:1; padding:12px;" id="btnEyebrowHas" onclick="selectEyebrowBase('有')">有底色</button>
         </div>
         <div id="eyebrowColorInputWrap" style="display: none; margin-top: 8px;">
           <input type="text" id="eyebrowColorText" class="form-input" placeholder="請填寫眉毛現在什麼顏色" autocomplete="off" oninput="updateSummary()">
@@ -244,12 +237,12 @@
         <div class="card-title">選擇日期與時段</div>
         <div class="cal-header">
           <button type="button" class="cal-btn" onclick="changeMonth(-1)">‹</button>
-          <span id="calMonthTitle" style="font-weight: 700; font-size: 14px;"></span>
+          <span id="calMonthTitle" style="font-weight: 700; font-size: 15px; color: var(--primary-color);"></span>
           <button type="button" class="cal-btn" onclick="changeMonth(1)">›</button>
         </div>
         <div class="cal-grid" id="calGrid"></div>
         
-        <div style="margin-top: 16px; font-size: 13px; font-weight: 700;" id="selectedDateText">請選擇日期</div>
+        <div style="margin-top: 18px; font-size: 14px; font-weight: 700; color: var(--primary-color);" id="selectedDateText">請選擇日期</div>
         <div class="time-grid" id="timeGrid"></div>
       </div>
 
@@ -265,10 +258,10 @@
         </div>
         <div class="form-group">
           <label>門口可直接停車 請選擇交通方式 *</label>
-          <div style="display: flex; gap: 8px; margin-top: 4px;" id="transportGroup">
-            <button type="button" class="btn-secondary" style="flex:1; padding:10px;" id="trans_moto" onclick="selectTransport('機車')">🛵 機車</button>
-            <button type="button" class="btn-secondary" style="flex:1; padding:10px;" id="trans_car" onclick="selectTransport('汽車')">🚗 汽車</button>
-            <button type="button" class="btn-secondary" style="flex:1; padding:10px;" id="trans_none" onclick="selectTransport('不需停車')">🚫 不需停車</button>
+          <div style="display: flex; gap: 8px; margin-top: 6px;" id="transportGroup">
+            <button type="button" class="btn-secondary" style="flex:1; padding:12px;" id="trans_moto" onclick="selectTransport('機車')">🛵 機車</button>
+            <button type="button" class="btn-secondary" style="flex:1; padding:12px;" id="trans_car" onclick="selectTransport('汽車')">🚗 汽車</button>
+            <button type="button" class="btn-secondary" style="flex:1; padding:12px;" id="trans_none" onclick="selectTransport('不需停車')">🚫 不需停車</button>
           </div>
         </div>
         <div class="form-group">
@@ -288,7 +281,7 @@
     </div>
   </div>
 
-  <!-- 後台管理介面 -->
+  <!-- 後台管理介面 (承襲安你好強大完整功能) -->
   <div id="adminView" style="display: none;">
     <!-- 服務管理 -->
     <div id="adminTabServices" class="admin-tab-content">
@@ -449,10 +442,10 @@
 <!-- 店家登入 Modal -->
 <div class="modal-overlay" id="merchantLoginModal" onclick="checkModalClose(event, 'merchantLoginModal')">
   <div class="modal-content" onclick="event.stopPropagation()">
-    <h3 style="color: var(--primary-color); margin-bottom: 12px;">店家後台登入</h3>
+    <h3 style="color: var(--primary-color); margin-bottom: 14px;">店家後台登入</h3>
     <div class="form-group"><label>店家帳號 *</label><input type="text" id="loginUsername" class="form-input" autocomplete="off"></div>
     <div class="form-group"><label>密碼 *</label><input type="password" id="loginPassword" class="form-input"></div>
-    <div style="display: flex; gap: 8px; margin-top: 16px;">
+    <div style="display: flex; gap: 8px; margin-top: 18px;">
       <button type="button" class="btn-secondary" style="width: 40%; padding: 12px;" onclick="closeMerchantLoginModal()">取消</button>
       <button type="button" class="btn-submit" style="width: 60%; padding: 12px;" onclick="handleMerchantLogin()">登入工作台</button>
     </div>
@@ -652,7 +645,6 @@
     loadPlatformShops();
   }
 
-  // 1. 載入多店家列表 (歐姆平台首頁)
   async function loadPlatformShops() {
     let listEl = document.getElementById('platformShopsList');
     listEl.innerHTML = "<div style='color:var(--text-sub); font-size:13px; text-align:center;'>正在載入雲端合作店家...</div>";
@@ -678,10 +670,10 @@
       shops.forEach(s => {
         html += `<div class="shop-card" onclick="selectShop('${s.id}')">
           <div>
-            <div style="font-size:15px; font-weight:bold; color:var(--primary-color);">${escapeHtml(s.shopName || '未命名工作室')}</div>
-            <div style="font-size:12px; color:var(--text-sub); margin-top:2px;">點擊進入預約系統</div>
+            <div style="font-size:16px; font-weight:bold; color:var(--primary-color);">${escapeHtml(s.shopName || '未命名工作室')}</div>
+            <div style="font-size:12px; color:var(--text-sub); margin-top:3px;">點擊進入預約系統 ➔</div>
           </div>
-          <div style="color:var(--primary-color); font-weight:bold; font-size:14px;">›</div>
+          <div style="color:var(--primary-color); font-weight:bold; font-size:18px;">›</div>
         </div>`;
       });
       listEl.innerHTML = html;
@@ -717,11 +709,9 @@
     } catch(err) { console.error(err); }
   }
 
-  // 2. 選擇特定店家進入顧客預約端
   async function selectShop(shopId) {
     currentShopId = shopId;
     document.getElementById('platformHomeView').style.display = 'none';
-    document.getElementById('oomuPlatformNav').style.display = 'none';
     document.getElementById('headerClickArea').style.display = 'block';
     document.getElementById('clientView').style.display = 'block';
     
@@ -738,7 +728,6 @@
     document.getElementById('adminHeader').style.display = 'none';
     document.getElementById('headerClickArea').style.display = 'none';
     document.getElementById('platformHomeView').style.display = 'block';
-    document.getElementById('oomuPlatformNav').style.display = 'flex';
     loadPlatformShops();
   }
 
@@ -776,7 +765,6 @@
       db = { ...defaultDb, ...shopObj };
       closeMerchantLoginModal();
       document.getElementById('platformHomeView').style.display = 'none';
-      document.getElementById('oomuPlatformNav').style.display = 'none';
       document.getElementById('headerClickArea').style.display = 'none';
       switchView('admin');
     } catch(e) {
@@ -866,7 +854,6 @@
     document.getElementById('adminView').style.display = view === 'admin' ? 'block' : 'none';
     document.getElementById('adminHeader').style.display = view === 'admin' ? 'block' : 'none';
     document.getElementById('platformHomeView').style.display = 'none';
-    document.getElementById('oomuPlatformNav').style.display = 'none';
     if(view === 'admin') document.getElementById('headerClickArea').style.display = 'none';
     else document.getElementById('headerClickArea').style.display = 'block';
 
@@ -1034,9 +1021,9 @@
     let btnHas = document.getElementById('btnEyebrowHas');
     let inputWrap = document.getElementById('eyebrowColorInputWrap');
 
-    btnNone.style.background = mode === '無' ? 'var(--primary-color)' : '#EFE8DF';
+    btnNone.style.background = mode === '無' ? 'var(--primary-color)' : '#EFECE6';
     btnNone.style.color = mode === '無' ? '#fff' : 'var(--primary-color)';
-    btnHas.style.background = mode === '有' ? 'var(--primary-color)' : '#EFE8DF';
+    btnHas.style.background = mode === '有' ? 'var(--primary-color)' : '#EFECE6';
     btnHas.style.color = mode === '有' ? '#fff' : 'var(--primary-color)';
 
     inputWrap.style.display = mode === '有' ? 'block' : 'none';
@@ -1048,7 +1035,7 @@
     selectedTransportMode = mode;
     ['機車', '汽車', '不需停車'].forEach(m => {
       let btn = document.getElementById(m === '機車' ? 'trans_moto' : (m === '汽車' ? 'trans_car' : 'trans_none'));
-      btn.style.background = m === mode ? 'var(--primary-color)' : '#EFE8DF';
+      btn.style.background = m === mode ? 'var(--primary-color)' : '#EFECE6';
       btn.style.color = m === mode ? '#fff' : 'var(--primary-color)';
       btn.style.borderColor = m === mode ? 'var(--primary-color)' : 'var(--border-color)';
     });
@@ -1719,7 +1706,7 @@
         let statusBadge = '';
         if(currentStatus === 'success') statusBadge = '<span style="color:#28a745; font-weight:bold;">[成功服務]</span>';
         else if(currentStatus === 'noshow') statusBadge = '<span style="color:#D9534F; font-weight:bold;">[如期未到]</span>';
-        else statusBadge = '<span style="color:#8C7C73;">[待處理]</span>';
+        else statusBadge = '<span style="color:#7A6B63;">[待處理]</span>';
 
         let hasPending = !!editData;
 
@@ -1769,7 +1756,7 @@
       ordersList.forEach((o, idx) => {
         let isUnread = !o.isRead;
         let cardBg = isUnread ? "#FFF8F2" : "#FFFFFF";
-        let cardBorder = isUnread ? "2px solid #E28670" : "1px solid var(--border-color)";
+        let cardBorder = isUnread ? "2px solid #D9534F" : "1px solid var(--border-color)";
 
         let isBl = (db.blacklist || []).includes(o.phone);
         let blWarning = isBl ? `<div style="color:#D9534F; font-weight:bold; background:#FDECEA; padding:4px; border-radius:4px; margin-top:4px;">⚠️ 警告：${escapeHtml(o.name)} 為黑名單，系統已阻擋預約功能</div>` : '';
@@ -1777,7 +1764,7 @@
         html += `<div style="border:${cardBorder}; padding:12px; border-radius:12px; margin-bottom:10px; font-size:13px; line-height:1.5; background:${cardBg};">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
             <span style="font-weight:bold; font-size:14px; color:var(--primary-color);">${o.date} ${o.time} ${isUnread?'<span style="color:#D9534F; font-size:11px;">[新預約!]</span>':''}</span>
-            <label style="font-size:12px; cursor:pointer; color:var(--primary-color); font-weight:bold; display:flex; align-items:center; gap:4px; background:#EFE8DF; padding:3px 8px; border-radius:6px;">
+            <label style="font-size:12px; cursor:pointer; color:var(--primary-color); font-weight:bold; display:flex; align-items:center; gap:4px; background:#EFECE6; padding:3px 8px; border-radius:6px;">
               <input type="checkbox" ${o.isRead ? 'checked' : ''} onchange="toggleOrderRead(${idx})"> 已閱
             </label>
           </div>
