@@ -59,7 +59,7 @@
         }
 
         .nav-container {
-            max-width: 900px;
+            max-width: 750px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -153,7 +153,7 @@
 
         main {
             flex: 1;
-            max-width: 900px;
+            max-width: 750px;
             width: 100%;
             margin: 0 auto;
             padding: 1.5rem 1rem;
@@ -263,27 +263,6 @@
             padding-right: 65px;
         }
 
-        .shop-meta {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.6rem;
-        }
-
-        .tag-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-bottom: 0.9rem;
-        }
-
-        .tag {
-            background: var(--bg-sand);
-            color: var(--primary-dark);
-            font-size: 0.78rem;
-            padding: 3px 8px;
-            border-radius: 8px;
-        }
-
         .card-panel {
             background: var(--bg-card);
             border: 1px solid var(--border-soft);
@@ -293,7 +272,7 @@
             width: 100%;
         }
 
-        /* 圖片一風格的分類與服務項目卡片 */
+        /* 安你好風格的服務分類卡片 */
         .category-block {
             border: 1.5px solid var(--border-soft);
             border-radius: 16px;
@@ -303,7 +282,7 @@
         }
 
         .category-header {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--primary-dark);
             margin-bottom: 0.8rem;
@@ -316,7 +295,7 @@
 
         .service-item-card {
             border: 1.5px solid var(--border-soft);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 1rem;
             margin-bottom: 0.7rem;
             background: var(--bg-card);
@@ -336,14 +315,14 @@
             background-color: var(--bg-sand);
         }
 
-        /* 日曆與時段（精緻適中比例） */
+        /* 日曆與時段（完美比例） */
         .calendar-box {
             background: var(--bg-card);
             border: 1.5px solid var(--border-soft);
             border-radius: 16px;
             padding: 1.2rem;
             margin-bottom: 1.2rem;
-            max-width: 450px;
+            max-width: 420px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -398,19 +377,19 @@
 
         .time-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 0.6rem;
+            grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+            gap: 0.5rem;
             margin-top: 0.8rem;
         }
 
         .time-slot {
-            padding: 0.5rem;
+            padding: 0.45rem;
             text-align: center;
             border: 1.5px solid var(--border-soft);
             border-radius: 10px;
             background: var(--bg-card);
             cursor: pointer;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
         }
 
         .time-slot.selected {
@@ -478,7 +457,7 @@
             background: var(--bg-card);
             border-radius: 20px;
             padding: 1.8rem;
-            max-width: 440px;
+            max-width: 420px;
             width: 100%;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             position: relative;
@@ -569,10 +548,10 @@
                     <div class="cal-grid" id="booking-cal-days"></div>
                 </div>
                 <div style="font-size: 0.9rem; color: var(--primary-dark); margin-bottom: 0.5rem; font-weight: 500; text-align: center;" id="booking-selected-date-label">請點選上方月曆日期</div>
-                <div id="time-slots-container" class="time-grid" style="max-width: 450px; margin: 0 auto;"></div>
+                <div id="time-slots-container" class="time-grid" style="max-width: 420px; margin: 0 auto;"></div>
             </div>
 
-            <!-- 步驟 4：定金與確認（對應圖片七三格規範） -->
+            <!-- 步驟 4：定金與確認（精準三格規範） -->
             <div class="card-panel">
                 <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">步驟 4：定金匯款與確認</h3>
                 <div class="summary-box">
@@ -841,9 +820,9 @@
                         <span class="badge-featured">雲端試用中</span>
                         <div>
                             <div class="shop-title">${shop.shopName || '未命名工作室'}</div>
-                            <div class="tag-list" style="margin-top: 0.5rem;">
-                                <span class="tag">美業預約</span>
-                                <span class="tag">線上訂金</span>
+                            <div class="tag-list" style="margin-top: 0.5rem; display: flex; gap: 0.4rem;">
+                                <span class="tag" style="background: var(--bg-sand); font-size: 0.78rem; padding: 3px 8px; border-radius: 8px;">美業預約</span>
+                                <span class="tag" style="background: var(--bg-sand); font-size: 0.78rem; padding: 3px 8px; border-radius: 8px;">線上訂金</span>
                             </div>
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 0.8rem; margin-top: 1rem; color: var(--primary-coffee); font-size: 0.9rem; font-weight: bold;">
@@ -897,8 +876,8 @@
                 const newShopData = {
                     shopId,
                     shopName,
-                    phone,
-                    email,
+                    phone: phone || "",
+                    email: email || "",
                     username,
                     password,
                     registerDate,
@@ -984,7 +963,7 @@
             btn.classList.add('active');
         }
 
-        // 後台渲染分類與項目（支援上下移動與編輯）
+        // 後台渲染分類與項目（支援上下移動與編輯、絕不產生 undefined）
         function renderMerchantCategories() {
             const container = document.getElementById('merchant-categories-list');
             const cats = currentLoggedInMerchant.categories || [];
@@ -997,7 +976,7 @@
                 <div class="category-block">
                     <div class="category-header">
                         <span>📁 ${cat.name}</span>
-                        <div style="display: flex; gap: 0.4rem;">
+                        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
                             ${cIdx > 0 ? `<button class="btn-soft btn-sm" onclick="moveCategory(${cIdx}, -1)">⬆️</button>` : ''}
                             ${cIdx < cats.length - 1 ? `<button class="btn-soft btn-sm" onclick="moveCategory(${cIdx}, 1)">⬇️</button>` : ''}
                             <button class="btn-soft btn-sm" onclick="openEditCategoryModal(${cIdx})">✏️ 編輯分類</button>
@@ -1007,7 +986,7 @@
                     </div>
                     <div>
                         ${(cat.items || []).map((item, iIdx) => `
-                            <div style="background: var(--bg-card); border: 1px solid var(--border-soft); padding: 0.8rem; border-radius: 10px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="background: var(--bg-card); border: 1px solid var(--border-soft); padding: 0.8rem; border-radius: 10px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
                                 <div>
                                     <strong>${item.name}</strong> <span style="color: var(--primary-coffee); font-weight: bold;">NT$ ${item.price}</span>
                                     <div style="font-size: 0.8rem; color: var(--text-muted);">${item.desc || ''} | 時間約 ${item.duration} 分鐘 | 定金 $${item.deposit}</div>
@@ -1025,22 +1004,31 @@
             `).join('');
         }
 
+        // 嚴格防範 undefined 的雲端同步函式
         async function saveShopCloud() {
             try {
+                if (!currentLoggedInMerchant || !currentLoggedInMerchant.id) return;
+
+                const shopName = currentLoggedInMerchant.shopName || "";
+                const bankCode = currentLoggedInMerchant.bankCode || "";
+                const bankAcc = currentLoggedInMerchant.bankAcc || "";
+                const bankName = currentLoggedInMerchant.bankName || "";
+                const announcement = currentLoggedInMerchant.announcement || "";
+                const categories = currentLoggedInMerchant.categories || [];
+
                 await window.updateDoc(window.doc(window.db, "shops", currentLoggedInMerchant.id), {
-                    shopName: currentLoggedInMerchant.shopName,
-                    bankCode: currentLoggedInMerchant.bankCode,
-                    bankAcc: currentLoggedInMerchant.bankAcc,
-                    bankName: currentLoggedInMerchant.bankName,
-                    announcement: currentLoggedInMerchant.announcement,
-                    categories: currentLoggedInMerchant.categories
+                    shopName,
+                    bankCode,
+                    bankAcc,
+                    bankName,
+                    announcement,
+                    categories
                 });
             } catch (e) {
                 alert("雲端同步失敗：" + e.message);
             }
         }
 
-        // 分類與項目順序移動與編輯邏輯
         async function moveCategory(idx, direction) {
             const cats = currentLoggedInMerchant.categories;
             const target = idx + direction;
@@ -1061,10 +1049,10 @@
             document.getElementById('edit-modal-title').innerText = "新增服務分類";
             document.getElementById('edit-modal-body').innerHTML = `
                 <div class="form-group" style="margin-bottom: 1rem;">
-                    <label class="form-label">分類名稱</label>
+                    <label class="form-label" style="display:block; margin-bottom:0.4rem; font-weight:500;">分類名稱</label>
                     <input type="text" id="modal-cat-name" placeholder="例：睫毛變漂漂*9ᵉ°">
                 </div>
-                <button class="btn-primary" style="width: 100%;" onclick="confirmAddCategory()">確認新增</button>
+                <button class="btn-primary" style="width: 100%; padding:0.7rem;" onclick="confirmAddCategory()">確認新增</button>
             `;
             document.getElementById('edit-modal').classList.add('active');
         }
@@ -1084,10 +1072,10 @@
             document.getElementById('edit-modal-title').innerText = "編輯分類名稱";
             document.getElementById('edit-modal-body').innerHTML = `
                 <div class="form-group" style="margin-bottom: 1rem;">
-                    <label class="form-label">分類名稱</label>
+                    <label class="form-label" style="display:block; margin-bottom:0.4rem; font-weight:500;">分類名稱</label>
                     <input type="text" id="modal-cat-name" value="${cat.name}">
                 </div>
-                <button class="btn-primary" style="width: 100%;" onclick="confirmEditCategory(${cIdx})">儲存修改</button>
+                <button class="btn-primary" style="width: 100%; padding:0.7rem;" onclick="confirmEditCategory(${cIdx})">儲存修改</button>
             `;
             document.getElementById('edit-modal').classList.add('active');
         }
@@ -1112,14 +1100,14 @@
         function openAddItemModal(cIdx) {
             document.getElementById('edit-modal-title').innerText = "新增服務項目";
             document.getElementById('edit-modal-body').innerHTML = `
-                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label">項目名稱</label><input type="text" id="m-item-name"></div>
-                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label">項目敘述</label><textarea id="m-item-desc" rows="2"></textarea></div>
+                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">項目名稱</label><input type="text" id="m-item-name"></div>
+                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">項目敘述</label><textarea id="m-item-desc" rows="2"></textarea></div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.6rem;">
-                    <div><label class="form-label">價格 (NT$)</label><input type="number" id="m-item-price"></div>
-                    <div><label class="form-label">定金 (NT$)</label><input type="number" id="m-item-deposit"></div>
+                    <div><label class="form-label" style="display:block; margin-bottom:0.3rem;">價格 (NT$)</label><input type="number" id="m-item-price"></div>
+                    <div><label class="form-label" style="display:block; margin-bottom:0.3rem;">定金 (NT$)</label><input type="number" id="m-item-deposit"></div>
                 </div>
-                <div class="form-group" style="margin-bottom: 1rem;"><label class="form-label">施作時間 (分鐘)</label><input type="number" id="m-item-dur" value="120"></div>
-                <button class="btn-primary" style="width: 100%;" onclick="confirmAddItem(${cIdx})">確認新增項目</button>
+                <div class="form-group" style="margin-bottom: 1rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">施作時間 (分鐘)</label><input type="number" id="m-item-dur" value="120"></div>
+                <button class="btn-primary" style="width: 100%; padding:0.7rem;" onclick="confirmAddItem(${cIdx})">確認新增項目</button>
             `;
             document.getElementById('edit-modal').classList.add('active');
         }
@@ -1142,14 +1130,14 @@
             const item = currentLoggedInMerchant.categories[cIdx].items[iIdx];
             document.getElementById('edit-modal-title').innerText = "編輯服務項目";
             document.getElementById('edit-modal-body').innerHTML = `
-                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label">項目名稱</label><input type="text" id="m-item-name" value="${item.name}"></div>
-                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label">項目敘述</label><textarea id="m-item-desc" rows="2">${item.desc || ''}</textarea></div>
+                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">項目名稱</label><input type="text" id="m-item-name" value="${item.name}"></div>
+                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">項目敘述</label><textarea id="m-item-desc" rows="2">${item.desc || ''}</textarea></div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.6rem;">
-                    <div><label class="form-label">價格 (NT$)</label><input type="number" id="m-item-price" value="${item.price}"></div>
-                    <div><label class="form-label">定金 (NT$)</label><input type="number" id="m-item-deposit" value="${item.deposit}"></div>
+                    <div><label class="form-label" style="display:block; margin-bottom:0.3rem;">價格 (NT$)</label><input type="number" id="m-item-price" value="${item.price}"></div>
+                    <div><label class="form-label" style="display:block; margin-bottom:0.3rem;">定金 (NT$)</label><input type="number" id="m-item-deposit" value="${item.deposit}"></div>
                 </div>
-                <div class="form-group" style="margin-bottom: 1rem;"><label class="form-label">施作時間 (分鐘)</label><input type="number" id="m-item-dur" value="${item.duration || 120}"></div>
-                <button class="btn-primary" style="width: 100%;" onclick="confirmEditItem(${cIdx}, ${iIdx})">儲存修改</button>
+                <div class="form-group" style="margin-bottom: 1rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">施作時間 (分鐘)</label><input type="number" id="m-item-dur" value="${item.duration || 120}"></div>
+                <button class="btn-primary" style="width: 100%; padding:0.7rem;" onclick="confirmEditItem(${cIdx}, ${iIdx})">儲存修改</button>
             `;
             document.getElementById('edit-modal').classList.add('active');
         }
@@ -1191,7 +1179,7 @@
             alert("全部設定儲存成功！");
         }
 
-        // 顧客預約頁面渲染 (類似圖片一風格)
+        // 顧客預約頁面渲染
         async function enterShopBooking(shopId) {
             currentViewingShopId = shopId;
             switchView('booking-view');
@@ -1208,19 +1196,16 @@
                 }
                 const shop = docSnap.data();
                 
-                // 不顯示負責人，僅顯示店名與公告
                 header.innerHTML = `
                     <h2 style="color: var(--primary-dark); font-size: 1.4rem; font-weight: 700; margin-bottom: 0.2rem;">${shop.shopName}</h2>
                     <p style="font-size: 0.85rem; color: var(--text-muted);">線上預約系統</p>
                 `;
 
-                // 填入匯款資訊到步驟四
                 document.getElementById('display-rule-box').innerText = shop.announcement || '暫無匯款規則';
                 document.getElementById('disp-bank-code').innerText = shop.bankCode || '812';
                 document.getElementById('disp-bank-acc').innerText = shop.bankAcc || '28881024671561';
                 document.getElementById('disp-bank-name').innerText = shop.bankName || shop.shopName;
 
-                // 渲染分類與項目 (圖片一風格)
                 const catContainer = document.getElementById('booking-categories-container');
                 const cats = shop.categories || [];
                 catContainer.innerHTML = cats.map(cat => `
@@ -1256,10 +1241,8 @@
             const card = document.getElementById(`item-card-${id}`);
             card.classList.toggle('selected');
             
-            // 簡易選取邏輯
             selectedServices = [{ id, name, price, deposit, duration }];
             
-            // 更新下方總金額
             document.getElementById('sum-total').innerText = `NT$ ${price}`;
             document.getElementById('sum-deposit').innerText = `NT$ ${deposit}`;
             document.getElementById('sum-duration').innerText = `${duration} 分鐘`;
