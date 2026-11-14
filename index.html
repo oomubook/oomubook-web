@@ -1,1346 +1,2077 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>OomuBook 輕約美業平台｜尋找最適合妳的美學職人</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        @font-face {
-            font-family: 'jf-openhuninn';
-            src: url('https://cdn.jsdelivr.net/gh/justfont/open-huninn-font@master/font/jf-openhuninn-2.0.ttf') format('truetype');
-            font-display: swap;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>OomuBook 輕約美業平台｜尋找最適合妳的美學職人</title>
+  
+  <!-- LINE / 社群分享預覽小字與標題設定 -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OomuBook 輕約美業平台">
+  <meta property="og:description" content="嚴選個人美學工作室｜透明價目・即時防撞時段・安心線上預約">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="OomuBook 輕約美業平台">
+  <meta name="twitter:description" content="嚴選個人美學工作室｜透明價目・即時防撞時段・安心線上預約">
 
-        :root {
-            --bg-cream: #FAF6F0;
-            --bg-card: #FFFFFF;
-            --bg-sand: #F2EAE1;
-            --primary-coffee: #8C6D53;
-            --primary-dark: #5C4533;
-            --accent-latte: #C7A88C;
-            --text-main: #4A3B32;
-            --text-muted: #8A796D;
-            --border-soft: #E6DDD3;
-            --danger-red: #D9534F;
-            --success-green: #4E9A51;
-            --font-main: 'jf-openhuninn', 'Noto Sans TC', sans-serif;
-        }
+  <!-- 引入 Google Fonts 圓體 (M PLUS Rounded 1c) 與 Noto Sans TC -->
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #FBF8F3;
+      --card-bg: #FFFFFF;
+      --text-main: #3D2E24;
+      --text-sub: #8C7C73;
+      --primary-color: #4A3B32;
+      --border-color: #EFE8DF;
+      --input-bg: #FAF6F0;
+      --radius-lg: 20px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 15px rgba(74, 59, 50, 0.05);
+    }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      font-family: "M PLUS Rounded 1c", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+      -webkit-tap-highlight-color: transparent; 
+      touch-action: manipulation;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+    body { background-color: var(--bg-main); color: var(--text-main); display: flex; justify-content: center; min-height: 100vh; padding: 12px; }
+    .app-container { width: 100%; max-width: 480px; background: var(--bg-main); min-height: 100vh; position: relative; padding-bottom: 90px; }
+    
+    /* 頂部導覽列與平台首頁樣式 */
+    .platform-header { background: #fff; border-bottom: 1px solid var(--border-color); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-radius: var(--radius-md); margin-bottom: 12px; box-shadow: var(--shadow); }
+    .brand-logo { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; color: var(--primary-color); }
+    .logo-icon { background-color: var(--primary-color); color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
+    
+    .header { text-align: center; padding: 15px 0 10px; cursor: pointer; user-select: none; }
+    .header h1 { font-size: 22px; color: var(--primary-color); letter-spacing: 2px; font-weight: 700; }
+    .header p { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
+    .card { background: var(--card-bg); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow); border: 1px solid var(--border-color); }
+    .card-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--primary-color); display: flex; justify-content: space-between; align-items: center; }
+    
+    .shop-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 10px; cursor: pointer; transition: transform 0.15s; }
+    .shop-card:hover { transform: translateY(-2px); border-color: var(--primary-color); }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: var(--font-main);
-            max-width: 100%;
-        }
+    .item-option { display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 8px; cursor: pointer; background-color: #fff; }
+    .item-option.selected { border-color: var(--primary-color); background-color: #F4EBE1; }
+    .item-info { flex: 1; padding-right: 12px; min-width: 0; }
+    .item-info .title { font-size: 14px; font-weight: 700; word-break: break-all; }
+    .item-info .desc { font-size: 12px; color: var(--text-sub); margin-top: 2px; word-break: break-all; }
+    .item-info .subtitle { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+    .item-price { font-weight: 700; color: var(--primary-color); font-size: 14px; white-space: nowrap; text-align: right; }
+    
+    .cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .cal-btn { background: none; border: none; font-size: 16px; color: var(--primary-color); cursor: pointer; padding: 4px 8px; font-weight: bold; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; font-size: 13px; }
+    .cal-day-label { font-weight: 700; color: var(--text-sub); padding-bottom: 6px; }
+    .cal-day { padding: 10px 0; border-radius: var(--radius-sm); border: 1px solid transparent; cursor: pointer; background: var(--input-bg); }
+    .cal-day.empty { background: transparent; cursor: default; }
+    .cal-day.selected { background: var(--primary-color); color: #fff; font-weight: 700; }
+    .cal-day.disabled { opacity: 0.3; cursor: not-allowed; }
+    
+    .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+    .time-btn { padding: 10px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); background: #fff; text-align: center; font-size: 13px; cursor: pointer; color: var(--text-main); position: relative; }
+    .time-btn.selected { border-color: var(--primary-color); background: var(--primary-color); color: #fff; }
+    .time-btn.booked { background: #f2ede4; color: #8c7c73; border-color: #dcd6ce; cursor: pointer; font-size: 12px; font-weight: 500; }
 
-        body {
-            background-color: var(--bg-cream);
-            color: var(--text-main);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 12px; color: var(--text-sub); margin-bottom: 4px; font-weight: 500; }
+    .form-input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--input-bg); font-size: 14px; outline: none; }
+    .form-input:focus { border-color: var(--primary-color); background: var(--input-bg); }
 
-        header {
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--border-soft);
-            padding: 0.9rem 1.2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(92, 69, 51, 0.04);
-            width: 100%;
-        }
+    .bottom-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; z-index: 100; box-shadow: 0 -4px 15px rgba(0,0,0,0.05); }
+    .price-summary { font-size: 12px; color: var(--text-sub); }
+    .price-summary .total { font-size: 16px; font-weight: 700; color: var(--primary-color); }
+    .btn-submit { background: var(--primary-color); color: #fff; border: none; padding: 12px 24px; border-radius: 30px; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .btn-submit:active { opacity: 0.8; }
 
-        .nav-container {
-            max-width: 750px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
+    .admin-bar { background: var(--primary-color); color: #fff; padding: 10px 16px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .admin-tab-group { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 16px; }
+    .admin-tab { padding: 8px 12px; background: #fff; border: 1px solid var(--border-color); border-radius: 20px; font-size: 11px; white-space: nowrap; cursor: pointer; position: relative; font-weight: 500; color: var(--primary-color); }
+    .admin-tab.active { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+    .badge-unread { position: absolute; top: -4px; right: -4px; background: #D9534F; color: #fff; font-size: 10px; font-weight: bold; border-radius: 10px; padding: 2px 5px; min-width: 16px; text-align: center; }
 
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            text-decoration: none;
-            color: var(--primary-dark);
-            cursor: pointer;
-        }
+    .btn-danger { background: #D9534F; color: white; border: none; padding: 5px 8px; border-radius: var(--radius-sm); font-size: 11px; cursor: pointer; }
+    .btn-secondary { background: #EFE8DF; color: var(--primary-color); border: none; padding: 6px 10px; border-radius: var(--radius-md); font-size: 11px; cursor: pointer; }
 
-        .logo-icon {
-            background-color: var(--primary-coffee);
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
+    .notice-accordion { border: 1.5px solid var(--border-color); border-radius: var(--radius-md); margin-bottom: 10px; overflow: hidden; background: #fff; }
+    .notice-header { padding: 14px; font-size: 14px; font-weight: 700; color: var(--primary-color); display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: #FAF6F0; }
+    .notice-body { padding: 14px; font-size: 13px; line-height: 1.6; display: none; border-top: 1px solid var(--border-color); }
 
-        .brand-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-        }
-
-        .brand-sub {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            background: var(--bg-sand);
-            padding: 2px 8px;
-            border-radius: 20px;
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 0.65rem;
-        }
-
-        button {
-            cursor: pointer;
-            border: none;
-            border-radius: 10px;
-            padding: 0.55rem 1rem;
-            font-size: 0.92rem;
-            transition: all 0.2s ease;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-coffee);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 1.5px solid var(--primary-coffee);
-            color: var(--primary-coffee);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--bg-sand);
-        }
-
-        .btn-soft {
-            background-color: var(--bg-sand);
-            color: var(--primary-dark);
-        }
-
-        .btn-soft:hover {
-            background-color: var(--border-soft);
-        }
-
-        .btn-sm {
-            padding: 0.35rem 0.75rem;
-            font-size: 0.82rem;
-            border-radius: 8px;
-        }
-
-        main {
-            flex: 1;
-            max-width: 750px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 1.5rem 1rem;
-        }
-
-        .view-section {
-            display: none;
-            animation: fadeIn 0.25s ease;
-            width: 100%;
-        }
-
-        .view-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        select, input[type="text"], input[type="tel"], input[type="date"], input[type="time"], input[type="number"], input[type="password"], textarea {
-            padding: 0.65rem 0.9rem;
-            border: 1.5px solid var(--border-soft);
-            border-radius: 12px;
-            background-color: var(--bg-cream);
-            color: var(--text-main);
-            font-size: 0.92rem;
-            outline: none;
-            width: 100%;
-        }
-
-        select:focus, input:focus, textarea:focus {
-            border-color: var(--primary-coffee);
-            background-color: #FFF;
-        }
-
-        .hero-box {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 20px;
-            padding: 1.8rem 1.2rem;
-            text-align: center;
-            margin-bottom: 1.8rem;
-            box-shadow: 0 4px 15px rgba(92, 69, 51, 0.03);
-        }
-
-        .hero-box h1 {
-            color: var(--primary-dark);
-            font-size: 1.55rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .hero-box p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .section-heading {
-            font-size: 1.15rem;
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .shop-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.2rem;
-        }
-
-        .shop-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 18px;
-            padding: 1.3rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-        }
-
-        .shop-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(92, 69, 51, 0.08);
-        }
-
-        .badge-featured {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            background: var(--primary-coffee);
-            color: white;
-            font-size: 0.75rem;
-            padding: 3px 10px;
-            border-radius: 20px;
-        }
-
-        .shop-title {
-            font-size: 1.15rem;
-            color: var(--primary-dark);
-            margin-bottom: 0.3rem;
-            padding-right: 65px;
-        }
-
-        .card-panel {
-            background: var(--bg-card);
-            border: 1px solid var(--border-soft);
-            border-radius: 18px;
-            padding: 1.4rem;
-            margin-bottom: 1.3rem;
-            width: 100%;
-        }
-
-        /* 安你好風格的服務分類卡片 */
-        .category-block {
-            border: 1.5px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 1.2rem;
-            margin-bottom: 1.2rem;
-            background: #FFF;
-        }
-
-        .category-header {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            margin-bottom: 0.8rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px dashed var(--accent-latte);
-            padding-bottom: 0.5rem;
-        }
-
-        .service-item-card {
-            border: 1.5px solid var(--border-soft);
-            border-radius: 14px;
-            padding: 1rem;
-            margin-bottom: 0.7rem;
-            background: var(--bg-card);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.15s;
-        }
-
-        .service-item-card:hover {
-            border-color: var(--primary-coffee);
-        }
-
-        .service-item-card.selected {
-            border-color: var(--primary-coffee);
-            background-color: var(--bg-sand);
-        }
-
-        /* 日曆與時段（完美比例） */
-        .calendar-box {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-soft);
-            border-radius: 16px;
-            padding: 1.2rem;
-            margin-bottom: 1.2rem;
-            max-width: 420px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            font-size: 1.05rem;
-        }
-
-        .cal-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 6px;
-            text-align: center;
-        }
-
-        .cal-week-name {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            padding-bottom: 4px;
-        }
-
-        .cal-day {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background: var(--bg-cream);
-            border: 1px solid var(--border-soft);
-            font-size: 0.88rem;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.15s;
-        }
-
-        .cal-day:hover {
-            background: var(--bg-sand);
-        }
-
-        .cal-day.selected {
-            background: var(--primary-dark) !important;
-            color: white !important;
-            border-color: var(--primary-dark) !important;
-            font-weight: bold;
-        }
-
-        .time-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
-            gap: 0.5rem;
-            margin-top: 0.8rem;
-        }
-
-        .time-slot {
-            padding: 0.45rem;
-            text-align: center;
-            border: 1.5px solid var(--border-soft);
-            border-radius: 10px;
-            background: var(--bg-card);
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-
-        .time-slot.selected {
-            background: var(--primary-coffee);
-            color: white;
-            border-color: var(--primary-coffee);
-        }
-
-        .summary-box {
-            background: var(--bg-sand);
-            border-radius: 14px;
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-        }
-
-        .merchant-tabs {
-            display: flex;
-            gap: 0.4rem;
-            margin-bottom: 1.2rem;
-            overflow-x: auto;
-            padding-bottom: 4px;
-        }
-
-        .m-tab-btn {
-            background: var(--bg-card);
-            border: 1.5px solid var(--border-soft);
-            color: var(--text-muted);
-            padding: 0.55rem 0.95rem;
-            border-radius: 12px;
-            font-weight: 500;
-            white-space: nowrap;
-            font-size: 0.88rem;
-        }
-
-        .m-tab-btn.active {
-            background: var(--primary-coffee);
-            color: white;
-            border-color: var(--primary-coffee);
-        }
-
-        .m-tab-content {
-            display: none;
-        }
-
-        .m-tab-content.active {
-            display: block;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(74, 59, 50, 0.45);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            padding: 1rem;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 1.8rem;
-            max-width: 420px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem 1rem;
-            color: var(--text-muted);
-            font-size: 0.82rem;
-            border-top: 1px solid var(--border-soft);
-            margin-top: 3rem;
-        }
-    </style>
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 16px; }
+    .modal-overlay.active { display: flex; }
+    .modal-content { background: #fff; border-radius: var(--radius-lg); padding: 20px; width: 100%; max-width: 400px; max-height: 90vh; overflow-y: auto; z-index: 10000; }
+  </style>
 </head>
 <body>
 
-    <!-- 頂部導覽列 -->
-    <header>
-        <div class="nav-container">
-            <div class="brand-logo" onclick="switchView('home-view')">
-                <div class="logo-icon">Oo</div>
-                <div>
-                    <div class="brand-title">OomuBook</div>
-                </div>
-                <span class="brand-sub">輕約美業平台</span>
-            </div>
-            <div class="nav-actions">
-                <button class="btn-outline" onclick="openMerchantLoginModal()">店家登入</button>
-                <button class="btn-primary" onclick="switchView('home-view')">顧客進入</button>
-            </div>
-        </div>
-    </header>
+<div class="app-container">
+  <!-- 平台頂部導覽 -->
+  <div class="platform-header">
+    <div class="brand-logo" onclick="backToPlatformHome()">
+      <div class="logo-icon">Oo</div>
+      <div><strong>OomuBook</strong> <span style="font-size:11px; color:var(--text-sub);">美業平台</span></div>
+    </div>
+    <div style="display:flex; gap:6px;">
+      <button type="button" class="btn-secondary" style="font-size:11px; padding:6px 10px;" onclick="openMerchantLoginModal()">店家登入</button>
+    </div>
+  </div>
 
-    <main>
-        <!-- ================= 1. 消費者首頁 ================= -->
-        <section id="home-view" class="view-section active">
-            <div class="hero-box">
-                <h1>預約屬於妳的日常微光 ✨</h1>
-                <p>嚴選個人美學工作室｜透明價目・即時防撞時段・安心線上預約</p>
-            </div>
+  <div class="header" id="headerClickArea">
+    <h1 id="shopTitle">OomuBook 輕約美業平台</h1>
+    <p id="shopSubTitle">嚴選個人美學工作室｜線上預約系統</p>
+  </div>
 
-            <div class="section-heading">
-                <span>精選美學工作室</span>
-                <span id="shop-count-label" style="font-size: 0.85rem; color: var(--text-muted);">載入雲端店家清單中...</span>
-            </div>
-            <div id="shop-grid" class="shop-grid"></div>
-        </section>
+  <!-- 平台首頁：店家列表檢視 -->
+  <div id="platformHomeView">
+    <div class="card">
+      <div class="card-title">✨ 合作美學工作室列表</div>
+      <div style="font-size:12px; color:var(--text-sub); margin-bottom:12px;">請選擇您想預約的工作室：</div>
+      <div id="platformShopsList">載入中...</div>
+    </div>
+  </div>
 
-        <!-- ================= 2. 獨立店家預約頁面 ================= -->
-        <section id="booking-view" class="view-section">
-            <button class="btn-soft" style="margin-bottom: 1rem;" onclick="switchView('home-view')">← 返回工作室列表</button>
-            
-            <div class="card-panel" id="booking-shop-header" style="text-align: center;"></div>
+  <div id="adminHeader" style="display: none;">
+    <div class="admin-bar">
+      <span>👑 <span id="currentAdminShopName">店家工作台</span> <button type="button" class="btn-secondary" onclick="requestPushPermission()" style="margin-left:6px; font-size:10px;">🔔 開啟推播</button></span>
+      <button type="button" class="btn-secondary" onclick="switchView('client')">👁️ 預覽顧客頁面</button>
+    </div>
+    <div class="admin-tab-group">
+      <div class="admin-tab active" onclick="switchAdminTab('services', event)">服務項目</div>
+      <div class="admin-tab" onclick="switchAdminTab('schedule', event)">時段</div>
+      <div class="admin-tab" id="tabOrdersHeader" onclick="switchAdminTab('orders', event)">
+        預約 <span id="adminUnreadBadge" class="badge-unread" style="display:none;">0</span>
+      </div>
+      <div class="admin-tab" onclick="switchAdminTab('customers', event)">客歷/會員</div>
+      <div class="admin-tab" onclick="switchAdminTab('blacklist', event)">黑名單</div>
+      <div class="admin-tab" onclick="switchAdminTab('reports', event)">營運報表</div>
+      <div class="admin-tab" onclick="switchAdminTab('accounting', event)">記帳</div>
+      <div class="admin-tab" onclick="switchAdminTab('settings', event)">設定</div>
+    </div>
+  </div>
 
-            <!-- 步驟 1：分類與服務項目 -->
-            <div class="card-panel">
-                <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">步驟 1：選擇服務項目 <span style="color: var(--danger-red)">*</span></h3>
-                <div id="booking-categories-container"></div>
-            </div>
-
-            <!-- 步驟 2：填寫聯絡資料 -->
-            <div class="card-panel">
-                <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">步驟 2：填寫聯絡資料 <span style="color: var(--danger-red)">*</span></h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div>
-                        <label class="form-label">姓名 <span style="color: var(--danger-red)">*</span></label>
-                        <input type="text" id="cust-name" placeholder="請輸入姓名">
-                    </div>
-                    <div>
-                        <label class="form-label">手機號碼（10碼） <span style="color: var(--danger-red)">*</span></label>
-                        <input type="tel" id="cust-phone" maxlength="10" placeholder="0912345678">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 步驟 3：選擇日期與時段 -->
-            <div class="card-panel">
-                <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">步驟 3：選擇預約日期與時段 <span style="color: var(--danger-red)">*</span></h3>
-                <div class="calendar-box">
-                    <div class="cal-header">
-                        <button class="btn-soft btn-sm" onclick="changeBookingMonth(-1)">〈</button>
-                        <span id="booking-cal-title">2026 年 5 月</span>
-                        <button class="btn-soft btn-sm" onclick="changeBookingMonth(1)">〉</button>
-                    </div>
-                    <div class="cal-grid" id="booking-cal-days"></div>
-                </div>
-                <div style="font-size: 0.9rem; color: var(--primary-dark); margin-bottom: 0.5rem; font-weight: 500; text-align: center;" id="booking-selected-date-label">請點選上方月曆日期</div>
-                <div id="time-slots-container" class="time-grid" style="max-width: 420px; margin: 0 auto;"></div>
-            </div>
-
-            <!-- 步驟 4：定金與確認（精準三格規範） -->
-            <div class="card-panel">
-                <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">步驟 4：定金匯款與確認</h3>
-                <div class="summary-box">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
-                        <span>服務總金額：</span>
-                        <span id="sum-total" style="font-weight: bold;">$0</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.8rem;">
-                        <span>施作總時長：</span>
-                        <span id="sum-duration" style="font-weight: bold;">0 分鐘</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; border-top: 1px dashed var(--accent-latte); padding-top: 0.6rem; font-weight: bold; color: var(--primary-dark);">
-                        <span>此項目需預付定金：</span>
-                        <span id="sum-deposit" style="color: var(--danger-red);">$0</span>
-                    </div>
-
-                    <!-- 第一格：店家可編輯的文字公告與規則 -->
-                    <div style="background: #FFF; padding: 0.9rem; border-radius: 10px; margin-bottom: 0.8rem; font-size: 0.88rem; white-space: pre-line;" id="display-rule-box">
-                        載入店家匯款規則中...
-                    </div>
-
-                    <!-- 第二格：銀行代號、帳號、戶名與複製按鈕 -->
-                    <div style="background: #FFF; padding: 0.9rem; border-radius: 10px; margin-bottom: 0.8rem; font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <div><strong>銀行代號：</strong><span id="disp-bank-code">812</span></div>
-                            <div><strong>銀行帳號：</strong><span id="disp-bank-acc">28881024671561</span></div>
-                            <div><strong>戶名：</strong><span id="disp-bank-name">老闆</span></div>
-                        </div>
-                        <button class="btn-soft btn-sm" onclick="copyBankAccount()">📋 複製帳號</button>
-                    </div>
-
-                    <!-- 第三格：客人輸入自己的帳號末五碼 -->
-                    <div>
-                        <label class="form-label" style="font-size: 0.88rem;">您的銀行帳號末五碼 <span style="color: var(--danger-red)">*</span></label>
-                        <input type="text" id="cust-last5" maxlength="5" placeholder="請輸入 5 碼數字" style="background: #FFF; max-width: 250px;">
-                    </div>
-                </div>
-
-                <button class="btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1.05rem;" onclick="submitBooking()">匯款完成請按我完成預約！</button>
-            </div>
-        </section>
-
-        <!-- ================= 3. 店家專屬工作台 ================= -->
-        <section id="merchant-view" class="view-section">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.6rem;">
-                <div>
-                    <h2 style="color: var(--primary-dark);" id="merchant-panel-title">店家工作台</h2>
-                    <span style="background: #E3F5E3; color: #2E7D32; padding: 3px 8px; border-radius: 12px; font-size: 0.76rem;">雲端訂閱中・試用期免月費</span>
-                </div>
-                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                    <button class="btn-outline" onclick="previewCurrentShop()">👁️ 預覽顧客頁面</button>
-                    <button class="btn-soft" onclick="switchView('home-view')">🏠 切換回首頁</button>
-                    <button class="btn-soft" style="color: var(--danger-red);" onclick="logoutMerchant()">登出</button>
-                </div>
-            </div>
-
-            <div class="merchant-tabs">
-                <button class="m-tab-btn active" onclick="switchMerchantTab('tab-services', this)">服務分類與項目</button>
-                <button class="m-tab-btn" onclick="switchMerchantTab('tab-schedule', this)">時段設定</button>
-                <button class="m-tab-btn" onclick="switchMerchantTab('tab-orders', this)">預約紀錄</button>
-                <button class="m-tab-btn" onclick="switchMerchantTab('tab-profile', this)">工作室與匯款設定</button>
-            </div>
-
-            <!-- 分頁 1：服務分類與項目（含上下移動與編輯功能） -->
-            <div id="tab-services" class="m-tab-content active">
-                <div class="card-panel">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                        <h3 style="color: var(--primary-dark);">✨ 專屬服務分類與項目管理</h3>
-                        <button class="btn-primary btn-sm" onclick="openAddCategoryModal()">+ 新增服務分類</button>
-                    </div>
-                    <div id="merchant-categories-list"></div>
-                </div>
-            </div>
-
-            <!-- 分頁 2：時段設定 -->
-            <div id="tab-schedule" class="m-tab-content">
-                <div class="card-panel">
-                    <h3 style="color: var(--primary-dark); margin-bottom: 0.8rem;">📅 開放預約時段管理</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">在此管理您的營業開放時段。</p>
-                    <div class="calendar-box">
-                        <div class="cal-header">
-                            <span id="merchant-cal-title">2026 年 5 月</span>
-                        </div>
-                        <div class="cal-grid" id="merchant-cal-days"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 分頁 3：預約紀錄 -->
-            <div id="tab-orders" class="m-tab-content">
-                <div class="card-panel">
-                    <h3 style="color: var(--primary-dark); margin-bottom: 0.8rem;">📋 雲端預約訂單列表</h3>
-                    <div id="merchant-orders-list"><p style="color: var(--text-muted); font-size: 0.9rem;">目前尚無客戶預約訂單。</p></div>
-                </div>
-            </div>
-
-            <!-- 分頁 4：工作室與匯款設定 -->
-            <div id="tab-profile" class="m-tab-content">
-                <div class="card-panel">
-                    <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">⚙️ 工作室與定金匯款設定</h3>
-                    <div class="form-group" style="margin-bottom: 1rem;">
-                        <label class="form-label">工作室名稱</label>
-                        <input type="text" id="prof-shopname">
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem;">
-                        <div>
-                            <label class="form-label">銀行代號</label>
-                            <input type="text" id="prof-bank-code" placeholder="例: 812">
-                        </div>
-                        <div>
-                            <label class="form-label">銀行帳號</label>
-                            <input type="text" id="prof-bank-acc" placeholder="例: 2888...">
-                        </div>
-                        <div>
-                            <label class="form-label">戶名</label>
-                            <input type="text" id="prof-bank-name" placeholder="例: 徐若嫣">
-                        </div>
-                    </div>
-                    <div class="form-group" style="margin-bottom: 1rem;">
-                        <label class="form-label">定金匯款規則與注意事項公告（第一格顯示內容）</label>
-                        <textarea id="prof-announcement" rows="6" placeholder="請輸入匯款規則、改期說明、取消辦法..."></textarea>
-                    </div>
-                    <button class="btn-primary" onclick="saveMerchantProfile()">儲存全部設定</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ================= 4. 店家登入與註冊彈窗 ================= -->
-    <div id="merchant-login-modal" class="modal-overlay">
-        <div class="modal-card">
-            <button onclick="closeMerchantLoginModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; font-size: 1.2rem; cursor: pointer;">✕</button>
-            
-            <div id="login-box">
-                <h3 style="color: var(--primary-dark); margin-bottom: 0.5rem; text-align: center;">店家後台登入</h3>
-                <p style="font-size: 0.82rem; color: var(--text-muted); text-align: center; margin-bottom: 1.2rem;">登入您的雲端美業管理後台</p>
-                <div class="form-group" style="margin-bottom: 0.8rem;">
-                    <label class="form-label">登入帳號</label>
-                    <input type="text" id="login-username">
-                </div>
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label class="form-label">登入密碼</label>
-                    <input type="password" id="login-password">
-                </div>
-                <button class="btn-primary" style="width: 100%; padding: 0.75rem;" onclick="handleLogin()">登入</button>
-                <div style="text-align: center; margin-top: 1rem; font-size: 0.85rem;">
-                    還沒有帳號？ <span style="color: var(--primary-coffee); font-weight: bold; cursor: pointer;" onclick="toggleRegisterView(true)">立即免費註冊店家</span>
-                </div>
-            </div>
-
-            <div id="register-box" style="display: none;">
-                <h3 style="color: var(--primary-dark); margin-bottom: 0.3rem; text-align: center;">註冊美業店家帳號</h3>
-                <p style="font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-bottom: 1rem;">享有前兩個月免費試用，自動記錄註冊時間</p>
-                <div class="form-group" style="margin-bottom: 0.6rem;">
-                    <label class="form-label">工作室名稱</label>
-                    <input type="text" id="reg-shopname" placeholder="例：安你好ANNEHO">
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin-bottom: 0.6rem;">
-                    <div>
-                        <label class="form-label">手機號碼</label>
-                        <input type="tel" id="reg-phone">
-                    </div>
-                </div>
-                <div class="form-group" style="margin-bottom: 0.6rem;">
-                    <label class="form-label">電子信箱 Email</label>
-                    <input type="email" id="reg-email">
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem;">
-                    <div>
-                        <label class="form-label">設定帳號</label>
-                        <input type="text" id="reg-username">
-                    </div>
-                    <div>
-                        <label class="form-label">設定密碼</label>
-                        <input type="password" id="reg-password">
-                    </div>
-                </div>
-                <button class="btn-primary" style="width: 100%; padding: 0.75rem;" onclick="handleRegister()">確認註冊並啟用免費試用</button>
-                <div style="text-align: center; margin-top: 0.8rem; font-size: 0.85rem;">
-                    已經有帳號？ <span style="color: var(--primary-coffee); font-weight: bold; cursor: pointer;" onclick="toggleRegisterView(false)">返回登入</span>
-                </div>
-            </div>
-        </div>
+  <div id="clientView" style="display: none;">
+    <div style="margin-bottom:10px;">
+      <button type="button" class="btn-secondary" style="padding:6px 12px; font-size:12px;" onclick="backToPlatformHome()">‹ 返回工作室列表</button>
     </div>
 
-    <!-- ================= 5. 通用編輯彈窗 (分類 / 項目) ================= -->
-    <div id="edit-modal" class="modal-overlay">
-        <div class="modal-card">
-            <button onclick="closeEditModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; font-size: 1.2rem; cursor: pointer;">✕</button>
-            <h3 id="edit-modal-title" style="color: var(--primary-dark); margin-bottom: 1rem;">編輯設定</h3>
-            <div id="edit-modal-body"></div>
+    <div id="stepNoticeView">
+      <div class="card">
+        <div class="card-title">🔍 查詢我的預約</div>
+        <div style="font-size: 12px; color: var(--text-sub); margin-bottom: 8px;">輸入預約時的手機號碼即可查詢</div>
+        <div style="display: flex; gap: 8px;">
+          <input type="tel" id="searchPhoneInput" class="form-input" placeholder="請輸入手機號碼" autocomplete="off" style="flex:1;">
+          <button type="button" class="btn-submit" style="padding: 0 16px; border-radius: var(--radius-md); font-size: 13px;" onclick="clientSearchOrder()">查詢</button>
         </div>
+        <div id="clientSearchResult" style="margin-top: 12px;"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">⚠️ 重要請詳細閱讀您預約的項目‼️</div>
+        <div id="clientNoticesContainer"></div>
+
+        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 16px 0;">
+        <div id="clientShopContactInfo" style="font-size: 13px; line-height: 1.6; color: var(--text-main); margin-bottom: 14px;">
+          ✉ <a href="https://lin.ee/QSxJwfB" target="_blank" style="color: #06C755; font-weight: bold; text-decoration: none;">官方LINE諮詢 請點我</a><br>
+          🅿️ <strong>汽/機車皆可停放門口</strong><br>
+          ❌ <strong>個人工作室 不開放攜伴</strong><br>
+          💰 <strong>支付方式：現金、轉帳</strong>
+        </div>
+
+        <div style="margin-top: 16px; background: var(--input-bg); padding: 12px; border-radius: var(--radius-md);">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <input type="checkbox" id="chkNoticeAgree" onchange="checkNoticeValid()" style="width: 18px; height: 18px; accent-color: var(--primary-color);">
+            <span style="color: #D9534F; font-weight: bold; font-size: 13px;">我已詳細閱讀完畢，確認沒問題👌</span>
+          </label>
+        </div>
+      </div>
+      
+      <div style="padding: 0 4px; margin-top: 16px;">
+        <button type="button" class="btn-submit" id="btnStepNoticeNext" style="width: 100%; padding: 14px; font-size: 15px; border-radius: var(--radius-md); opacity: 0.5; cursor: not-allowed;" onclick="goToStepService()">下一步：選擇服務項目</button>
+      </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 OomuBook 輕約美業預約平台. All rights reserved. <span class="secret-trigger" onclick="triggerAdminSecret()">✦</span></p>
-    </footer>
+    <div id="stepBookingView" style="display: none;">
+      <div style="margin-bottom: 12px;">
+        <button type="button" class="btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="backToNotice()">‹ 返回閱讀須知</button>
+      </div>
 
-    <!-- Firebase SDK & 核心邏輯 -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, doc, setDoc, getDoc, updateDoc, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      <div id="clientDynamicCategoriesContainer"></div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCRyyFuTR7pWLKMrMBOzGMu1_DdjtJCQ",
-            authDomain: "oomubook-system-dbc11.firebaseapp.com",
-            projectId: "oomubook-system-dbc11",
-            storageBucket: "oomubook-system-dbc11.appscore.app",
-            messagingSenderId: "330383784221",
-            appId: "1:330383784221:web:1a0323f211276c191609f4",
-            measurementId: "G-D3K6N7ZZ2Y"
-        };
+      <div class="card" id="eyebrowBaseColorCard" style="display: none;">
+        <div class="card-title">眉毛有無底色 <span style="color:#D9534F;">( 必填 )</span></div>
+        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+          <button type="button" class="btn-secondary" style="flex:1; padding:10px;" id="btnEyebrowNone" onclick="selectEyebrowBase('無')">無底色</button>
+          <button type="button" class="btn-secondary" style="flex:1; padding:10px;" id="btnEyebrowHas" onclick="selectEyebrowBase('有')">有底色</button>
+        </div>
+        <div id="eyebrowColorInputWrap" style="display: none; margin-top: 8px;">
+          <input type="text" id="eyebrowColorText" class="form-input" placeholder="請填寫眉毛現在什麼顏色" autocomplete="off" oninput="updateSummary()">
+        </div>
+      </div>
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+      <div class="card" id="eyebrowRemovalCard" style="display: none;">
+        <div class="card-title">除色評估資料 <span style="color:#D9534F;">( 必填 )</span></div>
+        <div style="color: #D9534F; font-weight: bold; font-size: 13px; margin-bottom: 12px; line-height: 1.4;">早期繡眉，底色為：青綠/藍/紫，恐無效。</div>
+        <div class="form-group">
+          <label>最後一次霧眉時間：</label>
+          <input type="text" id="remLastTime" class="form-input" placeholder="例如：半年前、1年前" oninput="updateSummary()">
+        </div>
+        <div class="form-group">
+          <label>目前眉毛底色顏色：</label>
+          <input type="text" id="remCurrentColor" class="form-input" placeholder="例如：偏橘紅、藍紫色" oninput="updateSummary()">
+        </div>
+        <div class="form-group">
+          <label>有無做過眉毛除色/多久之前/次數：</label>
+          <input type="text" id="remHistory" class="form-input" placeholder="例如：做過1次，大約3個月前" oninput="updateSummary()">
+        </div>
+      </div>
 
-        window.db = db;
-        window.collection = collection;
-        window.getDocs = getDocs;
-        window.doc = doc;
-        window.setDoc = setDoc;
-        window.getDoc = getDoc;
-        window.updateDoc = updateDoc;
-        window.query = query;
-        window.where = where;
+      <div class="card">
+        <div class="card-title">選擇日期與時段</div>
+        <div class="cal-header">
+          <button type="button" class="cal-btn" onclick="changeMonth(-1)">‹</button>
+          <span id="calMonthTitle" style="font-weight: 700; font-size: 14px;"></span>
+          <button type="button" class="cal-btn" onclick="changeMonth(1)">›</button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        
+        <div style="margin-top: 16px; font-size: 13px; font-weight: 700;" id="selectedDateText">請選擇日期</div>
+        <div class="time-grid" id="timeGrid"></div>
+      </div>
 
-        window.addEventListener('DOMContentLoaded', () => {
-            loadCloudShops();
-        });
-    </script>
+      <div class="card">
+        <div class="card-title">填寫預約資料</div>
+        <div class="form-group">
+          <label>您的姓名 *</label>
+          <input type="text" id="custName" class="form-input" placeholder="請輸入姓名" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label>聯絡電話 *</label>
+          <input type="tel" id="custPhone" class="form-input" placeholder="請輸入手機號碼" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label>門口可直接停車 請選擇交通方式 *</label>
+          <div style="display: flex; gap: 8px; margin-top: 4px;" id="transportGroup">
+            <button type="button" class="btn-secondary" style="flex:1; padding:10px;" id="trans_moto" onclick="selectTransport('機車')">🛵 機車</button>
+            <button type="button" class="btn-secondary" style="flex:1; padding:10px;" id="trans_car" onclick="selectTransport('汽車')">🚗 汽車</button>
+            <button type="button" class="btn-secondary" style="flex:1; padding:10px;" id="trans_none" onclick="selectTransport('不需停車')">🚫 不需停車</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>備註事項</label>
+          <input type="text" id="custNote" class="form-input" placeholder="例如：有無特殊需求或情況" autocomplete="off">
+        </div>
+      </div>
 
-    <script>
-        let currentLoggedInMerchant = null;
-        let currentViewingShopId = null;
-        let selectedBookingDate = null;
-        let selectedTimeSlot = null;
-        let selectedServices = [];
+      <div class="bottom-bar">
+        <div class="price-summary">
+          <div>定金合計：<span class="total" id="displayDeposit">NT$ 0</span></div>
+          <div style="font-size: 11px; margin-top: 2px;" id="displayTotal">總計：NT$ 0</div>
+          <div style="font-size: 11px; margin-top: 1px; color: var(--primary-color); font-weight: 700;" id="displayTime">施作總時間約 0 分鐘</div>
+        </div>
+        <button type="button" class="btn-submit" id="btnGoPay" onclick="tryOpenPayModal()">下一步：付款與確認</button>
+      </div>
+    </div>
+  </div>
 
-        function switchView(viewId) {
-            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            document.getElementById(viewId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+  <div id="adminView" style="display: none;">
+    <!-- 服務管理 -->
+    <div id="adminTabServices" class="admin-tab-content">
+      <div class="card">
+        <div class="card-title">
+          <span>服務分類與項目管理</span>
+          <button type="button" class="btn-submit" style="padding:6px 12px; font-size:12px;" onclick="openCategoryModal('add')">+ 新增分類</button>
+        </div>
+        <div id="adminCategoriesList"></div>
+      </div>
+    </div>
+
+    <!-- 時段管理 -->
+    <div id="adminTabSchedule" class="admin-tab-content" style="display: none;">
+      <div class="card">
+        <div class="card-title">設定日期與開放時段</div>
+        <div class="cal-header">
+          <button type="button" class="cal-btn" onclick="changeAdminMonth(-1)">‹</button>
+          <span id="adminCalMonthTitle" style="font-weight: 700;"></span>
+          <button type="button" class="cal-btn" onclick="changeAdminMonth(1)">›</button>
+        </div>
+        <div class="cal-grid" id="adminCalGrid"></div>
+        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 16px 0;">
+        <div id="adminDateScheduleArea" style="display: none;">
+          <div style="font-weight: 700; margin-bottom: 8px;" id="adminSelectedDateTitle"></div>
+          <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+            <input type="time" id="newTimeInput" class="form-input" style="width: 60%;" value="10:00">
+            <button type="button" class="btn-submit" style="border-radius: var(--radius-md); padding: 0 16px;" onclick="addCustomTime()">新增時段</button>
+          </div>
+          <div id="adminTimeSlotsList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 預約管理 -->
+    <div id="adminTabOrders" class="admin-tab-content" style="display: none;">
+      <div class="card">
+        <div class="card-title">已接收預約總覽</div>
+        <div id="adminOrdersList"></div>
+      </div>
+    </div>
+
+    <!-- 客戶與客歷管理 -->
+    <div id="adminTabCustomers" class="admin-tab-content" style="display: none;">
+      <div class="card">
+        <div class="card-title">客戶資料表與會員管理</div>
+        <div class="form-group">
+          <input type="text" id="customerSearchInput" class="form-input" placeholder="🔍 輸入姓名或手機號碼搜尋會員..." autocomplete="off" oninput="renderAdminCustomers()">
+        </div>
+        <div id="adminCustomersList"></div>
+      </div>
+    </div>
+
+    <!-- 黑名單管理 -->
+    <div id="adminTabBlacklist" class="admin-tab-content" style="display: none;">
+      <div class="card">
+        <div class="card-title">黑名單清單管理</div>
+        <div style="font-size: 12px; color: var(--text-sub); margin-bottom: 12px;">在此可查看及手動解除/新增黑名單貴賓。</div>
+        <div id="adminBlacklistList"></div>
+      </div>
+    </div>
+
+    <!-- 營運報表 -->
+    <div id="adminTabReports" class="admin-tab-content" style="display: none;">
+      <div class="card">
+        <div class="card-title">營運報表（含評分與狀態設定）</div>
+        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+          <select id="reportTypeSelect" class="form-input" onchange="toggleReportMode()">
+            <option value="daily">📅 指定單日報表</option>
+            <option value="monthly">🗓️ 指定月份報表</option>
+            <option value="range">📊 自訂日期區間</option>
+          </select>
+        </div>
+        
+        <div id="reportFilterDaily" class="form-group">
+          <label>選擇日期</label>
+          <input type="date" id="repDate" class="form-input" onchange="renderAdminReports()">
+        </div>
+        
+        <div id="reportFilterMonthly" class="form-group" style="display:none;">
+          <div style="display:flex; gap:8px;">
+            <select id="repYear" class="form-input" onchange="renderAdminReports()"></select>
+            <select id="repMonth" class="form-input" onchange="renderAdminReports()"></select>
+          </div>
+        </div>
+
+        <div id="reportFilterRange" class="form-group" style="display:none;">
+          <div style="display:flex; gap:8px; align-items:center;">
+            <input type="date" id="repStartDate" class="form-input" onchange="renderAdminReports()">
+            <span>至</span>
+            <input type="date" id="repEndDate" class="form-input" onchange="renderAdminReports()">
+          </div>
+        </div>
+
+        <div style="background: var(--input-bg); padding: 12px; border-radius: 12px; margin-bottom: 14px; font-size: 13px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>區間總預約數：</span><strong id="repTotalCount">0 筆</strong></div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>定金總收入：</span><strong style="color:var(--primary-color);" id="repTotalDeposit">NT$ 0</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span>總金額合計（如期未到僅計定金）：</span><strong style="color:#28a745;" id="repTotalAmount">NT$ 0</strong></div>
+        </div>
+
+        <div id="adminReportsDetails"></div>
+      </div>
+    </div>
+
+    <!-- 記帳 -->
+    <div id="adminTabAccounting" class="admin-tab-content" style="display: none;">
+      <div class="card">
+        <div class="card-title">
+          <span>每月記帳管理</span>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn-secondary" onclick="openExpenseModal('income')">+ 手動收入</button>
+            <button type="button" class="btn-secondary" onclick="openExpenseModal('expense')">+ 新增支出</button>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+          <button type="button" id="accTabIncomeBtn" class="btn-submit" style="flex:1; padding:8px; font-size:12px; border-radius:8px;" onclick="switchAccountingTab('income')">💰 收入紀錄</button>
+          <button type="button" id="accTabExpenseBtn" class="btn-secondary" style="flex:1; padding:8px; font-size:12px; border-radius:8px;" onclick="switchAccountingTab('expense')">🧾 支出紀錄</button>
+        </div>
+        <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+          <select id="accountingYearSelect" class="form-input" style="width:50%;" onchange="renderAdminAccounting()"></select>
+          <select id="accountingMonthSelect" class="form-input" style="width:50%;" onchange="renderAdminAccounting()"></select>
+        </div>
+        <div style="background: var(--input-bg); padding: 12px; border-radius: 12px; margin-bottom: 14px; font-size: 13px;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>本月總收入：</span><strong style="color:var(--primary-color);" id="accTotalIncome">NT$ 0</strong></div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>本月總支出：</span><strong style="color:#D9534F;" id="accTotalExpense">NT$ 0</strong></div>
+          <hr style="border:none; border-top:1px solid var(--border-color); margin:6px 0;">
+          <div style="display:flex; justify-content:space-between;"><span>本月淨利：</span><strong id="accNetProfit">NT$ 0</strong></div>
+        </div>
+        <div id="adminAccountingDetails"></div>
+      </div>
+    </div>
+
+    <!-- 設定 -->
+    <div id="adminTabSettings" class="admin-tab-content" style="display: none;">
+      <div class="card">
+        <div class="card-title">💳 轉帳銀行資訊設定</div>
+        <div class="form-group"><label>銀行代碼 (如 812)</label><input type="text" id="settingBankCode" class="form-input"></div>
+        <div class="form-group"><label>銀行名稱 (如 台新銀行)</label><input type="text" id="settingBankName" class="form-input"></div>
+        <div class="form-group"><label>轉帳帳號</label><input type="text" id="settingBankAcc" class="form-input"></div>
+        <div class="form-group"><label>戶名</label><input type="text" id="settingBankHolder" class="form-input"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">💬 轉帳彈窗注意事項設定</div>
+        <div class="form-group">
+          <textarea id="settingPayNotice" class="form-input" rows="6" style="resize:vertical;"></textarea>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📖 第一頁預約須知設定</div>
+        <div id="adminNoticesEditorList"></div>
+        <button type="button" class="btn-secondary" style="width:100%; margin-top:8px;" onclick="addNoticeSection()">+ 新增一個須知區塊</button>
+      </div>
+      <button type="button" class="btn-submit" style="width: 100%; margin-top: 10px; margin-bottom: 30px;" onclick="saveAllSettings()">儲存所有後台設定</button>
+    </div>
+  </div>
+</div>
+
+<!-- 店家登入 Modal -->
+<div class="modal-overlay" id="merchantLoginModal" onclick="checkModalClose(event, 'merchantLoginModal')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 style="color: var(--primary-color); margin-bottom: 12px;">店家後台登入</h3>
+    <div class="form-group"><label>店家帳號 *</label><input type="text" id="loginUsername" class="form-input" autocomplete="off"></div>
+    <div class="form-group"><label>密碼 *</label><input type="password" id="loginPassword" class="form-input"></div>
+    <div style="display: flex; gap: 8px; margin-top: 16px;">
+      <button type="button" class="btn-secondary" style="width: 40%; padding: 12px;" onclick="closeMerchantLoginModal()">取消</button>
+      <button type="button" class="btn-submit" style="width: 60%; padding: 12px;" onclick="handleMerchantLogin()">登入工作台</button>
+    </div>
+  </div>
+</div>
+
+<!-- 付款確認 Modal -->
+<div class="modal-overlay" id="payModal" onclick="checkModalClose(event, 'payModal')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 style="color: var(--primary-color); margin-bottom: 12px;">轉帳支付定金</h3>
+    <div style="color: #D9534F; font-weight: bold; font-size: 13px; margin-bottom: 8px;">為保障雙方權益，請確認以下內容再進行匯款</div>
+    <div id="payModalNoticeDisplay" style="font-size: 12px; line-height: 1.6; color: var(--text-main); margin-bottom: 12px; background: var(--input-bg); padding: 10px; border-radius: 8px;"></div>
+    <div style="background: var(--input-bg); padding: 12px; border-radius: var(--radius-md); font-size: 13px; line-height: 1.6; margin-bottom: 14px;">
+      <div><strong>銀行代碼：</strong><span id="payBankCode"></span> (<span id="payBankName"></span>)</div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+        <div><strong>帳號：</strong><span id="payBankAcc" style="font-weight: 700; font-size: 15px; color: var(--primary-color);"></span></div>
+        <button type="button" class="btn-secondary" style="padding:4px 8px; font-size:11px;" onclick="copyBankAccount()">📋 複製帳號</button>
+      </div>
+      <div style="margin-top:4px;"><strong>戶名：</strong><span id="payBankHolder"></span></div>
+      <div style="color: #D9534F; font-weight: bold; margin-top: 4px;">應付定金金額：NT$ <span id="payDepositAmount"></span></div>
+    </div>
+    <div class="form-group">
+      <label style="color: #D9534F; font-weight: bold;">您的銀行帳號末五碼 *</label>
+      <input type="text" id="payLast5" class="form-input" placeholder="請輸入 5 碼數字" maxlength="5" oninput="validatePayForm()" autocomplete="off">
+    </div>
+    <div style="display: flex; gap: 8px; margin-top: 16px;">
+      <button type="button" class="btn-secondary" style="width: 40%; padding: 12px;" onclick="closePayModal()">返回修改</button>
+      <button type="button" class="btn-submit" id="btnSubmitPay" style="width: 60%; font-size: 12px; line-height: 1.4;" onclick="submitOrderAndNotify()" disabled>匯款完成請按我<br>完成預約！</button>
+    </div>
+  </div>
+</div>
+
+<!-- 新增/編輯紀錄 Modal -->
+<div class="modal-overlay" id="historyModal" onclick="checkModalClose(event, 'historyModal')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 id="historyModalTitle" style="color: var(--primary-color); margin-bottom: 12px;">新增操作紀錄</h3>
+    <div class="form-group">
+      <label>操作項目類型 *</label>
+      <select id="histType" class="form-input" onchange="switchHistTypeFields()">
+        <option value="霧眉">微針霧眉</option>
+        <option value="美睫">新中式美睫</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>操作日期 *</label>
+      <input type="date" id="histDate" class="form-input">
+    </div>
+
+    <!-- 霧眉專屬欄位 -->
+    <div id="histFieldsEyebrow">
+      <div class="form-group"><label>使用的色乳</label><input type="text" id="histEyebrowPigment" class="form-input" placeholder="例如：某品牌色乳"></div>
+      <div class="form-group"><label>色乳顏色</label><input type="text" id="histEyebrowColor" class="form-input" placeholder="例如：亞麻棕"></div>
+      <div class="form-group"><label>操作針具</label><input type="text" id="histEyebrowNeedle" class="form-input" placeholder="例如：1R / 圓三針"></div>
+    </div>
+
+    <!-- 美睫專屬欄位 -->
+    <div id="histFieldsLash" style="display:none;">
+      <div class="form-group"><label>款式</label><input type="text" id="histLashStyleName" class="form-input" placeholder="例如：小漫畫款"></div>
+      <div class="form-group"><label>上睫毛翹度</label><input type="text" id="histLashUpperCurl" class="form-input" placeholder="例如：C / B"></div>
+      <div class="form-group"><label>上睫毛長度</label><input type="text" id="histLashUpperLen" class="form-input" placeholder="例如：9-12mm"></div>
+      <div class="form-group"><label>下睫毛翹度</label><input type="text" id="histLashLowerCurl" class="form-input" placeholder="例如：J"></div>
+      <div class="form-group"><label>下睫毛長度</label><input type="text" id="histLashLowerLen" class="form-input" placeholder="例如：6mm"></div>
+      <div class="form-group"><label>睫毛樣式</label><input type="text" id="histLashPattern" class="form-input" placeholder="例如：仙女直睫"></div>
+      <div class="form-group"><label>濃密度</label><input type="text" id="histLashDensity" class="form-input" placeholder="例如：濃密自然"></div>
+    </div>
+
+    <div class="form-group">
+      <label>備註紀錄</label>
+      <textarea id="histNote" class="form-input" rows="3" placeholder="記錄客人特點或施作狀況..."></textarea>
+    </div>
+
+    <div style="display: flex; gap: 8px; margin-top: 16px;">
+      <button type="button" class="btn-secondary" style="width: 50%; padding: 12px;" onclick="closeHistoryModal()">取消</button>
+      <button type="button" class="btn-submit" style="width: 50%; padding: 12px;" onclick="saveHistoryRecord()">儲存紀錄</button>
+    </div>
+  </div>
+</div>
+
+<!-- 分類與服務項目 Modals -->
+<div class="modal-overlay" id="categoryModal" onclick="checkModalClose(event, 'categoryModal')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 id="categoryModalTitle" style="color: var(--primary-color); margin-bottom: 12px;">新增服務分類</h3>
+    <div class="form-group"><label>分類名稱 *</label><input type="text" id="editCatName" class="form-input" autocomplete="off"></div>
+    <div class="form-group">
+      <label>選擇模式：</label>
+      <select id="editCatAllowMultiple" class="form-input">
+        <option value="no">單選</option>
+        <option value="yes">複選</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>須同時點選其他綁定分類：</label>
+      <select id="editCatRequiredMatchId" class="form-input">
+        <option value="">-- 無需綁定其他分類 --</option>
+      </select>
+    </div>
+    <div style="display: flex; gap: 8px; margin-top: 16px;">
+      <button type="button" class="btn-secondary" style="width: 50%; padding: 12px;" onclick="closeCategoryModal()">取消</button>
+      <button type="button" class="btn-submit" style="width: 50%; padding: 12px;" onclick="saveCategoryItem()">儲存</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="serviceModal" onclick="checkModalClose(event, 'serviceModal')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 id="serviceModalTitle" style="color: var(--primary-color); margin-bottom: 12px;">編輯服務項目</h3>
+    <div class="form-group"><label>項目名稱 *</label><input type="text" id="editItemName" class="form-input" autocomplete="off"></div>
+    <div class="form-group"><label>預估時間 (分鐘)</label><input type="number" id="editItemTime" class="form-input" value="30"></div>
+    <div class="form-group"><label>備註說明</label><input type="text" id="editItemDesc" class="form-input" autocomplete="off"></div>
+    <div class="form-group"><label>價格 (NT$) *</label><input type="number" id="editItemPrice" class="form-input" value="1000"></div>
+    <div class="form-group"><label>定金金額 (NT$) *</label><input type="number" id="editItemDeposit" class="form-input" value="500"></div>
+    <div style="display: flex; gap: 8px; margin-top: 16px;">
+      <button type="button" class="btn-secondary" style="width: 50%; padding: 12px;" onclick="closeServiceModal()">取消</button>
+      <button type="button" class="btn-submit" style="width: 50%; padding: 12px;" onclick="saveServiceItem()">儲存</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="expenseModal" onclick="checkModalClose(event, 'expenseModal')">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 id="expenseModalTitle" style="color: var(--primary-color); margin-bottom: 12px;">新增記帳紀錄</h3>
+    <div class="form-group"><label id="expNameLabel">項目名稱 *</label><input type="text" id="expName" class="form-input" autocomplete="off"></div>
+    <div class="form-group"><label>金額 (NT$) *</label><input type="number" id="expAmount" class="form-input"></div>
+    <div class="form-group"><label>日期 *</label><input type="date" id="expDate" class="form-input"></div>
+    <div style="display: flex; gap: 8px; margin-top: 16px;">
+      <button type="button" class="btn-secondary" style="width: 50%; padding: 12px;" onclick="closeExpenseModal()">取消</button>
+      <button type="button" class="btn-submit" style="width: 50%; padding: 12px;" onclick="saveExpenseItem()">儲存</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDK (模組化引入) -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, doc, setDoc, getDoc, updateDoc, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCRyyFuTR7pWLKMrMBOzGMu1_DdjtJCQ",
+    authDomain: "oomubook-system-dbc11.firebaseapp.com",
+    projectId: "oomubook-system-dbc11",
+    storageBucket: "oomubook-system-dbc11.appscore.app",
+    messagingSenderId: "330383784221",
+    appId: "1:330383784221:web:1a0323f211276c191609f4",
+    measurementId: "G-D3K6N7ZZ2Y"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const dbCloud = getFirestore(app);
+
+  // 掛載至全域變數供系統調用
+  window.dbCloud = dbCloud;
+  window.fbCollection = collection;
+  window.fbGetDocs = getDocs;
+  window.fbDoc = doc;
+  window.fbSetDoc = setDoc;
+  window.fbGetDoc = getDoc;
+  window.fbUpdateDoc = updateDoc;
+  window.fbQuery = query;
+  window.fbWhere = where;
+
+  window.dispatchEvent(new Event('firebase-ready'));
+</script>
+
+<script>
+  let currentShopId = null; // 當前操作的店家 ID (多租戶隔離)
+  let currentLoggedInMerchant = null; // 當前登入的店家物件
+
+  let defaultDb = {
+    settings: { bankCode: "812", bankName: "台新銀行", bankAcc: "", bankHolder: "", payNotice: "" },
+    notices: [],
+    categories: [],
+    schedule: {}, orders: [], expenses: [], manualIncomes: [],
+    customers: {}, 
+    blacklist: []  
+  };
+
+  let db = JSON.parse(JSON.stringify(defaultDb));
+
+  window.addEventListener('firebase-ready', () => {
+    initApp();
+  });
+
+  // 若 Firebase 載入稍慢的備用觸發
+  setTimeout(() => {
+    if(!window.dbCloud) initApp();
+  }, 1000);
+
+  function initApp() {
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    
+    initScheduleDefault();
+    initAccountingSelectors();
+    initReportSelectors();
+    document.getElementById('headerClickArea').addEventListener('click', handleHeaderClick);
+
+    // 載入多店家平台首頁列表
+    loadPlatformShops();
+  }
+
+  // 1. 載入多店家列表 (平台首頁)
+  async function loadPlatformShops() {
+    let listEl = document.getElementById('platformShopsList');
+    listEl.innerHTML = "<div style='color:var(--text-sub); font-size:13px; text-align:center;'>正在載入雲端合作店家...</div>";
+    
+    try {
+      if(!window.dbCloud) {
+        listEl.innerHTML = "<div style='color:#D9534F; font-size:13px; text-align:center;'>雲端連線中初始化...</div>";
+        return;
+      }
+      let snapshot = await window.fbGetDocs(window.fbCollection(window.dbCloud, "shops"));
+      let shops = [];
+      snapshot.forEach(docSnap => {
+        shops.push({ id: docSnap.id, ...docSnap.data() });
+      });
+
+      if(shops.length === 0) {
+        // 自動初始化預設第一家「安你好」店家供體驗
+        await createDefaultAnneHoShop();
+        loadPlatformShops();
+        return;
+      }
+
+      let html = "";
+      shops.forEach(s => {
+        html += `<div class="shop-card" onclick="selectShop('${s.id}')">
+          <div style="font-size:15px; font-weight:bold; color:var(--primary-color);">${escapeHtml(s.shopName || '未命名工作室')}</div>
+          <div style="font-size:12px; color:var(--text-sub); margin-top:2px;">線上預約系統 ➔</div>
+        </div>`;
+      });
+      listEl.innerHTML = html;
+    } catch(e) {
+      console.error(e);
+      listEl.innerHTML = "<div style='color:#D9534F; font-size:13px; text-align:center;'>載入店家列表發生錯誤，請檢查網路。</div>";
+    }
+  }
+
+  async function createDefaultAnneHoShop() {
+    let defaultShopId = "shop_anneho_" + Date.now();
+    let initialData = {
+      shopName: "安,你好ANNEHO",
+      username: "anneho",
+      password: "123",
+      settings: { bankCode: "812", bankName: "台新銀行", bankAcc: "28881024671561", bankHolder: "徐若嫣", payNotice: "為保障雙方權益，請確認以下內容再進行匯款" },
+      notices: [
+        { title: "📌 預約注意事項", content: "個人工作室不開放攜伴。<br>請準時抵達。" }
+      ],
+      categories: [
+        {
+          id: 'cat_1', name: '微針霧眉', allowMultiple: false, requiredMatchId: '',
+          items: [
+            { id: 'it_1', name: '微針霧眉（含三個月內補色一次）', desc: '眉毛無底色建議選此', time: 150, price: 6000, deposit: 1000 },
+            { id: 'it_2', name: '單次霧眉（不含補色）', desc: '適合眉毛有底色', time: 150, price: 3500, deposit: 800 }
+          ]
         }
+      ],
+      schedule: {}, orders: [], expenses: [], manualIncomes: [], customers: {}, blacklist: []
+    };
+    try {
+      await window.fbSetDoc(window.fbDoc(window.dbCloud, "shops", defaultShopId), initialData);
+    } catch(err) { console.error(err); }
+  }
 
-        async function loadCloudShops() {
-            const grid = document.getElementById('shop-grid');
-            const label = document.getElementById('shop-count-label');
-            grid.innerHTML = '<p style="color: var(--text-muted); grid-column: span 3; text-align: center; padding: 2rem;">正在從雲端載入店家...</p>';
+  // 2. 選擇特定店家進入顧客預約端
+  async function selectShop(shopId) {
+    currentShopId = shopId;
+    document.getElementById('platformHomeView').style.display = 'none';
+    document.getElementById('clientView').style.display = 'block';
+    
+    await fetchCloudData(() => {
+      renderClient();
+    });
+  }
 
-            try {
-                const querySnapshot = await window.getDocs(window.collection(window.db, "shops"));
-                let shops = [];
-                querySnapshot.forEach(docSnap => {
-                    shops.push({ id: docSnap.id, ...docSnap.data() });
-                });
+  function backToPlatformHome() {
+    currentShopId = null;
+    currentLoggedInMerchant = null;
+    document.getElementById('clientView').style.display = 'none';
+    document.getElementById('adminView').style.display = 'none';
+    document.getElementById('adminHeader').style.display = 'none';
+    document.getElementById('platformHomeView').style.display = 'block';
+    loadPlatformShops();
+  }
 
-                label.innerText = `目前共 ${shops.length} 家合作店家`;
+  // 開啟店家登入彈窗
+  function openMerchantLoginModal() {
+    document.getElementById('loginUsername').value = '';
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('merchantLoginModal').classList.add('active');
+  }
+  function closeMerchantLoginModal() {
+    document.getElementById('merchantLoginModal').classList.remove('active');
+  }
 
-                if (shops.length === 0) {
-                    grid.innerHTML = `<p style="color: var(--text-muted); grid-column: span 3; text-align: center; padding: 2rem;">目前尚無店家註冊上線，請點選右上角「店家登入」建立第一家工作室！</p>`;
-                    return;
-                }
+  async function handleMerchantLogin() {
+    let u = document.getElementById('loginUsername').value.trim();
+    let p = document.getElementById('loginPassword').value.trim();
+    if(!u || !p) { alert("請輸入帳號與密碼！"); return; }
 
-                grid.innerHTML = shops.map(shop => `
-                    <div class="shop-card" onclick="enterShopBooking('${shop.id}')">
-                        <span class="badge-featured">雲端試用中</span>
-                        <div>
-                            <div class="shop-title">${shop.shopName || '未命名工作室'}</div>
-                            <div class="tag-list" style="margin-top: 0.5rem; display: flex; gap: 0.4rem;">
-                                <span class="tag" style="background: var(--bg-sand); font-size: 0.78rem; padding: 3px 8px; border-radius: 8px;">美業預約</span>
-                                <span class="tag" style="background: var(--bg-sand); font-size: 0.78rem; padding: 3px 8px; border-radius: 8px;">線上訂金</span>
-                            </div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 0.8rem; margin-top: 1rem; color: var(--primary-coffee); font-size: 0.9rem; font-weight: bold;">
-                            <span>進入預約</span>
-                            <span>→</span>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (e) {
-                console.error("載入失敗", e);
-                label.innerText = "連線雲端發生錯誤";
-                grid.innerHTML = `<p style="color: var(--danger-red); grid-column: span 3; text-align: center;">無法讀取雲端資料，請檢查網路連線。</p>`;
+    try {
+      let q = window.fbQuery(window.fbCollection(window.dbCloud, "shops"), window.fbWhere("username", "==", u));
+      let snap = await window.fbGetDocs(q);
+      if(snap.empty) {
+        alert("找不到此店家帳號！");
+        return;
+      }
+      let shopObj = null;
+      snap.forEach(d => { shopObj = { id: d.id, ...d.data() }; });
+
+      if(shopObj.password !== p) {
+        alert("密碼錯誤！");
+        return;
+      }
+
+      currentShopId = shopObj.id;
+      currentLoggedInMerchant = shopObj;
+      db = { ...defaultDb, ...shopObj };
+      closeMerchantLoginModal();
+      switchView('admin');
+    } catch(e) {
+      alert("登入發生錯誤：" + e.message);
+    }
+  }
+
+  function fetchCloudData(callback) {
+    if(!currentShopId) { if(callback) callback(); return; }
+    window.fbGetDoc(window.fbDoc(window.dbCloud, "shops", currentShopId))
+      .then(docSnap => {
+        if(docSnap.exists()) {
+          let cloudData = docSnap.data();
+          db = { ...defaultDb, ...cloudData };
+          if(!db.customers) db.customers = {};
+          if(!db.blacklist) db.blacklist = [];
+        }
+        if(callback) callback();
+        else { if(currentView === 'admin') renderAdmin(); else renderClient(); }
+      })
+      .catch(err => {
+        console.error("雲端讀取失敗", err);
+        if(callback) callback();
+      });
+  }
+
+  function syncDataToCloud() {
+    if(!currentShopId) return;
+    window.fbSetDoc(window.fbDoc(window.dbCloud, "shops", currentShopId), db, { merge: true })
+      .catch(e => console.log("雲端同步儲存失敗", e));
+  }
+
+  function saveData() { syncDataToCloud(); }
+
+  let currentView = 'client', clickHeaderCount = 0, clickHeaderTimer = null;
+  let currentYear = new Date().getFullYear(), currentMonth = new Date().getMonth();
+  let adminYear = currentYear, adminMonth = currentMonth;
+  let selectedDateStr = "", selectedTime = "", selectedServiceIds = [], selectedTransportMode = "";
+  let selectedEyebrowBaseMode = ""; 
+  let currentAccTab = 'income', currentExpModalType = 'expense', activeCustomerPhoneForHist = null;
+  let expandedCustomerPhones = {};
+
+  function requestPushPermission() {
+    if ("Notification" in window) {
+      Notification.requestPermission().then(permission => {
+        if (permission === "granted") alert("推播通知已成功開啟！");
+        else alert("請至手機設定中允許通知。");
+      });
+    } else {
+      alert("請至手機瀏覽器設定中開啟通知！");
+    }
+  }
+
+  function triggerNativeAlert(msg) {
+    if ("vibrate" in navigator) navigator.vibrate([300, 100, 300, 100, 500]);
+    if ("Notification" in window && Notification.permission === "granted") {
+      new Notification("預約系統通知", { body: msg, icon: "https://fav.farm/✨" });
+    }
+  }
+
+  function initScheduleDefault() {
+    let today = new Date();
+    for(let i=0; i<30; i++) {
+      let d = new Date(today); d.setDate(today.getDate() + i);
+      let dateKey = formatDateKey(d.getFullYear(), d.getMonth(), d.getDate());
+      if(!db.schedule[dateKey]) db.schedule[dateKey] = ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
+    }
+  }
+  function formatDateKey(y, m, d) { return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+
+  function handleHeaderClick() {
+    clickHeaderCount++; clearTimeout(clickHeaderTimer);
+    clickHeaderTimer = setTimeout(() => { clickHeaderCount = 0; }, 2000);
+    if(clickHeaderCount >= 5 && currentView === 'client') {
+      let pwd = prompt("請輸入店家管理員密碼：");
+      if(pwd === "anneho0921827360" || (currentLoggedInMerchant && pwd === currentLoggedInMerchant.password)) {
+        switchView('admin');
+      } else if(pwd !== null) {
+        alert("密碼不正確！");
+      }
+    }
+  }
+
+  function switchView(view) {
+    currentView = view;
+    document.getElementById('clientView').style.display = (view === 'admin' || !currentShopId) ? 'none' : 'block';
+    document.getElementById('adminView').style.display = view === 'admin' ? 'block' : 'none';
+    document.getElementById('adminHeader').style.display = view === 'admin' ? 'block' : 'none';
+    document.getElementById('platformHomeView').style.display = 'none';
+    window.scrollTo(0, 0);
+    fetchCloudData(() => { if(view === 'admin') renderAdmin(); else renderClient(); });
+  }
+
+  function toggleAccordion(id) {
+    let body = document.getElementById(id);
+    let icon = document.getElementById('icon_' + id);
+    if(body.style.display === 'block') { body.style.display = 'none'; icon.innerText = '▼'; }
+    else { body.style.display = 'block'; icon.innerText = '▲'; }
+  }
+
+  function checkNoticeValid() {
+    let chk = document.getElementById('chkNoticeAgree').checked;
+    let btnNext = document.getElementById('btnStepNoticeNext');
+    btnNext.disabled = !chk;
+    btnNext.style.opacity = chk ? '1' : '0.5';
+    btnNext.style.cursor = chk ? 'pointer' : 'not-allowed';
+  }
+
+  function goToStepService() {
+    document.getElementById('stepNoticeView').style.display = 'none';
+    document.getElementById('stepBookingView').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function backToNotice() {
+    document.getElementById('stepBookingView').style.display = 'none';
+    document.getElementById('stepNoticeView').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function checkModalClose(event, modalId) {
+    if(event.target.id === modalId) document.getElementById(modalId).classList.remove('active');
+  }
+
+  function formatTextWithBr(str) {
+    if(!str) return '';
+    return str.replace(/<br\s*\/?>/gi, '\n').replace(/\n/g, '<br>');
+  }
+
+  function renderClientNotices() {
+    let notices = db.notices || [];
+    let html = "";
+    notices.forEach((n, idx) => {
+      let bodyId = "accNotice_" + idx;
+      html += `<div class="notice-accordion">
+        <div class="notice-header" onclick="toggleAccordion('${bodyId}')">
+          <span>${escapeHtml(n.title)}</span><span id="icon_${bodyId}">▼</span>
+        </div>
+        <div class="notice-body" id="${bodyId}">${formatTextWithBr(n.content)}</div>
+      </div>`;
+    });
+    document.getElementById('clientNoticesContainer').innerHTML = html || "<div style='color:var(--text-sub); font-size:13px; text-align:center;'>正在載入預約須知... ✨</div>";
+  }
+
+  function renderClient() {
+    if(db.shopName) {
+      document.getElementById('shopTitle').innerText = db.shopName;
+      document.getElementById('shopSubTitle').innerText = "線上預約系統";
+      if(document.getElementById('currentAdminShopName')) {
+        document.getElementById('currentAdminShopName').innerText = db.shopName + " - 工作台";
+      }
+    }
+    renderClientNotices();
+    let categories = db.categories || [];
+    let containerHtml = "";
+
+    categories.forEach(cat => {
+      let itemsHtml = "";
+      (cat.items || []).forEach(item => {
+        let isSel = selectedServiceIds.includes(item.id);
+        let priceText = item.price > 0 ? `NT$ ${item.price}` : "免費";
+        let displayName = escapeHtml(item.name);
+
+        itemsHtml += `<div class="item-option ${isSel?'selected':''}" onclick="toggleServiceItem('${cat.id}', '${item.id}')">
+          <div class="item-info">
+            <div class="title">${displayName}</div>
+            ${item.desc?`<div class="desc">${escapeHtml(item.desc)}</div>`:''}
+            <div class="subtitle">時間約 ${item.time||30} 分鐘</div>
+          </div>
+          <div class="item-price">${priceText}</div>
+        </div>`;
+      });
+
+      containerHtml += `<div class="card">
+        <div class="card-title">${escapeHtml(cat.name)} <span style="font-size:11px; font-weight:normal; color:var(--text-sub);">(${cat.allowMultiple ? '可複選' : '單選'})</span></div>
+        ${itemsHtml || "<div style='color:var(--text-sub); font-size:13px;'>此分類尚無項目</div>"}
+      </div>`;
+    });
+
+    document.getElementById('clientDynamicCategoriesContainer').innerHTML = containerHtml || "<div class='card' style='color:var(--text-sub); font-size:13px; text-align:center;'>尚無服務分類</div>";
+
+    let hasEyebrow = false, hasRemoval = false;
+    categories.forEach(cat => {
+      (cat.items || []).forEach(item => {
+        if(selectedServiceIds.includes(item.id)) {
+          if(item.name.includes("霧眉")) hasEyebrow = true;
+          if(item.name.includes("除色")) hasRemoval = true;
+        }
+      });
+    });
+
+    document.getElementById('eyebrowBaseColorCard').style.display = hasEyebrow ? 'block' : 'none';
+    if(!hasEyebrow) { selectedEyebrowBaseMode = ""; document.getElementById('eyebrowColorText').value = ""; }
+
+    document.getElementById('eyebrowRemovalCard').style.display = hasRemoval ? 'block' : 'none';
+    if(!hasRemoval) {
+      document.getElementById('remLastTime').value = "";
+      document.getElementById('remCurrentColor').value = "";
+      document.getElementById('remHistory').value = "";
+    }
+
+    renderCalendar(currentYear, currentMonth, 'client');
+    updateSummary();
+  }
+
+  function escapeHtml(str) {
+    if(!str) return '';
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+  }
+
+  function clientSearchOrder() {
+    let phone = document.getElementById('searchPhoneInput').value.trim();
+    let resDiv = document.getElementById('clientSearchResult');
+    if(!phone) { alert("請輸入手機號碼！"); return; }
+
+    fetchCloudData(() => {
+      let matched = (db.orders || []).filter(o => o.phone === phone);
+      if(matched.length === 0) {
+        resDiv.innerHTML = `<div style="background:var(--input-bg); padding:10px; border-radius:8px; font-size:12px; color:#D9534F;">查無此手機號碼的預約紀錄。</div>`;
+        return;
+      }
+      let html = "";
+      matched.forEach(v => {
+        html += `<div style="background:var(--input-bg); padding:10px; border-radius:8px; margin-top:6px; font-size:12px; line-height:1.5; border:1px solid var(--border-color);">
+          <div style="font-weight:bold; color:var(--primary-color);">📅 ${v.date} ${v.time}</div>
+          <div><strong>姓名：</strong>${escapeHtml(v.name)}</div>
+          <div><strong>預約項目：</strong>${escapeHtml(v.servicesSummary)}</div>
+          <div style="color:#D9534F; font-weight:bold; margin-top:2px;">已付定金：NT$ ${v.deposit} (總計 NT$ ${v.totalPrice})</div></div>`;
+      });
+      resDiv.innerHTML = html;
+    });
+  }
+
+  function toggleServiceItem(catId, itemId) {
+    let cat = (db.categories || []).find(c => c.id === catId);
+    if(cat && cat.allowMultiple) {
+      if(selectedServiceIds.includes(itemId)) selectedServiceIds = selectedServiceIds.filter(x => x !== itemId);
+      else selectedServiceIds.push(itemId);
+    } else {
+      let catItemIds = (cat.items || []).map(i => i.id);
+      let otherSelected = selectedServiceIds.filter(id => !catItemIds.includes(id));
+      if(selectedServiceIds.includes(itemId)) selectedServiceIds = otherSelected;
+      else { otherSelected.push(itemId); selectedServiceIds = otherSelected; }
+    }
+    renderClient();
+  }
+
+  function selectEyebrowBase(mode) {
+    selectedEyebrowBaseMode = mode;
+    let btnNone = document.getElementById('btnEyebrowNone');
+    let btnHas = document.getElementById('btnEyebrowHas');
+    let inputWrap = document.getElementById('eyebrowColorInputWrap');
+
+    btnNone.style.background = mode === '無' ? 'var(--primary-color)' : '#EFE8DF';
+    btnNone.style.color = mode === '無' ? '#fff' : 'var(--primary-color)';
+    btnHas.style.background = mode === '有' ? 'var(--primary-color)' : '#EFE8DF';
+    btnHas.style.color = mode === '有' ? '#fff' : 'var(--primary-color)';
+
+    inputWrap.style.display = mode === '有' ? 'block' : 'none';
+    if(mode === '無') document.getElementById('eyebrowColorText').value = "";
+    updateSummary();
+  }
+
+  function selectTransport(mode) {
+    selectedTransportMode = mode;
+    ['機車', '汽車', '不需停車'].forEach(m => {
+      let btn = document.getElementById(m === '機車' ? 'trans_moto' : (m === '汽車' ? 'trans_car' : 'trans_none'));
+      btn.style.background = m === mode ? 'var(--primary-color)' : '#EFE8DF';
+      btn.style.color = m === mode ? '#fff' : 'var(--primary-color)';
+      btn.style.borderColor = m === mode ? 'var(--primary-color)' : 'var(--border-color)';
+    });
+    updateSummary();
+  }
+
+  function renderCalendar(y, m, type) {
+    let monthTitle = `${y} 年 ${m + 1} 月`, firstDay = new Date(y, m, 1).getDay(), daysInMonth = new Date(y, m + 1, 0).getDate();
+    let todayStr = formatDateKey(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    let gridHtml = `<div class="cal-day-label">日</div><div class="cal-day-label">一</div><div class="cal-day-label">二</div><div class="cal-day-label">三</div><div class="cal-day-label">四</div><div class="cal-day-label">五</div><div class="cal-day-label">六</div>`;
+    for(let i=0; i<firstDay; i++) gridHtml += `<div class="cal-day empty"></div>`;
+    for(let d=1; d<=daysInMonth; d++) {
+      let dateKey = formatDateKey(y, m, d), isPast = dateKey < todayStr;
+      if(type === 'client') {
+        let isSel = selectedDateStr === dateKey ? "selected" : "";
+        gridHtml += `<div class="cal-day ${isSel} ${isPast?'disabled':''}" onclick="${isPast?'':'selectClientDate(\''+dateKey+'\')'}">${d}</div>`;
+      } else {
+        gridHtml += `<div class="cal-day ${adminSelectedDate === dateKey ? "selected" : ""}" onclick="selectAdminDate('${dateKey}')">${d}</div>`;
+      }
+    }
+    if(type === 'client') { document.getElementById('calMonthTitle').innerText = monthTitle; document.getElementById('calGrid').innerHTML = gridHtml; }
+    else { document.getElementById('adminCalMonthTitle').innerText = monthTitle; document.getElementById('adminCalGrid').innerHTML = gridHtml; }
+  }
+
+  function changeMonth(dir) {
+    currentMonth += dir;
+    if(currentMonth > 11) { currentMonth = 0; currentYear++; }
+    if(currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar(currentYear, currentMonth, 'client');
+  }
+
+  function selectClientDate(dateKey) {
+    selectedDateStr = dateKey; selectedTime = "";
+    document.getElementById('selectedDateText').innerText = `已選擇日期：${dateKey}`;
+    renderCalendar(currentYear, currentMonth, 'client'); renderTimeGrid(dateKey); updateSummary();
+  }
+
+  function renderTimeGrid(dateKey) {
+    let slots = db.schedule[dateKey] || [], html = "";
+    if(slots.length === 0) html = "<div style='grid-column: span 3; color: var(--text-sub); font-size:13px;'>該日期無開放時段</div>";
+    else {
+      slots.forEach(t => {
+        let isBooked = (db.orders || []).some(o => o.date === dateKey && o.time === t);
+        if(isBooked) html += `<div class="time-btn booked">已預約</div>`;
+        else html += `<div class="time-btn ${selectedTime === t ? "selected" : ""}" onclick="selectClientTime('${t}')">${t}</div>`;
+      });
+    }
+    document.getElementById('timeGrid').innerHTML = html;
+  }
+
+  function selectClientTime(t) { selectedTime = t; renderTimeGrid(selectedDateStr); updateSummary(); }
+
+  function updateSummary() {
+    let total = 0, totalDeposit = 0, totalTime = 0;
+    (db.categories || []).forEach(cat => {
+      (cat.items || []).forEach(item => {
+        if(selectedServiceIds.includes(item.id)) {
+          total += Number(item.price || 0);
+          totalDeposit += Number(item.deposit || 0);
+          totalTime += Number(item.time || 30);
+        }
+      });
+    });
+    document.getElementById('displayDeposit').innerText = `NT$ ${totalDeposit}`;
+    document.getElementById('displayTotal').innerText = `總計金額：NT$ ${total}`;
+    document.getElementById('displayTime').innerText = `施作總時間約 ${totalTime} 分鐘`;
+  }
+
+  function tryOpenPayModal() {
+    if(selectedServiceIds.length === 0) { alert("尚未選擇服務項目！"); return; }
+
+    let categories = db.categories || [];
+    let selectedCategoriesMap = {}; 
+    categories.forEach(cat => {
+      let hasItemInCat = (cat.items || []).some(item => selectedServiceIds.includes(item.id));
+      if(hasItemInCat) selectedCategoriesMap[cat.id] = true;
+    });
+
+    for(let cat of categories) {
+      if(selectedCategoriesMap[cat.id] && cat.requiredMatchId) {
+        if(!selectedCategoriesMap[cat.requiredMatchId]) {
+          let requiredCat = categories.find(c => c.id === cat.requiredMatchId);
+          let reqName = requiredCat ? requiredCat.name : "對應分類";
+          alert(`尚未點選「${reqName}」`);
+          return;
+        }
+      }
+    }
+
+    let custPhone = document.getElementById('custPhone').value.trim();
+    let custName = document.getElementById('custName').value.trim();
+    if(!custName || !custPhone) { alert("請填寫您的姓名與聯絡電話！"); return; }
+
+    let isBlacklisted = (db.blacklist || []).includes(custPhone) || 
+                        (db.customers && db.customers[custPhone] && db.customers[custPhone].isBlacklisted);
+    if(isBlacklisted) {
+      alert("親愛的顧客您好，系統顯示您過往有 2 次預約未到的紀錄\n為維護其他顧客的預約權益，系統暫時無法為您提供線上預約服務。\n造成不便，敬請見諒。");
+      return;
+    }
+
+    let selectedItemsList = [];
+    (db.categories || []).forEach(cat => {
+      (cat.items || []).forEach(item => { if(selectedServiceIds.includes(item.id)) selectedItemsList.push(item); });
+    });
+
+    let hasEyebrow = selectedItemsList.some(x => x.name.includes("霧眉"));
+    if(hasEyebrow && !selectedEyebrowBaseMode) { alert("尚未選擇眉毛底色！"); return; }
+    if(hasEyebrow && selectedEyebrowBaseMode === '有' && !document.getElementById('eyebrowColorText').value.trim()) { alert("尚未填寫目前眉毛底色顏色！"); return; }
+
+    let hasRemoval = selectedItemsList.some(x => x.name.includes("除色"));
+    if(hasRemoval) {
+      if(!document.getElementById('remLastTime').value.trim() || !document.getElementById('remCurrentColor').value.trim() || !document.getElementById('remHistory').value.trim()) {
+        alert("尚未填寫除色評估資料！");
+        return;
+      }
+    }
+
+    if(!selectedDateStr || !selectedTime) { alert("尚未選擇預約日期與時段！"); return; }
+    if(!selectedTransportMode) { alert("請選擇交通方式！"); return; }
+
+    openPayModal();
+  }
+
+  function openPayModal() {
+    let totalDeposit = 0;
+    (db.categories || []).forEach(cat => {
+      (cat.items || []).forEach(item => { if(selectedServiceIds.includes(item.id)) totalDeposit += Number(item.deposit || 0); });
+    });
+    document.getElementById('payBankCode').innerText = db.settings.bankCode || "";
+    document.getElementById('payBankName').innerText = db.settings.bankName || "";
+    document.getElementById('payBankAcc').innerText = db.settings.bankAcc || "";
+    document.getElementById('payBankHolder').innerText = db.settings.bankHolder || "";
+    document.getElementById('payModalNoticeDisplay').innerHTML = formatTextWithBr(db.settings.payNotice || "請依指定金額匯款");
+    document.getElementById('payDepositAmount').innerText = totalDeposit;
+    document.getElementById('payModal').classList.add('active');
+  }
+
+  function closePayModal() { document.getElementById('payModal').classList.remove('active'); }
+  function validatePayForm() { document.getElementById('btnSubmitPay').disabled = (document.getElementById('payLast5').value.trim().length !== 5); }
+
+  // 嚴格修正：複製帳號只複製純數字帳號
+  function copyBankAccount() {
+    let accText = document.getElementById('payBankAcc').innerText.trim();
+    if(!accText) { alert("目前無帳號可複製"); return; }
+    navigator.clipboard.writeText(accText).then(() => {
+      alert("✅ 銀行帳號已成功複製！");
+    }).catch(err => {
+      let textArea = document.createElement("textarea");
+      textArea.value = accText;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        alert("✅ 銀行帳號已成功複製！");
+      } catch (e) {
+        alert("複製失敗，請手動記下帳號。");
+      }
+      document.body.removeChild(textArea);
+    });
+  }
+
+  function submitOrderAndNotify() {
+    let last5 = document.getElementById('payLast5').value.trim();
+    let name = document.getElementById('custName').value.trim();
+    let phone = document.getElementById('custPhone').value.trim();
+    let note = document.getElementById('custNote').value.trim();
+
+    let totalDeposit = 0, totalPrice = 0, totalTime = 0;
+    let serviceNames = [];
+
+    (db.categories || []).forEach(cat => {
+      (cat.items || []).forEach(item => {
+        if(selectedServiceIds.includes(item.id)) {
+          totalDeposit += Number(item.deposit || 0);
+          totalPrice += Number(item.price || 0);
+          totalTime += Number(item.time || 30);
+          serviceNames.push(item.name);
+        }
+      });
+    });
+
+    let eyebrowBaseText = "";
+    if(selectedEyebrowBaseMode === '無') eyebrowBaseText = "無底色";
+    else if(selectedEyebrowBaseMode === '有') eyebrowBaseText = `有底色 (${document.getElementById('eyebrowColorText').value.trim()})`;
+
+    let removalDetailsText = "";
+    if(serviceNames.some(n => n.includes("除色"))) {
+      removalDetailsText = `最後一次霧眉：${document.getElementById('remLastTime').value.trim()} | 底色：${document.getElementById('remCurrentColor').value.trim()} | 紀錄：${document.getElementById('remHistory').value.trim()}`;
+    }
+
+    let order = {
+      id: Date.now(), name, phone, note, date: selectedDateStr, time: selectedTime,
+      servicesSummary: serviceNames.join(', '),
+      eyebrowBase: eyebrowBaseText, removalDetails: removalDetailsText,
+      transport: selectedTransportMode, deposit: totalDeposit, totalPrice, totalTime, last5, 
+      status: 'pending', 
+      rating: 0, ratingText: '', 
+      ratedAt: 0, 
+      createdAt: new Date().toLocaleString(), isRead: false
+    };
+
+    if(!db.orders) db.orders = [];
+    db.orders.unshift(order);
+    if(db.schedule[selectedDateStr]) db.schedule[selectedDateStr] = db.schedule[selectedDateStr].filter(t => t !== selectedTime);
+    
+    if(!db.customers) db.customers = {};
+    if(!db.customers[phone]) {
+      db.customers[phone] = { name, phone, notes: "", noShowDates: [], isBlacklisted: false, history: [] };
+    } else {
+      db.customers[phone].name = name;
+    }
+
+    saveData(); 
+    closePayModal();
+    triggerNativeAlert(`🔔 收到新的預約！顧客：${name} (${phone}) 於 ${selectedDateStr} ${selectedTime} 預約成功！`);
+    alert("感謝您的預約，期待為您服務✨🤍");
+    location.reload();
+  }
+
+  function renderAdmin() {
+    renderAdminCategories();
+    renderCalendar(adminYear, adminMonth, 'admin'); 
+    renderAdminOrders(); 
+    renderAdminCustomers();
+    renderAdminBlacklist();
+    renderAdminReports();
+    renderAdminAccounting();
+    
+    document.getElementById('settingBankCode').value = db.settings.bankCode || "";
+    document.getElementById('settingBankName').value = db.settings.bankName || "";
+    document.getElementById('settingBankAcc').value = db.settings.bankAcc || "";
+    document.getElementById('settingBankHolder').value = db.settings.bankHolder || "";
+    document.getElementById('settingPayNotice').value = (db.settings.payNotice || "").replace(/<br\s*\/?>/gi, '\n');
+
+    renderAdminNoticesEditor();
+    updateUnreadBadge();
+  }
+
+  function updateUnreadBadge() {
+    let unreadCount = (db.orders || []).filter(o => !o.isRead).length;
+    let badge = document.getElementById('adminUnreadBadge');
+    if(unreadCount > 0) { badge.style.display = 'inline-block'; badge.innerText = unreadCount; }
+    else { badge.style.display = 'none'; }
+  }
+
+  function switchAdminTab(tabName, evt) {
+    document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.admin-tab-content').forEach(el => el.style.display = 'none');
+    let tabMap = { 
+      services: 'adminTabServices', schedule: 'adminTabSchedule', orders: 'adminTabOrders', 
+      customers: 'adminTabCustomers', blacklist: 'adminTabBlacklist', reports: 'adminTabReports',
+      accounting: 'adminTabAccounting', settings: 'adminTabSettings' 
+    };
+    if(tabMap[tabName]) document.getElementById(tabMap[tabName]).style.display = 'block';
+    if(evt && evt.target) evt.target.classList.add('active');
+  }
+
+  function calculateCustomerAverageRating(phone) {
+    let orders = (db.orders || []).filter(o => o.phone === phone && (o.status === 'success' || o.status === 'noshow') && Number(o.rating) > 0);
+    if(orders.length === 0) return 0;
+    let sum = orders.reduce((acc, o) => acc + Number(o.rating), 0);
+    return (sum / orders.length).toFixed(1);
+  }
+
+  let pendingOrderEdits = {}; 
+
+  function initReportOrderEdit(orderId) {
+    let order = (db.orders || []).find(o => o.id === orderId);
+    if(!order) return;
+    if(!pendingOrderEdits[orderId]) {
+      pendingOrderEdits[orderId] = {
+        status: order.status || 'pending',
+        rating: order.rating || 0,
+        ratingText: order.ratingText || ''
+      };
+    }
+  }
+
+  function setReportOrderStatus(orderId, status) {
+    initReportOrderEdit(orderId);
+    pendingOrderEdits[orderId].status = status;
+    renderAdminReports();
+  }
+
+  function setReportOrderRating(orderId, ratingVal) {
+    initReportOrderEdit(orderId);
+    pendingOrderEdits[orderId].rating = Number(ratingVal);
+    renderAdminReports();
+  }
+
+  function setReportOrderRatingText(orderId, textVal) {
+    initReportOrderEdit(orderId);
+    pendingOrderEdits[orderId].ratingText = textVal;
+  }
+
+  function confirmReportOrderEdit(orderId) {
+    let order = (db.orders || []).find(o => o.id === orderId);
+    let editData = pendingOrderEdits[orderId];
+    if(!order || !editData) return;
+
+    let oldStatus = order.status;
+    let newStatus = editData.status;
+
+    order.status = newStatus;
+    order.rating = editData.rating;
+    order.ratingText = editData.ratingText;
+    
+    if(Number(editData.rating) > 0) {
+      order.ratedAt = Date.now();
+    }
+
+    let phone = order.phone;
+    if(!db.customers) db.customers = {};
+    if(!db.customers[phone]) {
+      db.customers[phone] = { name: order.name, phone: phone, notes: "", noShowDates: [], isBlacklisted: false, history: [] };
+    }
+    if(!db.customers[phone].noShowDates) db.customers[phone].noShowDates = [];
+
+    if(newStatus === 'noshow' && oldStatus !== 'noshow') {
+      if(!db.customers[phone].noShowDates.includes(order.date)) {
+        db.customers[phone].noShowDates.push(order.date);
+      }
+    } 
+    else if(newStatus !== 'noshow' && oldStatus === 'noshow') {
+      db.customers[phone].noShowDates = db.customers[phone].noShowDates.filter(d => d !== order.date);
+    }
+
+    let distinctNoShowCount = db.customers[phone].noShowDates.length;
+    if(distinctNoShowCount >= 2 && !db.customers[phone].isBlacklisted) {
+      db.customers[phone].isBlacklisted = true;
+      if(!db.blacklist) db.blacklist = [];
+      if(!db.blacklist.includes(phone)) db.blacklist.push(phone);
+      alert(`⚠️ 系統提示：${order.name} (${phone}) 已累積 2 個不同天數的「如期未到」，系統已自動將其加入黑名單！`);
+    } else if(distinctNoShowCount < 2 && db.customers[phone].isBlacklisted) {
+      db.customers[phone].isBlacklisted = false;
+      db.blacklist = (db.blacklist || []).filter(p => p !== phone);
+    }
+
+    delete pendingOrderEdits[orderId];
+    saveData();
+    renderAdminReports();
+    renderAdminOrders();
+    renderAdminCustomers();
+    renderAdminBlacklist();
+    alert("✅ 該筆資料編輯已確認儲存！");
+  }
+
+  function updateOrderStatusDirect(orderId, status) {
+    let order = (db.orders || []).find(o => o.id === orderId);
+    if(!order) return;
+    let oldStatus = order.status;
+    order.status = status;
+
+    let phone = order.phone;
+    if(!db.customers) db.customers = {};
+    if(!db.customers[phone]) {
+      db.customers[phone] = { name: order.name, phone: phone, notes: "", noShowDates: [], isBlacklisted: false, history: [] };
+    }
+    if(!db.customers[phone].noShowDates) db.customers[phone].noShowDates = [];
+
+    if(status === 'noshow' && oldStatus !== 'noshow') {
+      if(!db.customers[phone].noShowDates.includes(order.date)) {
+        db.customers[phone].noShowDates.push(order.date);
+      }
+    } else if(status !== 'noshow' && oldStatus === 'noshow') {
+      db.customers[phone].noShowDates = db.customers[phone].noShowDates.filter(d => d !== order.date);
+    }
+
+    let distinctNoShowCount = db.customers[phone].noShowDates.length;
+    if(distinctNoShowCount >= 2 && !db.customers[phone].isBlacklisted) {
+      db.customers[phone].isBlacklisted = true;
+      if(!db.blacklist) db.blacklist = [];
+      if(!db.blacklist.includes(phone)) db.blacklist.push(phone);
+    } else if(distinctNoShowCount < 2 && db.customers[phone].isBlacklisted) {
+      db.customers[phone].isBlacklisted = false;
+      db.blacklist = (db.blacklist || []).filter(p => p !== phone);
+    }
+
+    saveData();
+    renderAdminOrders();
+    renderAdminCustomers();
+    renderAdminBlacklist();
+    renderAdminReports();
+  }
+
+  function toggleCustomerExpand(phone) {
+    expandedCustomerPhones[phone] = !expandedCustomerPhones[phone];
+    renderAdminCustomers();
+  }
+
+  function getCustomerLatestRatedTime(phone) {
+    let orders = (db.orders || []).filter(o => o.phone === phone);
+    let maxRatedAt = 0;
+    orders.forEach(o => {
+      let rTime = Number(o.ratedAt || 0);
+      if(rTime > maxRatedAt) maxRatedAt = rTime;
+    });
+    return maxRatedAt;
+  }
+
+  function renderAdminCustomers() {
+    let query = (document.getElementById('customerSearchInput').value || "").trim().toLowerCase();
+    let html = "";
+    let custMap = db.customers || {};
+
+    (db.orders || []).forEach(o => {
+      if(!custMap[o.phone]) {
+        custMap[o.phone] = { name: o.name, phone: o.phone, notes: "", noShowDates: [], isBlacklisted: false, history: [] };
+      }
+    });
+
+    let keys = Object.keys(custMap);
+    if(keys.length === 0) {
+      html = "<div style='color:var(--text-sub); font-size:13px; text-align:center;'>尚無會員資料</div>";
+    } else {
+      keys.sort((a, b) => {
+        let timeA = getCustomerLatestRatedTime(a);
+        let timeB = getCustomerLatestRatedTime(b);
+        return timeB - timeA;
+      });
+
+      keys.forEach(phone => {
+        let c = custMap[phone];
+        if(query && !c.name.toLowerCase().includes(query) && !c.phone.includes(query)) return;
+
+        let matchedOrders = (db.orders || []).filter(o => o.phone === phone);
+        let totalBookingCount = matchedOrders.length + (c.history ? c.history.length : 0);
+        let avgRating = calculateCustomerAverageRating(phone);
+        let starDisplay = avgRating > 0 ? `⭐ ${avgRating} 顆星` : '⭐ 尚無評分';
+        let noShowCount = c.noShowDates ? c.noShowDates.length : 0;
+        let isExpanded = !!expandedCustomerPhones[phone];
+
+        if(!isExpanded) {
+          html += `<div style="border:1px solid var(--border-color); background:#fff; padding:12px 16px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleCustomerExpand('${phone}')">
+            <div>
+              <strong style="font-size:14px; color:var(--primary-color);">${escapeHtml(c.name)}</strong>
+              <span style="font-size:12px; color:var(--text-sub); margin-left:4px;">(${totalBookingCount})</span>
+              ${c.isBlacklisted ? '<span style="color:#D9534F; font-size:11px; font-weight:bold; margin-left:6px;">[黑名單]</span>' : ''}
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:12px; font-weight:bold; color:#e09f3e; background:#fef9e7; padding:2px 8px; border-radius:6px;">${starDisplay}</span>
+              <span style="font-size:12px; color:var(--text-sub);">▼ 展開</span>
+            </div>
+          </div>`;
+        } else {
+          let historyHtml = "";
+          let histList = c.history || [];
+          histList.forEach((h, hIdx) => {
+            let detail = "";
+            if(h.type === '霧眉') {
+              detail = `色乳: ${h.pigment||'-'} | 顏色: ${h.color||'-'} | 針具: ${h.needle||'-'}`;
+            } else {
+              detail = `款式: ${h.style||'-'} | 上翹度: ${h.upperCurl||'-'} | 上長度: ${h.upperLen||'-'} | 下翹度: ${h.lowerCurl||'-'} | 下長度: ${h.lowerLen||'-'} | 樣式: ${h.lashStyle||'-'} | 濃密度: ${h.density||'-'}`;
             }
-        }
+            historyHtml += `<div style="background:var(--input-bg); padding:8px; border-radius:6px; margin-top:6px; font-size:12px; position:relative;">
+              <div style="font-weight:bold; color:var(--primary-color);">📅 ${h.date} 【${h.type}】</div>
+              <div>${detail}</div>
+              ${h.note ? `<div>備註: ${escapeHtml(h.note)}</div>` : ''}
+              <button type="button" class="btn-danger" style="position:absolute; top:8px; right:8px; padding:2px 6px; font-size:10px;" onclick="deleteCustomerHistory('${phone}', ${hIdx})">刪除</button>
+            </div>`;
+          });
 
-        function openMerchantLoginModal() {
-            document.getElementById('merchant-login-modal').classList.add('active');
-            toggleRegisterView(false);
-        }
-        function closeMerchantLoginModal() {
-            document.getElementById('merchant-login-modal').classList.remove('active');
-        }
-        function toggleRegisterView(isReg) {
-            document.getElementById('login-box').style.display = isReg ? 'none' : 'block';
-            document.getElementById('register-box').style.display = isReg ? 'block' : 'none';
-        }
+          html += `<div style="border:1.5px solid var(--primary-color); background:#fff; padding:14px; border-radius:12px; margin-bottom:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <div>
+                <strong style="font-size:15px; color:var(--primary-color);">${escapeHtml(c.name)}</strong> 
+                <span style="font-size:12px; color:var(--text-sub);">(${c.phone})</span>
+                ${c.isBlacklisted ? '<span style="color:#D9534F; font-size:11px; font-weight:bold; margin-left:6px;">[黑名單]</span>' : ''}
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:13px; font-weight:bold; color:#e09f3e; background:#fef9e7; padding:2px 8px; border-radius:6px;">${starDisplay}</span>
+                <button type="button" class="btn-secondary" style="padding:2px 6px; font-size:11px;" onclick="toggleCustomerExpand('${phone}')">▲ 收合</button>
+              </div>
+            </div>
+            <div style="font-size:11px; color:var(--text-sub); margin-bottom:6px;">不同天未到次數：${noShowCount} 次</div>
 
-        async function handleRegister() {
-            const shopName = document.getElementById('reg-shopname').value.trim();
-            const phone = document.getElementById('reg-phone').value.trim();
-            const email = document.getElementById('reg-email').value.trim();
-            const username = document.getElementById('reg-username').value.trim();
-            const password = document.getElementById('reg-password').value.trim();
-
-            if (!shopName || !username || !password) {
-                alert("請填寫工作室名稱、帳號與密碼！");
-                return;
-            }
-
-            const shopId = 'shop_' + Date.now();
-            const registerDate = new Date().toISOString();
-
-            try {
-                const q = window.query(window.collection(window.db, "shops"), window.where("username", "==", username));
-                const snap = await window.getDocs(q);
-                if (!snap.empty) {
-                    alert("此登入帳號已被使用，請更換其他帳號名稱！");
-                    return;
-                }
-
-                const newShopData = {
-                    shopId,
-                    shopName,
-                    phone: phone || "",
-                    email: email || "",
-                    username,
-                    password,
-                    registerDate,
-                    bankCode: "812",
-                    bankAcc: "28881024671561",
-                    bankName: shopName,
-                    announcement: "為保障雙方權益，請確認以下內容再進行匯款\n已支付的定金會在項目費用扣除\n\n⚠️ 更改預約時間說明 ⚠️\n• 須至少三天前告知，僅可修改日期一次。\n• 須至少三天前告知，可退定金及取消預約。",
-                    categories: [
-                        {
-                            id: 'cat_1',
-                            name: '眉毛變漂漂*9ᵉ°',
-                            items: [
-                                { id: 'it_1', name: '微針霧眉（含三個月中補色一次）', desc: '眉毛無底色建議選此，顏色更飽和和漂亮✨', price: 6000, deposit: 1000, duration: 150 },
-                                { id: 'it_2', name: '單次霧眉（不含補色）', desc: '適合眉毛有底色（橘紅眉>建議先除色）', price: 3500, deposit: 800, duration: 150 }
-                            ]
-                        }
-                    ],
-                    orders: []
-                };
-
-                await window.setDoc(window.doc(window.db, "shops", shopId), newShopData);
-                alert("註冊成功！系統已記錄您的註冊時間與前兩個月免費試用。請登入後台！");
-                toggleRegisterView(false);
-            } catch (e) {
-                console.error("註冊失敗", e);
-                alert("註冊發生錯誤：" + e.message);
-            }
-        }
-
-        async function handleLogin() {
-            const username = document.getElementById('login-username').value.trim();
-            const password = document.getElementById('login-password').value.trim();
-
-            try {
-                const q = window.query(window.collection(window.db, "shops"), window.where("username", "==", username));
-                const snap = await window.getDocs(q);
-
-                if (snap.empty) {
-                    alert("找不到此帳號，請確認或先註冊！");
-                    return;
-                }
-
-                let shopObj = null;
-                snap.forEach(docSnap => {
-                    shopObj = { id: docSnap.id, ...docSnap.data() };
-                });
-
-                if (shopObj.password !== password) {
-                    alert("密碼錯誤！");
-                    return;
-                }
-
-                currentLoggedInMerchant = shopObj;
-                closeMerchantLoginModal();
-                enterMerchantDashboard();
-            } catch (e) {
-                console.error("登入失敗", e);
-                alert("登入發生錯誤：" + e.message);
-            }
-        }
-
-        function enterMerchantDashboard() {
-            switchView('merchant-view');
-            document.getElementById('merchant-panel-title').innerText = currentLoggedInMerchant.shopName + " - 工作台";
-            document.getElementById('prof-shopname').value = currentLoggedInMerchant.shopName || '';
-            document.getElementById('prof-bank-code').value = currentLoggedInMerchant.bankCode || '';
-            document.getElementById('prof-bank-acc').value = currentLoggedInMerchant.bankAcc || '';
-            document.getElementById('prof-bank-name').value = currentLoggedInMerchant.bankName || '';
-            document.getElementById('prof-announcement').value = currentLoggedInMerchant.announcement || '';
-            renderMerchantCategories();
-        }
-
-        function logoutMerchant() {
-            currentLoggedInMerchant = null;
-            switchView('home-view');
-            loadCloudShops();
-        }
-
-        function switchMerchantTab(tabId, btn) {
-            document.querySelectorAll('.m-tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.m-tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        // 後台渲染分類與項目（支援上下移動與編輯、絕不產生 undefined）
-        function renderMerchantCategories() {
-            const container = document.getElementById('merchant-categories-list');
-            const cats = currentLoggedInMerchant.categories || [];
-            if (cats.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-muted);">尚未建立服務分類。</p>';
-                return;
-            }
-
-            container.innerHTML = cats.map((cat, cIdx) => `
-                <div class="category-block">
-                    <div class="category-header">
-                        <span>📁 ${cat.name}</span>
-                        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
-                            ${cIdx > 0 ? `<button class="btn-soft btn-sm" onclick="moveCategory(${cIdx}, -1)">⬆️</button>` : ''}
-                            ${cIdx < cats.length - 1 ? `<button class="btn-soft btn-sm" onclick="moveCategory(${cIdx}, 1)">⬇️</button>` : ''}
-                            <button class="btn-soft btn-sm" onclick="openEditCategoryModal(${cIdx})">✏️ 編輯分類</button>
-                            <button class="btn-primary btn-sm" onclick="openAddItemModal(${cIdx})">+ 新增項目</button>
-                            <button class="btn-soft btn-sm" style="color: var(--danger-red);" onclick="deleteCategory(${cIdx})">刪除</button>
-                        </div>
-                    </div>
-                    <div>
-                        ${(cat.items || []).map((item, iIdx) => `
-                            <div style="background: var(--bg-card); border: 1px solid var(--border-soft); padding: 0.8rem; border-radius: 10px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-                                <div>
-                                    <strong>${item.name}</strong> <span style="color: var(--primary-coffee); font-weight: bold;">NT$ ${item.price}</span>
-                                    <div style="font-size: 0.8rem; color: var(--text-muted);">${item.desc || ''} | 時間約 ${item.duration} 分鐘 | 定金 $${item.deposit}</div>
-                                </div>
-                                <div style="display: flex; gap: 0.3rem;">
-                                    ${iIdx > 0 ? `<button class="btn-soft btn-sm" onclick="moveItem(${cIdx}, ${iIdx}, -1)">▲</button>` : ''}
-                                    ${iIdx < cat.items.length - 1 ? `<button class="btn-soft btn-sm" onclick="moveItem(${cIdx}, ${iIdx}, 1)">▼</button>` : ''}
-                                    <button class="btn-soft btn-sm" onclick="openEditItemModal(${cIdx}, ${iIdx})">✏️ 編輯</button>
-                                    <button class="btn-soft btn-sm" style="color: var(--danger-red);" onclick="deleteItem(${cIdx}, ${iIdx})">刪除</button>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // 嚴格防範 undefined 的雲端同步函式
-        async function saveShopCloud() {
-            try {
-                if (!currentLoggedInMerchant || !currentLoggedInMerchant.id) return;
-
-                const shopName = currentLoggedInMerchant.shopName || "";
-                const bankCode = currentLoggedInMerchant.bankCode || "";
-                const bankAcc = currentLoggedInMerchant.bankAcc || "";
-                const bankName = currentLoggedInMerchant.bankName || "";
-                const announcement = currentLoggedInMerchant.announcement || "";
-                const categories = currentLoggedInMerchant.categories || [];
-
-                await window.updateDoc(window.doc(window.db, "shops", currentLoggedInMerchant.id), {
-                    shopName,
-                    bankCode,
-                    bankAcc,
-                    bankName,
-                    announcement,
-                    categories
-                });
-            } catch (e) {
-                alert("雲端同步失敗：" + e.message);
-            }
-        }
-
-        async function moveCategory(idx, direction) {
-            const cats = currentLoggedInMerchant.categories;
-            const target = idx + direction;
-            [cats[idx], cats[target]] = [cats[target], cats[idx]];
-            renderMerchantCategories();
-            await saveShopCloud();
-        }
-
-        async function moveItem(cIdx, iIdx, direction) {
-            const items = currentLoggedInMerchant.categories[cIdx].items;
-            const target = iIdx + direction;
-            [items[iIdx], items[target]] = [items[target], items[iIdx]];
-            renderMerchantCategories();
-            await saveShopCloud();
-        }
-
-        function openAddCategoryModal() {
-            document.getElementById('edit-modal-title').innerText = "新增服務分類";
-            document.getElementById('edit-modal-body').innerHTML = `
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label class="form-label" style="display:block; margin-bottom:0.4rem; font-weight:500;">分類名稱</label>
-                    <input type="text" id="modal-cat-name" placeholder="例：睫毛變漂漂*9ᵉ°">
-                </div>
-                <button class="btn-primary" style="width: 100%; padding:0.7rem;" onclick="confirmAddCategory()">確認新增</button>
-            `;
-            document.getElementById('edit-modal').classList.add('active');
-        }
-
-        async function confirmAddCategory() {
-            const name = document.getElementById('modal-cat-name').value.trim();
-            if (!name) return alert("請輸入分類名稱！");
-            if (!currentLoggedInMerchant.categories) currentLoggedInMerchant.categories = [];
-            currentLoggedInMerchant.categories.push({ id: 'cat_' + Date.now(), name, items: [] });
-            closeEditModal();
-            renderMerchantCategories();
-            await saveShopCloud();
-        }
-
-        function openEditCategoryModal(cIdx) {
-            const cat = currentLoggedInMerchant.categories[cIdx];
-            document.getElementById('edit-modal-title').innerText = "編輯分類名稱";
-            document.getElementById('edit-modal-body').innerHTML = `
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label class="form-label" style="display:block; margin-bottom:0.4rem; font-weight:500;">分類名稱</label>
-                    <input type="text" id="modal-cat-name" value="${cat.name}">
-                </div>
-                <button class="btn-primary" style="width: 100%; padding:0.7rem;" onclick="confirmEditCategory(${cIdx})">儲存修改</button>
-            `;
-            document.getElementById('edit-modal').classList.add('active');
-        }
-
-        async function confirmEditCategory(cIdx) {
-            const name = document.getElementById('modal-cat-name').value.trim();
-            if (!name) return alert("請輸入分類名稱！");
-            currentLoggedInMerchant.categories[cIdx].name = name;
-            closeEditModal();
-            renderMerchantCategories();
-            await saveShopCloud();
-        }
-
-        async function deleteCategory(cIdx) {
-            if (confirm("確定要刪除此分類及其底下所有項目嗎？")) {
-                currentLoggedInMerchant.categories.splice(cIdx, 1);
-                renderMerchantCategories();
-                await saveShopCloud();
-            }
-        }
-
-        function openAddItemModal(cIdx) {
-            document.getElementById('edit-modal-title').innerText = "新增服務項目";
-            document.getElementById('edit-modal-body').innerHTML = `
-                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">項目名稱</label><input type="text" id="m-item-name"></div>
-                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">項目敘述</label><textarea id="m-item-desc" rows="2"></textarea></div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.6rem;">
-                    <div><label class="form-label" style="display:block; margin-bottom:0.3rem;">價格 (NT$)</label><input type="number" id="m-item-price"></div>
-                    <div><label class="form-label" style="display:block; margin-bottom:0.3rem;">定金 (NT$)</label><input type="number" id="m-item-deposit"></div>
-                </div>
-                <div class="form-group" style="margin-bottom: 1rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">施作時間 (分鐘)</label><input type="number" id="m-item-dur" value="120"></div>
-                <button class="btn-primary" style="width: 100%; padding:0.7rem;" onclick="confirmAddItem(${cIdx})">確認新增項目</button>
-            `;
-            document.getElementById('edit-modal').classList.add('active');
-        }
-
-        async function confirmAddItem(cIdx) {
-            const name = document.getElementById('m-item-name').value.trim();
-            const desc = document.getElementById('m-item-desc').value.trim();
-            const price = Number(document.getElementById('m-item-price').value);
-            const deposit = Number(document.getElementById('m-item-deposit').value) || 0;
-            const duration = Number(document.getElementById('m-item-dur').value) || 120;
-
-            if (!name || !price) return alert("請填寫項目名稱與價格！");
-            currentLoggedInMerchant.categories[cIdx].items.push({ id: 'it_' + Date.now(), name, desc, price, deposit, duration });
-            closeEditModal();
-            renderMerchantCategories();
-            await saveShopCloud();
-        }
-
-        function openEditItemModal(cIdx, iIdx) {
-            const item = currentLoggedInMerchant.categories[cIdx].items[iIdx];
-            document.getElementById('edit-modal-title').innerText = "編輯服務項目";
-            document.getElementById('edit-modal-body').innerHTML = `
-                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">項目名稱</label><input type="text" id="m-item-name" value="${item.name}"></div>
-                <div class="form-group" style="margin-bottom: 0.6rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">項目敘述</label><textarea id="m-item-desc" rows="2">${item.desc || ''}</textarea></div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 0.6rem;">
-                    <div><label class="form-label" style="display:block; margin-bottom:0.3rem;">價格 (NT$)</label><input type="number" id="m-item-price" value="${item.price}"></div>
-                    <div><label class="form-label" style="display:block; margin-bottom:0.3rem;">定金 (NT$)</label><input type="number" id="m-item-deposit" value="${item.deposit}"></div>
-                </div>
-                <div class="form-group" style="margin-bottom: 1rem;"><label class="form-label" style="display:block; margin-bottom:0.3rem;">施作時間 (分鐘)</label><input type="number" id="m-item-dur" value="${item.duration || 120}"></div>
-                <button class="btn-primary" style="width: 100%; padding:0.7rem;" onclick="confirmEditItem(${cIdx}, ${iIdx})">儲存修改</button>
-            `;
-            document.getElementById('edit-modal').classList.add('active');
-        }
-
-        async function confirmEditItem(cIdx, iIdx) {
-            const name = document.getElementById('m-item-name').value.trim();
-            const desc = document.getElementById('m-item-desc').value.trim();
-            const price = Number(document.getElementById('m-item-price').value);
-            const deposit = Number(document.getElementById('m-item-deposit').value) || 0;
-            const duration = Number(document.getElementById('m-item-dur').value) || 120;
-
-            if (!name || !price) return alert("請填寫項目名稱與價格！");
-            currentLoggedInMerchant.categories[cIdx].items[iIdx] = { ...currentLoggedInMerchant.categories[cIdx].items[iIdx], name, desc, price, deposit, duration };
-            closeEditModal();
-            renderMerchantCategories();
-            await saveShopCloud();
-        }
-
-        async function deleteItem(cIdx, iIdx) {
-            if (confirm("確定要刪除此項目嗎？")) {
-                currentLoggedInMerchant.categories[cIdx].items.splice(iIdx, 1);
-                renderMerchantCategories();
-                await saveShopCloud();
-            }
-        }
-
-        function closeEditModal() {
-            document.getElementById('edit-modal').classList.remove('active');
-        }
-
-        async function saveMerchantProfile() {
-            currentLoggedInMerchant.shopName = document.getElementById('prof-shopname').value.trim();
-            currentLoggedInMerchant.bankCode = document.getElementById('prof-bank-code').value.trim();
-            currentLoggedInMerchant.bankAcc = document.getElementById('prof-bank-acc').value.trim();
-            currentLoggedInMerchant.bankName = document.getElementById('prof-bank-name').value.trim();
-            currentLoggedInMerchant.announcement = document.getElementById('prof-announcement').value.trim();
-
-            await saveShopCloud();
-            alert("全部設定儲存成功！");
-        }
-
-        // 顧客預約頁面渲染
-        async function enterShopBooking(shopId) {
-            currentViewingShopId = shopId;
-            switchView('booking-view');
-
-            const header = document.getElementById('booking-shop-header');
-            header.innerHTML = '<p style="color: var(--text-muted);">載入店家預約資訊中...</p>';
-
-            try {
-                const docSnap = await window.getDoc(window.doc(window.db, "shops", shopId));
-                if (!docSnap.exists()) {
-                    alert("找不到此店家！");
-                    switchView('home-view');
-                    return;
-                }
-                const shop = docSnap.data();
-                
-                header.innerHTML = `
-                    <h2 style="color: var(--primary-dark); font-size: 1.4rem; font-weight: 700; margin-bottom: 0.2rem;">${shop.shopName}</h2>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">線上預約系統</p>
-                `;
-
-                document.getElementById('display-rule-box').innerText = shop.announcement || '暫無匯款規則';
-                document.getElementById('disp-bank-code').innerText = shop.bankCode || '812';
-                document.getElementById('disp-bank-acc').innerText = shop.bankAcc || '28881024671561';
-                document.getElementById('disp-bank-name').innerText = shop.bankName || shop.shopName;
-
-                const catContainer = document.getElementById('booking-categories-container');
-                const cats = shop.categories || [];
-                catContainer.innerHTML = cats.map(cat => `
-                    <div class="category-block">
-                        <div class="category-header">
-                            <span>${cat.name}</span>
-                            <span style="font-size: 0.78rem; color: var(--text-muted);">(單選)</span>
-                        </div>
-                        <div>
-                            ${(cat.items || []).map(item => `
-                                <div class="service-item-card" id="item-card-${item.id}" onclick="toggleServiceItem('${item.id}', '${item.name}', ${item.price}, ${item.deposit}, ${item.duration})">
-                                    <div>
-                                        <div style="font-weight: bold; color: var(--primary-dark); font-size: 1.02rem; margin-bottom: 0.2rem;">${item.name}</div>
-                                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.2rem;">${item.desc || ''}</div>
-                                        <div style="font-size: 0.82rem; color: var(--primary-coffee); font-weight: 500;">時間約 ${item.duration || 120} 分鐘</div>
-                                    </div>
-                                    <div style="text-align: right; font-weight: bold; font-size: 1.1rem; color: var(--primary-dark);">
-                                        NT$ ${item.price}
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `).join('');
-
-                renderBookingCalendar();
-            } catch (e) {
-                console.error("載入預約頁失敗", e);
-            }
-        }
-
-        function toggleServiceItem(id, name, price, deposit, duration) {
-            const card = document.getElementById(`item-card-${id}`);
-            card.classList.toggle('selected');
+            <div style="margin-bottom:8px;">
+              <button type="button" class="btn-submit" style="padding:4px 8px; font-size:11px;" onclick="openHistoryModal('${phone}')">+ 新增操作紀錄</button>
+            </div>
             
-            selectedServices = [{ id, name, price, deposit, duration }];
-            
-            document.getElementById('sum-total').innerText = `NT$ ${price}`;
-            document.getElementById('sum-deposit').innerText = `NT$ ${deposit}`;
-            document.getElementById('sum-duration').innerText = `${duration} 分鐘`;
+            <div class="form-group" style="margin-top:8px; margin-bottom:8px;">
+              <label style="font-size:11px; font-weight:bold; color:var(--primary-color);">會員備註 (記錄客人特點與喜好)：</label>
+              <textarea class="form-input" rows="2" style="font-size:12px; resize:vertical;" onchange="updateCustomerNotes('${phone}', this.value)" placeholder="例如：喜歡自然款、眼皮較敏感...">${escapeHtml(c.notes || '')}</textarea>
+            </div>
+
+            <div style="font-size:12px; font-weight:bold; color:var(--text-sub); margin-top:8px;">📜 操作紀錄 (${histList.length} 筆)：</div>
+            ${historyHtml || "<div style='color:var(--text-sub); font-size:11px; margin-top:4px;'>尚無操作紀錄</div>"}
+          </div>`;
         }
+      });
+    }
+    document.getElementById('adminCustomersList').innerHTML = html || "<div style='color:var(--text-sub); font-size:13px; text-align:center;'>找不到符合的會員</div>";
+  }
 
-        function renderBookingCalendar() {
-            const daysContainer = document.getElementById('booking-cal-days');
-            daysContainer.innerHTML = `
-                <div class="cal-week-name">日</div><div class="cal-week-name">一</div><div class="cal-week-name">二</div>
-                <div class="cal-week-name">三</div><div class="cal-week-name">四</div><div class="cal-week-name">五</div><div class="cal-week-name">六</div>
-            `;
-            for (let i = 1; i <= 31; i++) {
-                daysContainer.innerHTML += `<div class="cal-day" onclick="selectBookingDate(this, ${i})">${i}</div>`;
-            }
+  function updateCustomerNotes(phone, val) {
+    if(db.customers && db.customers[phone]) {
+      db.customers[phone].notes = val;
+      saveData();
+    }
+  }
+
+  function openHistoryModal(phone) {
+    activeCustomerPhoneForHist = phone;
+    document.getElementById('histDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('histType').value = '霧眉';
+    switchHistTypeFields();
+    document.getElementById('histNote').value = '';
+    document.getElementById('historyModal').classList.add('active');
+  }
+
+  function closeHistoryModal() { document.getElementById('historyModal').classList.remove('active'); }
+
+  function switchHistTypeFields() {
+    let t = document.getElementById('histType').value;
+    document.getElementById('histFieldsEyebrow').style.display = t === '霧眉' ? 'block' : 'none';
+    document.getElementById('histFieldsLash').style.display = t === '美睫' ? 'block' : 'none';
+  }
+
+  function saveHistoryRecord() {
+    if(!activeCustomerPhoneForHist || !db.customers[activeCustomerPhoneForHist]) return;
+    let type = document.getElementById('histType').value;
+    let date = document.getElementById('histDate').value;
+    let note = document.getElementById('histNote').value.trim();
+
+    if(!date) { alert("請選擇操作日期！"); return; }
+
+    let record = { id: 'hist_' + Date.now(), type, date, note };
+
+    if(type === '霧眉') {
+      record.pigment = document.getElementById('histEyebrowPigment').value.trim();
+      record.color = document.getElementById('histEyebrowColor').value.trim();
+      record.needle = document.getElementById('histEyebrowNeedle').value.trim();
+    } else {
+      record.style = document.getElementById('histLashStyleName').value.trim();
+      record.upperCurl = document.getElementById('histLashUpperCurl').value.trim();
+      record.upperLen = document.getElementById('histLashUpperLen').value.trim();
+      record.lowerCurl = document.getElementById('histLashLowerCurl').value.trim();
+      record.lowerLen = document.getElementById('histLashLowerLen').value.trim();
+      record.lashStyle = document.getElementById('histLashPattern').value.trim();
+      record.density = document.getElementById('histLashDensity').value.trim();
+    }
+
+    if(!db.customers[activeCustomerPhoneForHist].history) db.customers[activeCustomerPhoneForHist].history = [];
+    db.customers[activeCustomerPhoneForHist].history.unshift(record);
+    saveData();
+    closeHistoryModal();
+    renderAdminCustomers();
+    alert("操作紀錄已成功新增！");
+  }
+
+  function deleteCustomerHistory(phone, hIdx) {
+    if(confirm("確定要刪除這筆操作紀錄嗎？")) {
+      if(db.customers[phone] && db.customers[phone].history) {
+        db.customers[phone].history.splice(hIdx, 1);
+        saveData();
+        renderAdminCustomers();
+      }
+    }
+  }
+
+  function renderAdminBlacklist() {
+    let blacklistPhones = db.blacklist || [];
+    let html = "";
+    if(blacklistPhones.length === 0) {
+      html = "<div style='color:var(--text-sub); font-size:13px; text-align:center;'>目前無黑名單紀錄</div>";
+    } else {
+      blacklistPhones.forEach(phone => {
+        let cust = (db.customers && db.customers[phone]) ? db.customers[phone] : { name: '未知貴賓', phone, notes: '無' };
+        let noShowCount = cust.noShowDates ? cust.noShowDates.length : 2;
+        html += `<div style="display:flex; justify-content:space-between; align-items:center; background:var(--input-bg); padding:10px 12px; border-radius:8px; margin-bottom:8px; border:1px solid var(--border-color);">
+          <div>
+            <strong style="color:#D9534F; font-size:14px;">🚫 ${escapeHtml(cust.name)} (${phone})</strong>
+            <div style="font-size:12px; color:var(--text-sub);">不同天未到次數：${noShowCount} 次</div>
+          </div>
+          <button type="button" class="btn-secondary" onclick="removeFromBlacklist('${phone}')">解除黑名單</button>
+        </div>`;
+      });
+    }
+    document.getElementById('adminBlacklistList').innerHTML = html;
+  }
+
+  function removeFromBlacklist(phone) {
+    if(confirm(`確定要將電話 ${phone} 從黑名單中移除嗎？`)) {
+      db.blacklist = (db.blacklist || []).filter(p => p !== phone);
+      if(db.customers && db.customers[phone]) {
+        db.customers[phone].isBlacklisted = false;
+        db.customers[phone].noShowDates = [];
+      }
+      saveData();
+      renderAdminBlacklist();
+      renderAdminCustomers();
+    }
+  }
+
+  function initReportSelectors() {
+    let now = new Date(), currentY = now.getFullYear(), currentM = now.getMonth() + 1;
+    let yHtml = ""; for(let y = currentY; y >= currentY - 2; y--) yHtml += `<option value="${y}">${y} 年</option>`;
+    let repYearEl = document.getElementById('repYear');
+    if(repYearEl) { repYearEl.innerHTML = yHtml; repYearEl.value = currentY; }
+
+    let mHtml = ""; for(let m = 1; m <= 12; m++) mHtml += `<option value="${String(m).padStart(2,'0')}">${m} 月</option>`;
+    let repMonthEl = document.getElementById('repMonth');
+    if(repMonthEl) { repMonthEl.innerHTML = mHtml; repMonthEl.value = String(currentM).padStart(2,'0'); }
+
+    let todayStr = now.toISOString().split('T')[0];
+    let repDateEl = document.getElementById('repDate');
+    if(repDateEl) repDateEl.value = todayStr;
+
+    let repStartDateEl = document.getElementById('repStartDate');
+    let repEndDateEl = document.getElementById('repEndDate');
+    if(repStartDateEl && repEndDateEl) {
+      repStartDateEl.value = todayStr;
+      repEndDateEl.value = todayStr;
+    }
+  }
+
+  function toggleReportMode() {
+    let type = document.getElementById('reportTypeSelect').value;
+    document.getElementById('reportFilterDaily').style.display = type === 'daily' ? 'block' : 'none';
+    document.getElementById('reportFilterMonthly').style.display = type === 'monthly' ? 'block' : 'none';
+    document.getElementById('reportFilterRange').style.display = type === 'range' ? 'block' : 'none';
+    renderAdminReports();
+  }
+
+  function renderAdminReports() {
+    let type = document.getElementById('reportTypeSelect').value;
+    let orders = db.orders || [];
+    let filtered = [];
+
+    if(type === 'daily') {
+      let targetDate = document.getElementById('repDate').value;
+      if(!targetDate) return;
+      filtered = orders.filter(o => o.date === targetDate);
+    } else if(type === 'monthly') {
+      let y = document.getElementById('repYear').value;
+      let m = document.getElementById('repMonth').value;
+      let ym = `${y}-${m}`;
+      filtered = orders.filter(o => o.date && o.date.startsWith(ym));
+    } else if(type === 'range') {
+      let start = document.getElementById('repStartDate').value;
+      let end = document.getElementById('repEndDate').value;
+      if(!start || !end) return;
+      filtered = orders.filter(o => o.date >= start && o.date <= end);
+    }
+
+    let totalCount = filtered.length;
+    let totalDeposit = filtered.reduce((sum, o) => sum + Number(o.deposit || 0), 0);
+    
+    let totalAmount = filtered.reduce((sum, o) => {
+      let st = pendingOrderEdits[o.id] ? pendingOrderEdits[o.id].status : o.status;
+      if(st === 'noshow') return sum + Number(o.deposit || 0);
+      return sum + Number(o.totalPrice || 0);
+    }, 0);
+
+    document.getElementById('repTotalCount').innerText = `${totalCount} 筆`;
+    document.getElementById('repTotalDeposit').innerText = `NT$ ${totalDeposit}`;
+    document.getElementById('repTotalAmount').innerText = `NT$ ${totalAmount}`;
+
+    let html = "";
+    if(filtered.length === 0) {
+      html = "<div style='color:var(--text-sub); font-size:12px; text-align:center;'>此區間尚無預約營運紀錄</div>";
+    } else {
+      filtered.forEach(o => {
+        let editData = pendingOrderEdits[o.id];
+        let currentStatus = editData ? editData.status : (o.status || 'pending');
+        let currentRating = editData ? editData.rating : (o.rating || 0);
+        let ratingTextVal = editData ? editData.ratingText : (o.ratingText || '');
+
+        let statusBadge = '';
+        if(currentStatus === 'success') statusBadge = '<span style="color:#28a745; font-weight:bold;">[成功服務]</span>';
+        else if(currentStatus === 'noshow') statusBadge = '<span style="color:#D9534F; font-weight:bold;">[如期未到]</span>';
+        else statusBadge = '<span style="color:#8C7C73;">[待處理]</span>';
+
+        let hasPending = !!editData;
+
+        html += `<div style="background:var(--input-bg); padding:10px; border-radius:8px; margin-bottom:8px; font-size:12px; line-height:1.5; border:1px solid var(--border-color);">
+          <div style="display:flex; justify-content:space-between; font-weight:bold; color:var(--primary-color); margin-bottom:4px;">
+            <span>📅 ${o.date} ${o.time}</span>
+            <span>${statusBadge}</span>
+          </div>
+          <div><strong>會員姓名：</strong>${escapeHtml(o.name)} (${o.phone})</div>
+          <div><strong>操作項目：</strong>${escapeHtml(o.servicesSummary)}</div>
+          <div><strong>定金：</strong>NT$ ${o.deposit} | <strong>總價：</strong>NT$ ${o.totalPrice}</div>
+          
+          <div style="margin-top:8px; padding-top:8px; border-top:1px dashed var(--border-color);">
+            <div style="display:flex; gap:6px; margin-bottom:6px;">
+              <button type="button" class="${currentStatus==='success'?'btn-submit':'btn-secondary'}" style="padding:3px 6px; font-size:10px;" onclick="setReportOrderStatus(${o.id}, 'success')">✅ 成功服務</button>
+              <button type="button" class="${currentStatus==='noshow'?'btn-danger':'btn-secondary'}" style="padding:3px 6px; font-size:10px;" onclick="setReportOrderStatus(${o.id}, 'noshow')">❌ 如期未到</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+              <span>客戶評分：</span>
+              <select class="form-input" style="width:110px; padding:4px; font-size:11px;" onchange="setReportOrderRating(${o.id}, this.value)">
+                <option value="0" ${currentRating==0?'selected':''}>⭐ 選擇星級</option>
+                <option value="5" ${currentRating==5?'selected':''}>⭐⭐⭐⭐⭐ (5星)</option>
+                <option value="4" ${currentRating==4?'selected':''}>⭐⭐⭐⭐ (4星)</option>
+                <option value="3" ${currentRating==3?'selected':''}>⭐⭐⭐ (3星)</option>
+                <option value="2" ${currentRating==2?'selected':''}>⭐⭐ (2星)</option>
+                <option value="1" ${currentRating==1?'selected':''}>⭐ (1星)</option>
+              </select>
+            </div>
+            <div style="margin-bottom:6px;">
+              <input type="text" class="form-input" style="padding:6px; font-size:11px;" placeholder="文字評分（可打可不打）..." value="${escapeHtml(ratingTextVal)}" oninput="setReportOrderRatingText(${o.id}, this.value)">
+            </div>
+            <div>
+              <button type="button" class="btn-submit" style="width:100%; padding:6px; font-size:11px; ${hasPending?'background:#28a745;':'opacity:0.7;'}" onclick="confirmReportOrderEdit(${o.id})">💾 確認儲存此筆編輯</button>
+            </div>
+          </div>
+        </div>`;
+      });
+    }
+    document.getElementById('adminReportsDetails').innerHTML = html;
+  }
+
+  function renderAdminOrders() {
+    let html = "";
+    let ordersList = db.orders || [];
+    if(ordersList.length === 0) html = "<div style='color:var(--text-sub); font-size:13px;'>目前尚無預約紀錄</div>";
+    else {
+      ordersList.forEach((o, idx) => {
+        let isUnread = !o.isRead;
+        let cardBg = isUnread ? "#FFF8F2" : "#FFFFFF";
+        let cardBorder = isUnread ? "2px solid #E28670" : "1px solid var(--border-color)";
+
+        let isBl = (db.blacklist || []).includes(o.phone);
+        let blWarning = isBl ? `<div style="color:#D9534F; font-weight:bold; background:#FDECEA; padding:4px; border-radius:4px; margin-top:4px;">⚠️ 警告：${escapeHtml(o.name)} 為黑名單，系統已阻擋預約功能</div>` : '';
+
+        html += `<div style="border:${cardBorder}; padding:12px; border-radius:12px; margin-bottom:10px; font-size:13px; line-height:1.5; background:${cardBg};">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span style="font-weight:bold; font-size:14px; color:var(--primary-color);">${o.date} ${o.time} ${isUnread?'<span style="color:#D9534F; font-size:11px;">[新預約!]</span>':''}</span>
+            <label style="font-size:12px; cursor:pointer; color:var(--primary-color); font-weight:bold; display:flex; align-items:center; gap:4px; background:#EFE8DF; padding:3px 8px; border-radius:6px;">
+              <input type="checkbox" ${o.isRead ? 'checked' : ''} onchange="toggleOrderRead(${idx})"> 已閱
+            </label>
+          </div>
+          <div><strong>姓名：</strong>${escapeHtml(o.name)} (${o.phone})</div>
+          <div><strong>預約項目：</strong>${escapeHtml(o.servicesSummary)}</div>
+          <div><strong>定金：</strong>NT$ ${o.deposit} (末五碼: <span style="color:#D9534F; font-weight:bold;">${o.last5}</span>)</div>
+          ${blWarning}
+          <div style="display:flex; gap:6px; margin-top:8px;">
+            <button type="button" class="${o.status==='success'?'btn-submit':'btn-secondary'}" style="padding:4px 8px; font-size:11px;" onclick="updateOrderStatusDirect(${o.id}, 'success')">✅ 成功服務</button>
+            <button type="button" class="${o.status==='noshow'?'btn-danger':'btn-secondary'}" style="padding:4px 8px; font-size:11px;" onclick="updateOrderStatusDirect(${o.id}, 'noshow')">❌ 如期未到</button>
+          </div>
+        </div>`;
+      });
+    }
+    document.getElementById('adminOrdersList').innerHTML = html;
+    updateUnreadBadge();
+  }
+
+  function toggleOrderRead(idx) {
+    db.orders[idx].isRead = !db.orders[idx].isRead;
+    saveData();
+    renderAdminOrders();
+  }
+
+  function renderAdminCategories() {
+    let categories = db.categories || [];
+    let html = "";
+    categories.forEach((cat, catIdx) => {
+      let requiredName = "無";
+      if(cat.requiredMatchId) {
+        let reqCat = categories.find(c => c.id === cat.requiredMatchId);
+        if(reqCat) requiredName = reqCat.name;
+      }
+
+      let itemsHtml = "";
+      let totalItems = (cat.items || []).length;
+      (cat.items || []).forEach((item, itemIdx) => {
+        itemsHtml += `<div class="item-option" style="background:#fff; margin-bottom:6px;">
+          <div class="item-info">
+            <div class="title">${escapeHtml(item.name)}</div>
+            <div class="subtitle">${item.time||30}分鐘 | NT$ ${item.price} (定金: $${item.deposit || 0})</div>
+          </div>
+          <div style="display:flex; gap:3px; align-items:center;">
+            ${itemIdx > 0 ? `<button type="button" class="btn-secondary" style="padding:3px 5px; font-size:10px;" onclick="moveServiceItem('${cat.id}', ${itemIdx}, -1)">⬆</button>` : ''}
+            ${itemIdx < totalItems - 1 ? `<button type="button" class="btn-secondary" style="padding:3px 5px; font-size:10px;" onclick="moveServiceItem('${cat.id}', ${itemIdx}, 1)">⬇</button>` : ''}
+            <button type="button" class="btn-secondary" style="padding:3px 5px;" onclick="openServiceModal('${cat.id}', 'edit', ${itemIdx})">編輯</button>
+            <button type="button" class="btn-danger" style="padding:3px 5px;" onclick="deleteServiceItem('${cat.id}', ${itemIdx})">刪除</button>
+          </div>
+        </div>`;
+      });
+
+      html += `<div style="border:1px solid var(--border-color); background:var(--input-bg); padding:12px; border-radius:12px; margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <strong style="color:var(--primary-color); font-size:15px;">📁 ${escapeHtml(cat.name)}</strong>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn-secondary" style="padding:4px 8px; font-size:11px;" onclick="openCategoryModal('edit', ${catIdx})">編輯分類設定</button>
+            <button type="button" class="btn-submit" style="padding:4px 8px; font-size:11px;" onclick="openServiceModal('${cat.id}', 'add')">+項目</button>
+          </div>
+        </div>
+        <div style="font-size:12px; color:var(--text-sub); margin-bottom:10px;">綁定聯動：點選此分類時須同時點選 ➔ <b style="color:var(--primary-color);">${escapeHtml(requiredName)}</b></div>
+        ${itemsHtml || "<div style='color:var(--text-sub); font-size:12px;'>此分類尚無項目</div>"}
+      </div>`;
+    });
+    document.getElementById('adminCategoriesList').innerHTML = html || "<div style='color:var(--text-sub); font-size:13px;'>尚無分類</div>";
+  }
+
+  function moveServiceItem(catId, idx, direction) {
+    let cat = db.categories.find(c => c.id === catId);
+    if(!cat || !cat.items) return;
+    let targetIdx = idx + direction;
+    if(targetIdx < 0 || targetIdx >= cat.items.length) return;
+    let temp = cat.items[idx];
+    cat.items[idx] = cat.items[targetIdx];
+    cat.items[targetIdx] = temp;
+    saveData();
+    renderAdminCategories();
+    renderClient();
+  }
+
+  let currentCatMode = 'add', currentCatIdx = -1;
+  function openCategoryModal(mode, idx = -1) {
+    currentCatMode = mode; currentCatIdx = idx;
+    let catNameInput = document.getElementById('editCatName');
+    let allowMultSel = document.getElementById('editCatAllowMultiple');
+    let reqMatchSelect = document.getElementById('editCatRequiredMatchId');
+
+    let categories = db.categories || [];
+    let optionsHtml = `<option value="">-- 無需綁定其他分類 --</option>`;
+    categories.forEach(c => {
+      if(mode === 'edit' && c.id === categories[idx].id) return; 
+      optionsHtml += `<option value="${c.id}">${escapeHtml(c.name)}</option>`;
+    });
+    reqMatchSelect.innerHTML = optionsHtml;
+
+    if(mode === 'edit' && idx >= 0) {
+      let cat = categories[idx];
+      catNameInput.value = cat.name || "";
+      allowMultSel.value = cat.allowMultiple ? "yes" : "no";
+      reqMatchSelect.value = cat.requiredMatchId || "";
+      document.getElementById('categoryModalTitle').innerText = "編輯服務分類";
+    } else {
+      catNameInput.value = "";
+      allowMultSel.value = "no";
+      reqMatchSelect.value = "";
+      document.getElementById('categoryModalTitle').innerText = "新增服務分類";
+    }
+    document.getElementById('categoryModal').classList.add('active');
+  }
+
+  function closeCategoryModal() { document.getElementById('categoryModal').classList.remove('active'); }
+  
+  function saveCategoryItem() {
+    let name = document.getElementById('editCatName').value.trim();
+    let allowMultiple = document.getElementById('editCatAllowMultiple').value === 'yes';
+    let requiredMatchId = document.getElementById('editCatRequiredMatchId').value;
+
+    if(!name) { alert("請輸入分類名稱！"); return; }
+    if(!db.categories) db.categories = [];
+
+    if(currentCatMode === 'add') {
+      db.categories.push({ id: 'cat_' + Date.now(), name, allowMultiple, requiredMatchId, items: [] });
+    } else {
+      db.categories[currentCatIdx].name = name;
+      db.categories[currentCatIdx].allowMultiple = allowMultiple;
+      db.categories[currentCatIdx].requiredMatchId = requiredMatchId;
+    }
+    saveData(); 
+    closeCategoryModal(); 
+    renderAdminCategories(); 
+    renderClient();
+  }
+
+  let currentItemCatId = '', currentItemMode = 'add', currentItemIdx = -1;
+  function openServiceModal(catId, mode, idx = -1) {
+    currentItemCatId = catId; currentItemMode = mode; currentItemIdx = idx;
+    if(mode === 'edit') {
+      let cat = db.categories.find(c => c.id === catId);
+      let item = cat.items[idx];
+      document.getElementById('editItemName').value = item.name || "";
+      document.getElementById('editItemDesc').value = item.desc || "";
+      document.getElementById('editItemTime').value = item.time || 30;
+      document.getElementById('editItemPrice').value = item.price || 0;
+      document.getElementById('editItemDeposit').value = item.deposit || 0;
+    } else {
+      document.getElementById('editItemName').value = "";
+      document.getElementById('editItemDesc').value = "";
+      document.getElementById('editItemTime').value = 60;
+      document.getElementById('editItemPrice').value = 1000;
+      document.getElementById('editItemDeposit').value = 500;
+    }
+    document.getElementById('serviceModal').classList.add('active');
+  }
+  function closeServiceModal() { document.getElementById('serviceModal').classList.remove('active'); }
+  function saveServiceItem() {
+    let name = document.getElementById('editItemName').value.trim();
+    let desc = document.getElementById('editItemDesc').value.trim();
+    let time = Number(document.getElementById('editItemTime').value);
+    let price = Number(document.getElementById('editItemPrice').value);
+    let deposit = Number(document.getElementById('editItemDeposit').value);
+
+    if(!name) { alert("請輸入項目名稱！"); return; }
+    let cat = db.categories.find(c => c.id === currentItemCatId);
+    if(!cat.items) cat.items = [];
+
+    let newItem = { id: currentItemMode === 'edit' ? cat.items[currentItemIdx].id : 'item_' + Date.now(), name, desc, time, price, deposit };
+    if(currentItemMode === 'edit') cat.items[currentItemIdx] = newItem;
+    else cat.items.push(newItem);
+
+    saveData(); closeServiceModal(); renderAdminCategories(); renderClient();
+  }
+  function deleteServiceItem(catId, idx) {
+    if(confirm("確定要刪除此項目嗎？")) {
+      let cat = db.categories.find(c => c.id === catId);
+      cat.items.splice(idx, 1);
+      saveData(); renderAdminCategories(); renderClient();
+    }
+  }
+
+  let adminSelectedDate = "";
+  function changeAdminMonth(dir) {
+    adminMonth += dir;
+    if(adminMonth > 11) { adminMonth = 0; adminYear++; }
+    if(adminMonth < 0) { adminMonth = 11; adminYear--; }
+    renderCalendar(adminYear, adminMonth, 'admin');
+  }
+  function selectAdminDate(dateKey) {
+    adminSelectedDate = dateKey;
+    renderCalendar(adminYear, adminMonth, 'admin');
+    document.getElementById('adminDateScheduleArea').style.display = 'block';
+    document.getElementById('adminSelectedDateTitle').innerText = `修改 ${dateKey} 開放時段：`;
+    renderAdminTimeSlots();
+  }
+  function renderAdminTimeSlots() {
+    let slots = db.schedule[adminSelectedDate] || [], html = "";
+    if(slots.length === 0) html = "<div style='color:var(--text-sub); font-size:13px;'>當日無開放時段</div>";
+    else {
+      slots.forEach((t, idx) => {
+        html += `<div style="display:flex; justify-content:space-between; align-items:center; background:var(--input-bg); padding:8px 12px; border-radius:8px; margin-bottom:6px;">
+          <span style="font-size:13px;"><b>${t}</b></span>
+          <button type="button" class="btn-danger" onclick="deleteAdminTime(${idx})">刪除</button>
+        </div>`;
+      });
+    }
+    document.getElementById('adminTimeSlotsList').innerHTML = html;
+  }
+  function addCustomTime() {
+    let val = document.getElementById('newTimeInput').value;
+    if(!val) return;
+    if(!db.schedule[adminSelectedDate]) db.schedule[adminSelectedDate] = [];
+    if(!db.schedule[adminSelectedDate].includes(val)) { db.schedule[adminSelectedDate].push(val); db.schedule[adminSelectedDate].sort(); saveData(); renderAdminTimeSlots(); }
+  }
+  function deleteAdminTime(idx) {
+    db.schedule[adminSelectedDate].splice(idx, 1);
+    saveData(); renderAdminTimeSlots();
+  }
+
+  function initAccountingSelectors() {
+    let now = new Date(), currentY = now.getFullYear(), currentM = now.getMonth() + 1;
+    let yHtml = ""; for(let y = currentY; y >= currentY - 2; y--) yHtml += `<option value="${y}">${y} 年</option>`;
+    let accY = document.getElementById('accountingYearSelect');
+    if(accY) { accY.innerHTML = yHtml; accY.value = currentY; }
+    let mHtml = ""; for(let m = 1; m <= 12; m++) mHtml += `<option value="${String(m).padStart(2,'0')}">${m} 月</option>`;
+    let accM = document.getElementById('accountingMonthSelect');
+    if(accM) { accM.innerHTML = mHtml; accM.value = String(currentM).padStart(2,'0'); }
+  }
+
+  function switchAccountingTab(tab) {
+    currentAccTab = tab;
+    document.getElementById('accTabIncomeBtn').className = tab === 'income' ? "btn-submit" : "btn-secondary";
+    document.getElementById('accTabExpenseBtn').className = tab === 'expense' ? "btn-submit" : "btn-secondary";
+    renderAdminAccounting();
+  }
+
+  function renderAdminAccounting() {
+    let y = document.getElementById('accountingYearSelect').value;
+    let m = document.getElementById('accountingMonthSelect').value;
+    let ym = `${y}-${m}`;
+    let bookingIncome = 0; 
+    (db.orders || []).forEach(o => { if(o.date && o.date.startsWith(ym)) bookingIncome += Number(o.deposit || 0); });
+    let manualIncome = 0; (db.manualIncomes || []).forEach(i => { if(i.date && i.date.startsWith(ym)) manualIncome += Number(i.amount || 0); });
+    let totalIncome = bookingIncome + manualIncome;
+    let totalExpense = 0; (db.expenses || []).forEach(e => { if(e.date && e.date.startsWith(ym)) totalExpense += Number(e.amount || 0); });
+    let netProfit = totalIncome - totalExpense;
+
+    document.getElementById('accTotalIncome').innerText = `NT$ ${totalIncome}`;
+    document.getElementById('accTotalExpense').innerText = `NT$ ${totalExpense}`;
+    let profitEl = document.getElementById('accNetProfit');
+    profitEl.innerText = `NT$ ${netProfit}`; profitEl.style.color = netProfit >= 0 ? 'var(--primary-color)' : '#D9534F';
+
+    let html = "";
+    if(currentAccTab === 'income') {
+      (db.orders || []).forEach(o => {
+        if(o.date && o.date.startsWith(ym)) {
+          html += `<div style="background:var(--input-bg); padding:8px 10px; border-radius:8px; margin-bottom:6px; font-size:12px;">
+            <div style="display:flex; justify-content:space-between;"><span style="font-weight:bold;">${o.date} - ${escapeHtml(o.name)} (預約定金)</span><span style="color:var(--primary-color); font-weight:bold;">+NT$ ${o.deposit || 0}</span></div>
+          </div>`;
         }
+      });
+    } else {
+      ((db.expenses || []).filter(e => e.date && e.date.startsWith(ym))).forEach((e, idx) => {
+        html += `<div style="display:flex; justify-content:space-between; align-items:center; background:var(--input-bg); padding:8px 10px; border-radius:8px; margin-bottom:6px; font-size:12px;">
+          <div><div style="font-weight:bold;">${escapeHtml(e.name)}</div><div style="color:var(--text-sub); font-size:11px;">${e.date}</div></div>
+          <div style="display:flex; align-items:center; gap:8px;"><span style="color:#D9534F; font-weight:bold;">-NT$ ${e.amount}</span><button type="button" class="btn-danger" style="padding:3px 6px; font-size:10px;" onclick="deleteExpense(${idx})">刪除</button></div></div>`;
+      });
+    }
+    document.getElementById('adminAccountingDetails').innerHTML = html || "<div style='color:var(--text-sub); font-size:12px;'>本月尚無紀錄</div>";
+  }
 
-        function selectBookingDate(el, day) {
-            document.querySelectorAll('#booking-cal-days .cal-day').forEach(d => d.classList.remove('selected'));
-            el.classList.add('selected');
-            selectedBookingDate = `2026-05-${day < 10 ? '0' + day : day}`;
-            document.getElementById('booking-selected-date-label').innerText = `已選擇日期：${selectedBookingDate}`;
-            
-            const timeContainer = document.getElementById('time-slots-container');
-            const slots = ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00"];
-            timeContainer.innerHTML = slots.map(t => `
-                <div class="time-slot" onclick="selectTimeSlot(this, '${t}')">${t}</div>
-            `).join('');
-        }
+  function openExpenseModal(type) {
+    currentExpModalType = type;
+    document.getElementById('expenseModalTitle').innerText = type === 'income' ? "新增手動收入" : "新增支出";
+    document.getElementById('expName').value = ""; document.getElementById('expAmount').value = "";
+    document.getElementById('expDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('expenseModal').classList.add('active');
+  }
+  function closeExpenseModal() { document.getElementById('expenseModal').classList.remove('active'); }
+  function saveExpenseItem() {
+    let name = document.getElementById('expName').value.trim(), amount = Number(document.getElementById('expAmount').value), date = document.getElementById('expDate').value;
+    if(!name || !amount || !date) { alert("請完整填寫！"); return; }
+    if(currentExpModalType === 'income') { if(!db.manualIncomes) db.manualIncomes = []; db.manualIncomes.push({ name, amount, date }); }
+    else { if(!db.expenses) db.expenses = []; db.expenses.push({ name, amount, date }); }
+    saveData(); closeExpenseModal(); renderAdminAccounting();
+  }
+  function deleteExpense(idx) { db.expenses.splice(idx, 1); saveData(); renderAdminAccounting(); }
 
-        function selectTimeSlot(el, time) {
-            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-            el.classList.add('selected');
-            selectedTimeSlot = time;
-        }
-
-        function copyBankAccount() {
-            const code = document.getElementById('disp-bank-code').innerText;
-            const acc = document.getElementById('disp-bank-acc').innerText;
-            const text = `銀行代號：${code}\n帳號：${acc}`;
-            navigator.clipboard.writeText(text).then(() => {
-                alert("已成功複製銀行帳號資訊！");
-            });
-        }
-
-        async function submitBooking() {
-            const name = document.getElementById('cust-name').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
-            const last5 = document.getElementById('cust-last5').value.trim();
-
-            if (!name || !phone || selectedServices.length === 0 || !selectedBookingDate || !selectedTimeSlot || last5.length !== 5) {
-                alert("請完整填寫所有必填欄位、選擇服務、日期時段以及 5 碼匯款後五碼！");
-                return;
-            }
-
-            try {
-                const bookingData = {
-                    customerName: name,
-                    customerPhone: phone,
-                    service: selectedServices[0].name,
-                    price: selectedServices[0].price,
-                    deposit: selectedServices[0].deposit,
-                    date: selectedBookingDate,
-                    time: selectedTimeSlot,
-                    last5,
-                    status: "已預約",
-                    createdAt: new Date().toISOString()
-                };
-
-                const shopRef = window.doc(window.db, "shops", currentViewingShopId);
-                const snap = await window.getDoc(shopRef);
-                if (snap.exists()) {
-                    const shopData = snap.data();
-                    const orders = shopData.orders || [];
-                    orders.push(bookingData);
-                    await window.updateDoc(shopRef, { orders });
-                }
-
-                alert("預約與匯款資訊已送出成功！店家將盡快為您審核。");
-                switchView('home-view');
-            } catch (e) {
-                alert("送出預約發生錯誤：" + e.message);
-            }
-        }
-
-        function previewCurrentShop() {
-            if (currentLoggedInMerchant) {
-                enterShopBooking(currentLoggedInMerchant.id);
-            }
-        }
-
-        function triggerAdminSecret() {
-            const pwd = prompt("請輸入管理員總控密碼：");
-            if (pwd === "Oomubook0921827360") {
-                alert("管理員總控驗證成功！");
-            } else if (pwd !== null) {
-                alert("密碼錯誤！");
-            }
-        }
-    </script>
+  function renderAdminNoticesEditor() {
+    let notices = db.notices || [];
+    let html = "";
+    notices.forEach((n, idx) => {
+      html += `<div style="background:var(--input-bg); padding:10px; border-radius:8px; margin-bottom:10px;">
+        <input type="text" class="form-input" style="font-weight:bold; margin-bottom:6px;" id="noticeTitle_${idx}" value="${escapeHtml(n.title)}">
+        <textarea class="form-input" rows="3" id="noticeContent_${idx}">${(n.content||'').replace(/<br\s*\/?>/gi, '\n')}</textarea>
+      </div>`;
+    });
+    document.getElementById('adminNoticesEditorList').innerHTML = html;
+  }
+  function addNoticeSection() {
+    if(!db.notices) db.notices = [];
+    db.notices.push({ id: 'n_' + Date.now(), title: "新標題", content: "說明..." });
+    renderAdminNoticesEditor();
+  }
+  function saveAllSettings() {
+    db.settings.bankCode = document.getElementById('settingBankCode').value.trim();
+    db.settings.bankName = document.getElementById('settingBankName').value.trim();
+    db.settings.bankAcc = document.getElementById('settingBankAcc').value.trim();
+    db.settings.bankHolder = document.getElementById('settingBankHolder').value.trim();
+    db.settings.payNotice = document.getElementById('settingPayNotice').value.trim();
+    saveData();
+    alert("後台設定已儲存！");
+    renderClientNotices();
+  }
+</script>
 </body>
 </html>
